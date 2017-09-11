@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>菜肴添加</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/add.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/webuploader/webuploader.css">
+	<style>
+		.submit:hover{
+			text-decoration:none;
+		}
+	</style>
+
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>基础信息</h3></div>
+	<input type="hidden" name="sid" value="{$shopid}">
+	<input type="hidden" name="adduser" value="<?php echo $_SESSION['think']['uid'];?>">
+</div>
+<div class="input-names">
+	<div class="input-name">菜肴名称</div>
+	<div class="input-text"><input type="text" class="shuru" name="dishname"></div>
+</div>
+<div class="input-img">
+	<div class="input-name">菜肴图片</div>
+	<div class="input-text">
+	<!-- <div><input class="tijiao" type="file" name="icon"></div> 
+	<div class="input-icons"><img src="__LOCAL__/img/u3160.png"></div> -->
+	<div id="fileList" class="uploader-list"></div>
+    <div id="filePicker">选择图片</div>
+	</div>
+</div>
+<div class="input-miaoshu">
+	<div class="input-name">菜肴描述</div>
+	<div class="input-text"><textarea name="desc" class="shuru"></textarea></div>
+</div>
+<div class="input-img">
+	<div class="input-name">口味分类</div>
+	<div class="input-text">
+	<div class="cwf" id="kouwei"><input  type="text" id="kouweii" class="kouwei" name="tastesid" placeholder="可不填"></div>
+	<div class="input-icons"><a href="javascript:addkouwei(this)">+添加多种口味</a></div>
+	</div>
+</div>
+<!-- <div class="input-img">
+	<div class="input-name">可否外卖</div>
+	<div class="input-text">
+	<div><input class="tijiao" type="radio" name="waimai">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="tijiao" type="radio" name="waimai">否</div>
+	<div class="input-icons wmf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="wmf" placeholder="外卖费">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元 / 人</div>
+	</div>
+</div> -->
+<!-- <div class="input-img">
+	<div class="input-name">所属区域</div>
+	<div class="input-text">
+		<select name="" id="area">
+			<option value="0">北京</option>
+			<option value="1">上海</option>
+			<option value="2">广州</option>
+			<option value="3">深圳</option>
+		</select>
+
+		<select name="" id="city">
+			<option value="">请选择</option>
+		</select>
+		<select name="" id="son">
+			<option value="">请选择</option>
+		</select>
+	</div>
+</div> -->
+<!-- <div class="input-miaoshu">
+	<div class="input-name">详细地址</div>
+	<div class="input-text"><textarea name="address" class="shuru"></textarea></div>
+</div> -->
+<div class="input-img">
+	<div class="input-name">菜肴分类</div>
+	<div class="input-text">
+		<select name="cuisineid" id="time1">
+			<option value="0">一级分类</option>
+			{volist name="list1" id="vo"}
+			<option value="{$vo.f_cid}">{$vo.f_cname}</option>
+			{/volist}
+		</select>
+		<select name="classid" id="time2">
+			<option value="0">二级分类</option>
+			{volist name="list2" id="vo"}
+			<option value="{$vo.f_cid}">{$vo.f_cname}</option>
+			{/volist}
+		</select>
+	</div>
+</div>
+<!-- <div class="input-img">
+	<div class="input-name">所属店铺</div>
+	<div class="input-text">
+		<select name="shangjia" id="time1">
+			<option value="0">一级分类</option>
+			<option value="1">2:00</option>
+			<option value="2">3:00</option>
+			<option value="3">4:00</option>
+		</select>
+</div> -->
+<div class="input-img">
+	<div class="input-name">菜肴默认折扣</div>
+	<div class="input-text">
+	<div class="phone"><input  type="text" name="discount" placeholder="请填写小数" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}"></div>
+	</div>
+</div>
+<div class="input-img">
+	<div class="input-name">价格</div>
+	<div class="input-text">
+	<div class="phone"><input  type="text" name="price" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></div>
+	</div>
+</div>
+<!-- <div class="input-img" style="padding-bottom:20px">
+	<div class="input-name">店铺图标</div>
+	<div class="input-text">
+	<div><input class="tijiao" type="file" name="images"></div>
+	<div class="input-icons"><img src="./img/u3160.png"></div>
+	</div>
+</div> -->
+<hr style="border:1px solid black;">
+<div class="input-names">
+	<div class="input-name input-foot"><input type="submit" value="返回" class="back" style="width:15%;height:30px;background:white;border:1px solid rgb(45,44,65);float:left;" onclick="history.go(-1)"><a href="javascript:void(0)"  class="submit" style="width:15%;height:30px;background:rgb(45,44,65);border:1px solid rgb(45,44,65);color:white;float:right;text-align:center">提交</a></div>
+</div>
+<!-- <script type="text/javascript" src="js/md-add.js"></script> -->
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/webuploader/webuploader.js"></script>
+</body>
+<script type="text/javascript">
+	function addkouwei(){
+		var changdu = document.getElementsByClassName("kouwei").length+1;
+		var kouwei = document.getElementById("kouwei");
+		var input = document.createElement('input');
+		input.setAttribute('type','text');
+		input.setAttribute('class','kouwei');
+		input.setAttribute('name','kouwei'+changdu);
+		kouwei.appendChild(input);
+	}
+
+	var $list=$("#fileList");
+        var thumbnailWidth = 100;
+        var thumbnailHeight = 100;
+        var uploader = WebUploader.create({
+            auto: true,
+            fileNumLimit : 10,
+            server: "{:url('Upload/images')}",
+            pick: '#filePicker',
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+
+        uploader.on( 'fileQueued', function( file ) {
+            // layer.msg(file.id)
+            var $li = $(
+                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<div class="info">' + file.name + '</div>' +
+                    '</div>'
+                    //'<div class="img_li col-sm-6"><a class="del_span" href="javascript:;" onclick="delimg(this)">删除</a><img class="viewer-item" width="200px" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;"/></div>'
+                ),
+                $img = $li.find('img');
+            $list.html( $li );
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+                $img.attr( 'src', src );
+            }, thumbnailWidth, thumbnailHeight );
+        });
+        uploader.on( 'uploadSuccess', function( file,response){
+            console.log(response);
+            if (response.code==1){
+                $('#filePicker').append('<input type="hidden" name="dishicon" value="'+response.info.imgpath+'">')
+                //$('#filePicker').append('<input id="img_input" type="hidden" name="img" value="'+response.url+'">')
+            }
+        });
+
+        $(".submit").click(function(){
+        	url = "{:url('addDishes')}";
+        	discount = $("input[name='discount']").val();
+        	shopid = $("input[name='sid']").val();
+        	adduser = $("input[name='adduser']").val();
+        	dishname = $("input[name='dishname']").val();
+        	dishicon = $("input[name='dishicon']").val();
+        	desc = $("textarea[name='desc']").val();
+        	tastesid = $("input[name='tastesid']").val();
+        	cuisineid = $("select[name='cuisineid']").val();
+        	classid = $("select[name='classid']").val();
+        	price = $("input[name='price']").val();
+
+        	$.post(url,{shopid:shopid,discount:discount,adduser:adduser,dishdesc:desc,dishname:dishname,tastesid:tastesid,classid:classid,price:price,dishicon:dishicon,cuisineid:cuisineid},function(data){
+        		if(data.code == -1){
+        			alert(data.msg);
+        		}else{
+        			alert("操作成功");
+        			window.location.href = "{:url('index?shopid='.$shopid)}";
+        		}
+        	})
+        })
+</script>
+</html>

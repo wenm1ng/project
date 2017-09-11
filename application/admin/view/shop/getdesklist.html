@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>today-list门店列表</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/food-gl.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>门店管理</h3></div>
+	<div class="title-1"><h5 style="line-height: 50px;">门店：{$shopinfo.f_shopname}</h5></div>
+</div>
+<div class="today-search">
+	<ul>
+		<li ><a href="{:url('Dishes/index?shopid='.$shopid)}">菜肴管理</a></li>
+		<li><a href="{:url('Shop/getDineshopSell?shopid='.$shopid)}">放号管理</a></li>
+		<li><a href="{:url('Shop/getDineshopDiscount?shopid='.$shopid)}">折扣管理</a></li>
+		<li id="xz-blue"><a href="{:url('Shop/getDesklist?shopid='.$shopid)}">桌号管理</a></li>
+	</ul>
+	<div class="title-2"><div><a href="{:url('addDesk?shopid='.$shopid)}">新增</a></div></div>
+</div>
+<div class="today-table">
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<!-- <td>桌型图片</td> -->
+			<td>桌型名称</td>
+			<td>桌型数量</td>
+			<td>可坐人数</td>
+			<td>操作</td>
+		</tr>
+		{volist name="list" id="vo"}
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{$vo.deskid}</td>
+				<td>{$vo.desknum}</td>
+				<td>{$vo.seatnum}</td>
+				<td><a href="{:url('editDesk?id='.$vo.id.'&shopid='.$shopid)}">修改</a>&nbsp;{if condition="$vo.status eq 0"}<a href="javascript:void(0)" class="del" deskid="{$vo.id}">上架</a>{else /}<a href="javascript:void(0)" class="del" deskid="{$vo.id}">下架</a>{/if}</td>
+			</tr>
+		{/volist}
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/viewimg.js"></script>
+
+</body>
+<script>
+	$(".del").click(function(){
+		url = "{:url('delDesk')}";
+		id = $(this).attr('deskid');
+		if(confirm("您确定要进行该操作吗？")){
+			$.post(url,{id:id},function(data){
+				if(data.code == -1){
+					alert(data.msg);
+				}else{
+					alert(data.msg);
+					window.location.href = "{:url('getDesklist?shopid='.$shopid)}";
+				}
+			});
+		}
+		
+	})
+</script>
+</html>

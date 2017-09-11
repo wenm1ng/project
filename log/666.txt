@@ -1,0 +1,14 @@
+exception 'think\exception\PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '文明店铺' for key 's_add_shopname'' in E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\db\Connection.php:438
+Stack trace:
+#0 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\db\Query.php(240): think\db\Connection->execute('INSERT INTO `t_...', Array)
+#1 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\db\Query.php(2072): think\db\Query->execute('INSERT INTO `t_...', Array)
+#2 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\db\Query.php(2093): think\db\Query->insert(Array, false, true, NULL)
+#3 E:\phpweb\39.108.193.42\Service-master\application\admin\model\DineshopModel.php(41): think\db\Query->insertGetId(Array)
+#4 E:\phpweb\39.108.193.42\Service-master\application\admin\controller\Shop.php(113): app\admin\model\DineshopModel->addDineshop('\xE6\x96\x87\xE6\x98\x8E\xE5\xBA\x97\xE9\x93\xBA', '\xE6\xB0\xB4\xE7\x94\xB5\xE8\xB4\xB9\xE7\xAC\xAC\xE4\xB8\x89...', '/public/static/...', '56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '5:00-17:00', '2132316541', '\xE4\xBD\x9B\xE6\x8C\xA1\xE6\x9D\x80\xE4\xBD\x9B', 10001, 0, 2, '1')
+#5 [internal function]: app\admin\controller\Shop->addDineshop()
+#6 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\App.php(224): ReflectionMethod->invokeArgs(Object(app\admin\controller\Shop), Array)
+#7 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\App.php(389): think\App::invokeMethod(Array, Array)
+#8 E:\phpweb\39.108.193.42\Service-master\thinkphp\library\think\App.php(130): think\App::module(Array, Array, NULL)
+#9 E:\phpweb\39.108.193.42\Service-master\thinkphp\start.php(18): think\App::run()
+#10 E:\phpweb\39.108.193.42\Service-master\public\index.php(19): require('E:\\phpweb\\39.10...')
+#11 {main}

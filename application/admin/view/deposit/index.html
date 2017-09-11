@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>押金/余额管理</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/food-gl.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>押金/余额</h3></div>
+	<div class="title-1"><span>押金总额：{$depositall}元</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>余额总额：{$moneyall}元</span></div>
+</div>
+<div class="today-search">
+	<div class="title-2" style="float:right"><div><a href="javascript:void(0)" data-toggle="modal" data-target="#myModal">退款设置</a></div></div>
+</div>
+<div class="today-table">
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<!-- <td>桌型图片</td> -->
+			<td>手机号</td>
+			<td>押金</td>
+			<td>余额</td>
+		</tr>
+		{volist name="list" id="vo"}
+			<tr>
+				<td>{$vo.uid}</td>
+				<td>{$vo.mobile}</td>
+				<td>{$vo.depositmoney}</td>
+				<td>{$vo.usermoney}</td>
+			</tr>
+		{/volist}
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        	<form action="{:url('time')}" method="post">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">退款批准时长设置</h4>
+	            </div>
+	            <div class="modal-body">
+	        		
+					退款申请后
+						<select name="time" id="">
+							<option value="0">即时</option>
+							<option value="1">12小时</option>
+							<option value="2">1天</option>
+							<option value="3">2天</option>
+							<option value="4">3天</option>
+						</select>
+					到账
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	                <button type="submit" class="btn btn-primary">确定</button>
+	            </div>
+    		</form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<!-- <script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script> -->
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+</body>
+</html>

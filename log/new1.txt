@@ -1,0 +1,1 @@
+SELECT * FROM `t_orders` WHERE  (  f_type = 2 )

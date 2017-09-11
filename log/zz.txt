@@ -1,0 +1,104 @@
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 10:20:19
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@10'  WHERE  `f_id` = 4------------------------------------2017-08-16 10:20:19
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 10:23:15
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@10$46@25'  WHERE  `f_id` = 4------------------------------------2017-08-16 10:23:15
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 10:27:49
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@25'  WHERE  `f_id` = 4------------------------------------2017-08-16 10:27:49
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 10:29:50
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@25'  WHERE  `f_id` = 4------------------------------------2017-08-16 10:29:50
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 10:30:13
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@25'  WHERE  `f_id` = 4------------------------------------2017-08-16 10:30:13
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:25:43
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:34:20
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:35:18
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:36:59
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:38:39
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:39:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:40:01
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:40:10
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@11'  WHERE  `f_id` = 4------------------------------------2017-08-16 11:40:10
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:42:08
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@22$46@11$46@45'  WHERE  `f_id` = 4------------------------------------2017-08-16 11:42:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:43:04
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:43:36
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:44:12
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:44:21
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:45:30
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:45:49
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:47:53
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:47:56
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 11:47:57
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 12:17:35
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@15'  WHERE  `f_id` = 4------------------------------------2017-08-16 12:17:35
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 12:18:26
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 12:18:26
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 12:18:42
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 12:18:42
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 12:19:00
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 12:19:00
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 7 LIMIT 1------------------------------------2017-08-16 12:22:30
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@15'  WHERE  `f_id` = 5------------------------------------2017-08-16 12:22:30
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 7 LIMIT 1------------------------------------2017-08-16 12:26:21
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@15'  WHERE  `f_id` = 5------------------------------------2017-08-16 12:26:21
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 13:50:49
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 13:50:49
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 13:50:49
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@23'  WHERE  `f_id` = 4------------------------------------2017-08-16 13:50:49
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 13:53:18
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='47@15'  WHERE  `f_id` = 4------------------------------------2017-08-16 13:53:18
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 13:53:18
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14'  WHERE  `f_id` = 4------------------------------------2017-08-16 13:53:18
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:15:14
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@15'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:15:14
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:15:14
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:15:14
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:16:07
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:16:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:16:08
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14$46@14'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:16:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:19:10
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@12'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:19:10
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:19:10
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:19:10
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:20:59
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:26:16
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:26:24
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14$47@12'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:26:24
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:26:24
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$46@14$46@14'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:26:25
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:33:27
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:33:27
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:33:27
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:33:27
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:33:46
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:33:46
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:33:46
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:33:46
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:34:28
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:34:28
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:34:28
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:34:28
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:36:40
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:36:40
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:36:40
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:36:40
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:40:08
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:40:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:40:08
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:40:08
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:43:30
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:43:30
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:43:30
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:43:30
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:44:13
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:44:13
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:44:13
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:44:13
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:44:58
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@14$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:44:58
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:44:58
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@36$47@13'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:44:58
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:45:10
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@36$47@39'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:45:10
+SELECT f_id id,f_sellinfo sellinfo FROM `t_dineshop_sellinfo` WHERE  `f_sid` = 33  AND `f_date` = '2017-08-16'  AND `f_timeslot` = 4 LIMIT 1------------------------------------2017-08-16 14:45:10
+UPDATE `t_dineshop_sellinfo`  SET `f_sellinfo`='46@18$47@39'  WHERE  `f_id` = 4------------------------------------2017-08-16 14:45:10

@@ -1,0 +1,10 @@
+# Windows:
+Thumbs.db
+Desktop.ini
+
+# My configurations:
+/application/database.php
+/runtime/
+/upload/
+/public/
+

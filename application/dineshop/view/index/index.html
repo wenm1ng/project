@@ -1,0 +1,26 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>后台首页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"><link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap-responsive.css">
+</head>
+<frameset rows="8%,92%">
+<noframes>
+
+<body>
+
+很抱歉，您使用的浏览器不支持框架功能，请采用新版本的浏览器。
+
+</body>
+
+</noframes>
+  <frame src="{:url('dineshop/index/head')}" noresize="noresize" frameborder="0" framspacing="0" scrolling="no" name="head" />
+  <frameset cols="15%,85%">
+	  <frame src="{:url('dineshop/index/menu')}" noresize="noresize" frameborder="0" framspacing="0" name="menu" />
+	  <frame src="{:url('dineshop/index/main')}" noresize="noresize" frameborder="0" framspacing="0" name="main" />
+  </frameset>
+</frameset>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+</html>

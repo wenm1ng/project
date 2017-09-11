@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>新增模块权限</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/add.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+</head>
+<body>
+<!-- <form action="{:url('addDineshop')}" method="post" multipart/form-data> -->
+	<div class="today-title">
+		<div class="title-1"><h3>添加权限</h3></div>
+	</div>
+	<input type="hidden" name="mid" value="{notempty name='$info'}{$info.mid}{/notempty}">
+	<div class="input-names">
+		<div class="input-name">权限名称</div>
+		<div class="input-text"><input type="text" class="shuru" name="name" value="{notempty name='$info'}{$info.modulename}{/notempty}" placeholder="权限名称"></div>
+	</div>
+	<div class="input-miaoshu">
+		<div class="input-name">模块描述</div>
+		<div class="input-text"><textarea name="describle" class="shuru" id="address">{notempty name='$info'}{$info.describle}{/notempty}</textarea></div>
+	</div>
+	<div class="input-names">
+		<div class="input-name">访问控制器</div>
+		<div class="input-text"><input type="text" name="controll" value="{notempty name='$info'}{$info.controll}{/notempty}" class="shuru" placeholder="模块类型为虚节点时,本选项可为空" /></div>
+	</div>
+	<div class="input-names">
+		<div class="input-name">访问方法名</div>
+		<div class="input-text"><input type="text" name="method"  value="{notempty name='$info'}{$info.method}{/notempty}" class="shuru" placeholder="模块类型为虚节点时,本选项可为空" /></div>
+	</div>
+	<div class="input-names">
+		<div class="input-name">显示顺序</div>
+		<div class="input-text">
+			<select name="showorder" id="">
+				<option value="1" {$info.showorder == 1? 'selected' : ''}>顶级</option>
+				<option value="2" {$info.showorder == 2? 'selected' : ''}>二级</option>
+				<option value="3" {$info.showorder == 3? 'selected' : ''}>三级</option>
+			</select>
+		</div>
+	</div>
+	<div class="input-names">
+		<div class="input-name">模块类型</div>
+		<div class="input-text">
+			<select name="moduletype" id="">
+				<option value="0" {$info.moduletype == 0? 'selected' : ''}>虚节点</option>
+				<option value="1" {$info.moduletype == 1? 'selected' : ''}>实节点</option>
+			</select>
+		</div>
+	</div>
+		<div class="input-names">
+		<div class="input-name">父模块</div>
+		<div class="input-text">
+			<select name="parentid" id="">
+					<option value="0">顶级模块</option>
+				{volist name="list" id="vo"}
+					<option value="{$vo.mid}" {$info.parentid == $vo.mid? 'selected' : ''}>{$vo.modulename}</option>
+				{/volist}
+			</select>
+		</div>
+	</div>	
+
+
+	<hr style="border:1px solid black;">
+	<div class="input-names">
+		<div class="input-name input-foot"><input type="submit" value="返回" class="back" style="width:15%;height:30px;background:white;border:1px solid rgb(45,44,65);float:left;" onclick="history.go(-1)"><a href="javascript:void(0)" class="submit" style="width:15%;height:30px;background:rgb(45,44,65);border:1px solid rgb(45,44,65);color:white;float:right;text-align:center;">提交</a></div>
+		<input type="hidden" name="sid" value="{notempty name='$info'}{$info.mid}{/notempty}{empty name='$info'}0{/empty}">
+	</div>
+<!-- </form> -->
+<!-- <script type="text/javascript" src="__LOCAL__/js/md-add.js"></script> -->
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+</body>
+<script>
+	$(".submit").click(function(){
+		mid = $("input[name='mid']").val();
+		// alert(mid);
+		if(mid){
+			url = "{:url('updateModuleInfo')}";
+		}else{
+			url = "{:url('addModule')}";
+		}
+		name = $("input[name='name']").val();
+		describle = $("textarea[name='describle']").val();
+		controll = $("input[name='controll']").val();
+		method = $("input[name='method']").val();
+		showorder = $("select[name='showorder']").val();
+		moduletype = $("select[name='moduletype']").val();
+		parentid = $("select[name='parentid']").val();
+		$.post(url,{showorder:showorder,name:name,describle:describle,controll:controll,method:method,moduletype:moduletype,parentid:parentid,mid:mid},function(data)
+		{
+			// alert(data);
+			
+			if(data == '添加成功'){
+				alert(data);
+				window.location.href = "{:url('index')}";
+			}else if(data == '修改成功'){
+				alert(data);
+				window.location.href = "{:url('index')}";
+			}else{
+				alert(data);
+
+			}
+		});
+	})
+
+	// 
+</script>
+
+</html>

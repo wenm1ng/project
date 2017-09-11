@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>today-list当天列表</title>
+	<link rel="stylesheet" type="text/css" href="./css/advance-list.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+	<style type="text/css">
+	*{margin:0;padding:0;list-style-type:none;}
+	a,img{border:0;}
+	body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+	/* demo */
+	.demo{width:500px;margin:40px auto;}
+	.demo span{display:inline-block;width:240px;}
+	.demo span input{padding:3px;width:120px;font-size:12px;font-family:Arial, Helvetica, sans-serif;}
+	</style>
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>预售列表</h3></div>
+	<!-- <div class="title-2">2017年3月14日 10:22</div> -->
+</div>
+<div class="demo" id="demoDate">
+	<span>日期筛选&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="日期选择" id="" onclick="SelectDate(this,'yyyy-MM-dd')"/>&nbsp;&nbsp;&nbsp;&nbsp;-----</span>
+	<span><input type="text" value="日期选择" id="" onclick="SelectDate(this,'yyyy-MM-dd')"/></span>
+</div>	
+<div class="demo" id="demoTime">
+	<span>时间段筛选&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="时间选择" id="" onclick="SelectDate(this,'yyyy-MM-dd hh:mm:ss')"/>&nbsp;&nbsp;&nbsp;&nbsp;-----</span>
+	<span><input type="text" value="时间选择" id="" onclick="SelectDate(this,'yyyy-MM-dd hh:mm:ss')"/></span>
+</div>	
+<div class="today-search">
+	<input type="text" name="orderId" placeholder="输入用户订单号" style="height:30px;text-align: center"/>
+	<input type="text" name="orderCode" placeholder="标志码" style="height:30px;text-align: center"/>
+	<button type="button" class="btn btn-large btn-primary disabled" disabled="disabled" style="height:40px;margin-top:-10px;">验证就餐</button>
+</div>
+<div class="today-table">
+		<!-- 遮罩start -->
+			<div class="body-box">
+		<!-- 遮罩stop -->
+			</div>
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<td>订单号</td>
+			<td>就餐时间段</td>
+			<td>用户账号</td>
+			<td>就餐人数</td>
+			<td>桌号</td>
+			<td>菜肴名称</td>
+			<td>价格</td>
+			<td>状态</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>41234</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><div class="font-blue">查看菜单</div></td>
+			<td>￥66.00</td>
+			<td><div class="font-red">已取消</div></td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr><tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr><tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr><tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+		<tr>
+			<td>八人桌C10</td>
+			<td>11234</td>
+			<td>9:00-10:00</td>
+			<td>1562345678</td>
+			<td>7</td>
+			<td>八人桌 C10</td>
+			<td><div class="font-blue">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>查看菜单</h4></li>
+					<li><div id="food-name">酸菜鱼（辣）</div><div id="food-pay">￥20.00</div></li>
+					<li><div id="food-name">麻辣香锅麻辣香锅麻辣香锅麻辣香锅麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">麻辣香锅</div><div id="food-pay">￥12.00</div></li>
+					<li><div id="food-name">aaaaaaaaaaaa</div><div id="food-pay">￥13.00</div></li>
+					<li><div id="food-name">茶位费</div><div id="food-pay">￥3.00*7</div></li>
+					<li class="button"><div>关闭</div></li>
+				</ul>
+			</div>
+			</td>
+			<td>￥66.00</td>
+			<td>已付款</td>
+		</tr>
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/table-page.js"></script>
+<script type="text/javascript" src="js/advance-list.js"></script>
+</body>
+</html>

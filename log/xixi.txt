@@ -1,0 +1,1 @@
+SELECT `f_oid`,`f_foodname`,`f_foodprice`,`f_foodnum` FROM `t_food_menu` WHERE  (  f_foodname like '%%' )

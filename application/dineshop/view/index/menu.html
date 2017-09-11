@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>栏目</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Iconos -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__LOCAL__/css/admin-menu.css" media="screen" type="text/css" />
+    
+</head>
+<body>
+<div style="text-align:center;clear:both">
+</div>
+	<!-- Contenedor -->
+	<ul id="accordion" class="accordion">
+		<li>
+			<div class="link"><i class="fa fa-paint-brush"></i>门店端<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="{:url('dineshop/Order/todaylist')}" target="main">当天列表</a></li>
+				<li>
+					<a href="{:url('dineshop/Order/getOrderlist')}" target="main">预售列表</a><ul class="submenu-list">
+						<li><span><a href="{:url('dineshop/Order/getFood')}" target="main">预售菜品统计</a></span></li>
+						<li><span><a href="{:url('dineshop/Order/getTime')}" target="main">时间段预售菜品</a></span></li>
+					</ul>
+				</li>
+				<li><a href="{:url('dineshop/Order/getTakeOut')}" target="main">外卖列表</a></li>
+			</ul>
+		</li>
+		<li>
+			<div class="link"><i class="fa fa-paint-brush"></i>统计报表<i class="fa fa-chevron-down"></i></div>
+			<ul class="submenu">
+				<li><a href="{:url('dineshop/User/getRegUserList')}" target="main">统计报表</a></li>
+			</ul>
+		</li>
+	</ul>
+
+</body>
+<script src='__LOCAL__/js/jquery-2.0.2.min.js'></script>
+<script src="__LOCAL__/js/admin-menu.js"></script>
+</html>

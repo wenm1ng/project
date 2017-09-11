@@ -1,0 +1,84 @@
+{extend name="public/public_1" /}
+{block name="style"}{/block}
+{block name="headstyle"}{/block}
+{block name="body"}
+	<table border="1">
+		<tr>
+			<th>门店ID</th>
+			<th>店铺图标</th>
+			<th>店铺名称</th>
+			<th>可否预定/外卖</th>
+			<th>营业/配送时间</th>
+			<th>联系方式</th>
+			<th>店铺状态</th>
+			<th>操作</th>
+		</tr>
+		{volist name="list" id="vo"}
+		<tr align="center">
+			<td>{$vo.id}</td>
+			<td><img src="{$vo.shopicon}" alt=""></td>
+			<td>{$vo.shopname}</td>
+			<td>{switch name="vo.isaway"}
+				{case value="0"}否{/case}
+				{case value="1"}是{/case}
+				{default /}default
+				{/switch}</td>
+			<td>{$vo.deliverytime}</td>
+			<td>{$vo.shophone}</td>
+			<td>
+				{switch name="vo.status"}
+				{case value="0"}初始{/case}
+				{case value="1"}审核中{/case}
+				{case value="100"}审核通过{/case}
+				{case value="-100"}审核不通过{/case}
+				{case value="-300"}已下架{/case}
+				{default /}未知
+				{/switch}
+			</td>
+			<td>
+				{switch name="vo.status"}
+				{case value="0"}
+					<a href="javascript:void(0)" class="aa">审核</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					{/case}
+				{case value="1"}
+					<a href="javascript:void(0)" class="aa">通过审核</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					<a href="javascript:void(0)" class="aa">审核不通过</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					{/case}
+				{case value="100"}
+					<a href="javascript:void(0)" class="aa">下架</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					{/case}
+				{case value="-100"}
+					<a href="javascript:void(0)" class="aa">下架</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					{/case}
+				{case value="-300"}
+					<a href="javascript:void(0)" class="aa">重新提交审核</a>
+					<input type="hidden" class="id" value="{$vo.id}">
+					{/case}
+				{default /}未知
+				{/switch}
+			</td>
+		</tr>
+		{/volist}
+	</table>
+{/block}
+{block name="bootscript"}
+	<script>
+		$('.aa').click(function(){
+			shopid = $(this).next().val();
+			key = $(this).html();
+			url = "{:url('shop/modDineshopStatus')}";
+
+			$.post(url,{key:key,shopid:shopid},function( data ){
+				if(data == 1){
+					layer.alert('操作成功',{icon:6});
+					window.location.reload();
+				}
+			})
+		})
+	</script>
+{/block}

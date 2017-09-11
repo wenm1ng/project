@@ -1,0 +1,43 @@
+{extend name="public/public" /}
+{block name="style"}{/block}
+{block name="body"}
+	<div id="first">
+        <div class="signin-head"><h3 style="text-align:center">门店端登录</h3></div>
+        <br>
+        <form action="{:url('dineshop/User/logindineshop')}" method="post">
+	        <input type="text" class="form-control" name="username" placeholder="用户名" required autofocus />
+	        <input type="password" class="form-control" name="password" placeholder="密码" required />
+	        <!-- <a href="javascript:void(0)" class="btn btn-lg btn-primary btn-block"  id="sub">登录</a> -->
+	        <input type="submit" class="btn btn-lg btn-primary btn-block" value="登录">
+        </form>
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> 记住我哈哈
+        </label>
+        <label class="checkbox">
+            <a href="{:url('admin/index/login')}">切换总部端</a>
+        </label>
+    </div>
+{/block}
+<!-- {block name="script"}
+	<script>
+		$("#sub").click(function(){
+			username = $("input[name='username']").val();
+			password = $("input[name='password']").val();
+			url = "{:url('admin/User/login')}";
+			// console.log("{:url('Admin/Index/index')}");
+			// layer.alert("登录成功",{icon:6});
+			$.post(url,{username:username,password:password},function(data){
+				if(data.code == 1){
+					// window.event.returnValue=false;
+					layer.open({content:'登录成功',icon:6,yes:function(){
+						window.location.href="{:url('index/index/index')}";
+					}});
+					 
+				}else{
+					layer.alert(data.msg,{icon:5});
+				}
+			})
+		})
+	</script>
+{/block}
+ -->

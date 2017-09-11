@@ -1,0 +1,410 @@
+注意事项：
+    1、所有接口皆需要验证签名
+        1)参数名称token
+        2)签名密钥sign：x$sfxF%Qu4
+        3)signstr生成规则：除token外所有参数，按照参数名称升序排列，组装成key1=value1&key2=value2...
+        4)密钥生成规则：md5(signstr+sign)
+
+    2、API接口地址
+        http://39.108.193.42/Service-master/public/index.php  
+    3、用户相关接口需验证登录 传入uid=1002&ck=
+首页
+    1，获取首页推荐店铺
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getRecomList?num=4  
+    入参：num获取推荐店铺个数 默认为4
+    2，获取首页外卖列表
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getTakeoutList?page=1&pagesize=10&lon=114.240668&lat=22.703796
+    入参：page页码默认为1；pagesize每页显示条数默认为10；lon经度；lat纬度
+    3，获取首页食堂列表
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getCanteenList?page=1&pagesize=10&lon=114.240668&lat=22.703796 
+    入参：page页码默认为1；pagesize每页显示条数默认为10；lon经度；lat纬度
+    结果说明：（1,2,3共用）shopname店铺名；shopicon店铺图标；sales销量；配送费deliveryfee，minprice最低起送金额；minconsume堂食最低消费; preconsume人均消费；distance距离（米）
+
+店铺详情页
+    1，获取店铺信息
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getShopDetail?shopid=8
+    入参： shopid店铺ID
+    结果说明： info: {"shopname":"味千拉面(深圳福华三路分店)","shopicon":"http:\/\/p0.meituan.net\/200.0\/deal\/da3961ec4c4d411699930e03ac9b2b7533862.jpg","shophone":"0755-28635923","address":"深圳市福田区福华三路138号购物公园B1层T-12-2号","sales（销量）":732,"deliveryfee（配送金额）":20,"minprice（最低起送金额）":9,"minconsume（堂食最低消费）":50,"preconsume（人均消费）":30,"servicecharge(就餐服务费-按就餐人数算)":0,"isbooking（是否允许预订）":0,"isaway（是否允许外卖）":1,"opentime":"10:00-23:00","deliverytime(外卖时间)":"00:01-02:45,16:50-23:59","cuisinename(菜系)":"徽菜"}
+    list: {"id":1,"icon":"https:\/\/img.meituan.net\/100.100.90\/wmproduct\/712a233b4018a100bdf7a668132ab49386611.jpg","dishesname（菜名）":"葱香油焖大虾","price（价格）":"88.0000","tastesid（口味ID 1免辣，2微辣，3超辣）":"1,2,3","cuisinename（菜系）":"鲁菜"}
+    
+    2，获取店铺折扣时间段
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getDiscountTimeslot
+    结果说明： 
+    id: "3",  折扣时间段ID
+    timeslot: "13:00-14:00",  折扣时间段
+    addtime: "2017-05-17 21:43:40"  添加时间
+    3，获取店铺折扣信息
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getDineshopDiscount?shopid=1&slotid=3&date=2017-05-23  
+    入参说明：
+    shopid 店铺ID， slotid 时间段ID（接口2获取）
+    结果说明：
+    id: "1",  菜品ID  
+    icon: "https://img.meituan.net/100.100.90/wmproduct/712a233b4018a100bdf7a668132ab49386611.jpg",
+    dishesname: "葱香油焖大虾",
+    price: "88.0000",  菜品原价
+    tastesid: "1,2,3",
+    classifyname: "招牌推荐",
+    cuisinename: "鲁菜",
+    discountprice: "52.80" 菜品折扣价格
+
+    4、获取桌型放号信息
+    http://39.108.193.42/Service-master/public/index.php/data/shop/getDeskSellInfo?shopid=1&slotid=3&date=2017-05-23
+    入参说明：
+    shopid 店铺ID， slotid 时间段ID（接口2获取）date 日期
+    结果说明：
+        list:
+            shopid : 店铺ID
+            deskid : 桌型ID
+            seatnum : 可坐人数
+            sellnum : 该桌型剩余可预订数量
+            usable : 是否可预订(true-可预订，false-不可预订)
+
+    4、获取菜肴口味信息
+    http://39.108.193.42/Service-master/public/index.php/data/Shop/getFoodTastesInfo
+    入参说明：
+        无
+    结果说明：
+        list:
+            tastid : 口味ID
+            tastname : 口味名称
+    
+
+账户模块
+    1、发送短信验证码接口(兼注册功能)
+    http://39.108.193.42/Service-master/public/index.php/data/User/sendSms?mobile=13933332222
+    入参：
+        mobile      手机号码
+    结果说明：
+        {"code":1,"msg":"successs","info":[],"list":[]}
+        code > 0，即发送成功
+
+    2、登录接口
+    http://39.108.193.42/Service-master/public/index.php/data/User/login?mobile=13933332222&vcode=1234&deviceid=355439075682780&platform=2&ip=192.168.1.1&remark=xxx
+    入参：
+        mobile      手机号码
+        vcode       短信验证码
+        deviceid    登录设备号
+        platform    平台类型(1 web主站,2 android, 3 IOS, 4 H5)
+        ip          登录设备IP地址
+        remark      其它附属信息
+    结果说明：
+        {"code":1,"msg":"successs","info":{"ck":"ck_ZDYZODLMNWE1NTDIYJAWMJJMODCZMDJJM2EZMDA0MJM=","uid":10011},"list":[]}
+        code > 0，即登录成功
+        ck 唯一标示用户登录态信息
+        uid 用户ID
+
+    3、退出登录接口
+    http://39.108.193.42/Service-master/public/index.php/data/User/logout?ck=ck_xxx&uid=xxx
+    入参：
+        ck  唯一标示用户登录态信息
+        uid 用户ID
+    结果说明：
+        {"code":1,"msg":"successs","info":[],"list":[]}
+        code > 0，即退出登录成功
+
+    4，设置收货地址（默认设置最新地址为默认地址） （验证登录）
+    http://39.108.193.42/Service-master/public/index.php/data/user/addAddress?uid=10002&province=广东省&city=深圳市&address=龙岗区龙岗中心城&name=邹易&mobile=18018738562
+    4，删除收货地址（默认设置最新地址为默认地址） （验证登录）
+    http://shanwei.boss.com/data/user/delAddress?addressid=4
+    5，修改收货地址 （验证登录）
+    http://39.108.193.42/Service-master/public/index.php/data/user/modAddress?addressid=1&province=广东省&city=深圳市&address=龙岗区龙岗中心城&name=邹易&mobile=18018738562
+    6，获取收货地址列表（isactive=1表示默认地址） （验证登录）
+    http://39.108.193.42/Service-master/public/index.php/data/user/getAddressList?uid=10002
+    7，获取收货地址信息（isactive=1表示默认地址） （验证登录）
+    http://39.108.193.42/Service-master/public/index.php/data/user/getAddressInfo?addressid=1
+    8，设置默认地址 （验证登录）
+    http://39.108.193.42/Service-master/public/index.php/data/user/setDefAddress?uid=10001&addressid=1
+    
+    9、获取登录用户信息
+    http://39.108.193.42/Service-master/public/index.php/data/User/getuserinfo?ck=ck_xxx&uid=xxx
+    入参：
+        ck  唯一标示用户登录态信息
+        uid 用户ID
+    结果说明：
+        {"code":1,"msg":"success","info":{"uid":10001,"nickname":null,"mobile":"13510902030","realname":null,"sex":0,"idcard":null,"auth_status":0,"usermoney":"1202.0000","freezemoney":"0.0000","depositmoney":"0.0000","user_status":0,"regtime":"2017-04-30 13:26:37"},"list":[]}
+        uid 用户唯一ID
+        nickname 用户昵称(默认空)
+        mobile 用户注册手机号码
+        realname 用户真实姓名
+        sex 0-保密,1-男,2-女
+        idcard 用户身份证号码
+        auth_status 实名认证状态(0-未认证,100-已认证,-100-认证失败)
+        usermoney 用户余额
+        freezemoney 冻结金额
+        depositmoney 押金金额
+        user_status 用户状态(0-默认,100-已充值押金,200-已实名认证,-100-黑名单)
+        regtime 用户注册时间
+
+    10、发起充值(!!已废除,改调用10.1--创建充值订单接口-createRechargeOrder)
+    http://39.108.193.42/Service-master/public/index.php/data/User/recharge?ck=ck_xxx&uid=xxx&paytype=1001&paymoney=100&channel=1001
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        paytype     充值类型(1001-充值余额,1002-充值押金)
+        paymoney    充值金额
+        channel     充值渠道(1001-支付宝充值,1002-微信充值)
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即充值下单成功
+
+    10.1、创建充值订单接口
+    http://39.108.193.42/Service-master/public/index.php/data/User/createRechargeOrder?ck=ck_xxx&uid=xxx&paytype=1001&paymoney=100&channel=1001&subject=商品标题&describle=商品描述
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        paytype     充值类型(1001-充值余额,1002-充值押金,1003-订单充值)
+        paymoney    充值金额(保留小数点后2位)
+        channel     充值渠道(1001-支付宝充值,1002-微信充值)
+        subject     商品标题(eg.吾折餐饮)
+        describle   商品描述(eg.押金充值)
+        suborder    子订单号(可选,1003-订单充值时,不能为空)
+        ordertype   子订单类型(可选,0-正常订单,1-堂食加餐订单)
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即创建充值订单成功,info中字段说明:
+            orderid 充值订单ID
+            paymoney 充值的订单金额
+            request 包含第三方支付接口所需参数
+
+    11、发起提款(!!已废除,前端直接调用[订单相关-5.取消订单接口]即可)
+    http://39.108.193.42/Service-master/public/index.php/data/User/draw?ck=ck_xxx&uid=xxx&drawtype=200&drawmoney=99&describle=押金退款
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        drawtype    提款类型(300-订单退款)
+        drawmoney   提款金额
+        describle   提款说明(eg.订单退款)
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即提款发起成功
+
+    12、更新用户信息
+    http://39.108.193.42/Service-master/public/index.php/data/User/updateuserinfo?ck=ck_xxx&uid=xxx&nickname=Wayde&mobile=&realname=张三&sex=1&idcard=430121198012263231
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        nickname    用户昵称(可选)
+        mobile      手机号码(可选)
+        sex         用户性别(可选,0-保密,1-男,2-女)
+        realname    真实姓名(可选,实名认证通过前可修改)
+        idcard      用户身份证号码(可选,实名认证通过前可修改)
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即更新成功
+
+    13、实名认证
+    http://39.108.193.42/Service-master/public/index.php/data/User/updateuserinfo?ck=ck_xxx&uid=xxx&realname=张三&idcard=430121198012263231
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        realname    真实姓名
+        idcard      用户身份证号码
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即认证成功
+
+    14、充值订单同步通知处理接口
+    http://39.108.193.42/Service-master/public/index.php/data/User/finishRechargeOrder?ck=ck_xxx&uid=xxx&orderid=xxx
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        orderid     充值订单ID
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即充值入账成功，否则为充值状态未决，引导用户稍后查看订单状态
+        
+订单相关
+    1，创建订单
+    #创建外卖订单 http://39.108.193.42/Service-master/public/index.php/data/order/createOrder?uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=&shopid=8&orderdetail=1|1@1,2|2@1,23|3@1&ordermoney=216&deliverymoney=9&allmoney=225&paytype=0&ordertype=1&deliverytime=2017-05-02%2012:00:00&addressid=1  
+    #创建食堂订单 http://39.108.193.42/Service-master/public/index.php/data/order/createOrder?uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=&shopid=8&orderdetail=1|1@1,2|2@1,23|3@1&ordermoney=216&deliverymoney=9&allmoney=225&paytype=0&ordertype=2&mealsnum=2&startime=2017-05-02%2012:00:00&endtime=2017-05-02%2012:00:00
+    参数说明 uid用户ID，ck用户登录ck，shopid店铺ID，orderdetail订单详情（菜品ID|口味ID@数量），ordermoney订单金额，deliverymoney配送金额，allmoney订单总金额，paytype支付方式（0余额，1微信，2支付宝），ordertype订单类型（1,外卖订单  2,食堂订单）,slotid折扣时间段，date折扣时间
+    外卖订单特有参数 deliverytime配送时间（格式 2017-05-02 12:00:00），addressid配送地址ID
+    食堂订单特有参数 mealsnum就餐人数，startime预计就餐开始时间（格式 2017-05-02 12:00:00），endtime预计就餐结束时间,deskid桌型ID，servicemoney服务费
+    2，完成订单(!!仅余额支付方式时调用)
+    #完成订单 http://39.108.193.42/Service-master/public/index.php/data/order/finishOrder?orderid=6&uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=
+    参数说明
+    orderid订单ID 要求验证登录
+    3，订单列表
+    参数说明
+    ordertype = 1  外面订单 2食堂订单
+    http://39.108.193.42/Service-master/public/index.php/data/order/getOrderlist?ordertype=1&uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=&page=1&pagesize=20
+    4，订单详情
+    http://39.108.193.42/Service-master/public/index.php/data/order/getOrderinfo?orderid=11&uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=
+    返回结果字段：
+    orderid: "11", //订单ID
+    shopid: "8", //店铺ID
+    userid: "10002", //用户ID
+    ordertype: "2", //订单类型（1,外卖订单  2,食堂订单）
+    status: "0", //订单状态（0,初始 1,未付款 2,已付款 3,配送中 4,配送完成 5,用餐中 100,已完成 -100逾期, -200退款中, -300已退款, -400已取消））
+    orderdetail: "1|1@1,2|2@1,23|3@1", //订单详情
+    ordermoney: "216", //订单金额
+    deliverymoney: "9", //配送费
+    allmoney: "225", 总金额
+    paymoney: "0", 已支付金额
+    paytype: "0", 支付方式（0余额，1微信，2支付宝）
+    addtime: "" ,订单时间
+    mealsnum: "2", 就餐人数（仅食堂订单有）
+    startime: "2017-05-02 12:00:00", 用餐开始时间（仅食堂订单有）
+    endtime: "2017-05-02 12:00:00", 用餐结束时间（仅食堂订单有）
+    deliveryid: null, 配送员ID（仅外卖订单有）
+    deliverytime: null, 配送时间（仅外卖订单有）
+    addressid: null, 配送地址ID（仅外卖订单有）
+    shopname: "味千拉面(深圳福华三路分店)",
+    deliveryaddress: null,  配送地址（仅外卖订单有）
+    deliveryname: null, 配送员姓名（仅外卖订单有）
+    deliveryphone: null  配送员联系电话（仅外卖订单有）
+
+    5、取消订单接口
+    http://39.108.193.42/Service-master/public/index.php/data/Order/cancelOrder?ck=ck_xxx&uid=xxx&orderid=xxx
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        orderid     订单ID
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即取消订单成功
+
+    6、更新订单信息
+    http://39.108.193.42/Service-master/public/index.php/data/Order/updateOrderInfo?ck=ck_xxx&uid=xxx&orderid=xxx&paytype=1
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        orderid     订单ID
+        paytype     修改后的订单支付方式
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即订单更新成功
+
+    7、创建子订单
+    http://39.108.193.42/Service-master/public/index.php/data/Order/createSubOrder?ck=ck_xxx&uid=xxx
+    参数说明 uid用户ID，ck用户登录ck，parentid关联订单ID，orderdetail订单详情（菜品ID|口味ID@数量），ordermoney订单金额,allmoney订单总金额，paytype支付方式（0余额，1微信，2支付宝）,slotid折扣时间段，date折扣时间
+    结果说明：
+        {"code":1,"msg":"success","info":["parentid":xxx,"orderid":xxx],"list":[]}
+        code > 0，即创建订单成功
+
+    8、更新子订单信息
+    http://39.108.193.42/Service-master/public/index.php/data/Order/updateSubOrderInfo?ck=ck_xxx&uid=xxx&orderid=xxx&paytype=1
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        orderid     订单ID
+        paytype     修改后的订单支付方式
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即订单更新成功
+
+    9、完成子订单(!!仅余额支付方式时调用)
+    #完成订单 http://39.108.193.42/Service-master/public/index.php/data/order/finishSubOrder?orderid=6&uid=10002&ck=ck_NGE5NJA5NWVMMTIYNWJKZMRLOWZKODFLNMM3YTVKZTU=
+    参数说明
+    orderid订单ID 要求验证登录
+
+    10、设置订单状态(堂食订单设置就餐中、申请打包)
+    http://39.108.193.42/Service-master/public/index.php/data/Order/setOrderStatus?ck=ck_xxx&uid=xxx&orderid=xxx&status=5
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        status      设置订单状态(5-用餐中，6-申请打包)
+    结果说明：
+        {"code":1,"msg":"success","info":[],"list":[]}
+        code > 0，即订单设置成功
+
+    11、扫码获取用户最新待用餐订单ID
+    http://39.108.193.42/Service-master/public/index.php/data/Order/scan?ck=ck_xxx&uid=xxx&shopid=xxx&deskid=xxx
+    入参：
+        ck          唯一标示用户登录态信息
+        uid         用户ID
+        shopid      店铺ID
+        deskid      桌型ID
+    结果说明：
+        {"code":1,"msg":"success","info":{"orderid":"1000000057"},"list":[]}
+        code > 0，即查询成功，当有符合条件订单时，info中包含orderid信息，否则为空
+
+更新内容：
+    2017-05-29 modify by zhangw
+    1) 梳理修改订单支付流程
+        a.余额支付，创建订单后，直接调用完成订单接口(finishOrder)，完成扣款
+        b.第三方支付，创建订单后
+            i) 首先调用创建充值订单接口(createRechargeOrder)
+            ii) 待支付返回后，调用充值订单同步通知处理接口(finishRechargeOrder)
+            iii) 根据finishRechargeOrder返回结果，提示用户是否成功，不论是否成功，都跳转至订单详情页面
+    2) 梳理取消订单/退款流程
+        a.用户申请退款，直接调用取消订单接口(cancelOrder)即可
+        b.实现如下：
+            i) 检查该订单是否可退，外卖订单与堂食订单退款条件不一样
+            ii) 将订单更新为退款待审核状态，等待管理后台人工审核
+            iii) 人工审核通过后，区分余额支付和第三方支付处理
+                *.余额支付，直接撤单返款，资金退至用户账户余额
+                *.第三方支付，调用第三方支付接口原路退回
+    3) 废除发起提款(draw)接口
+    4）新增取消订单接口(cancelOrder)
+    5）修改订单表(t_orders)，新增f_deskid桌型ID,f_servicemoney服务费字段，f_status字段新增-110退款待审核 -120退款审核通过 -130退款审核不通过状态
+    6）修改创建订单接口(createOrder)，新增入参deskid桌型ID、servicemoney即该订单餐位服务费
+    7) 修改完成订单接口(finishOrder)，扣款接入账户体系
+    8) 修改订单详情接口(getOrderinfo),新增出参，deskid桌型ID、servicemoney即该订单餐位服务费
+    9) 管理后台新增退款审核接口(checkupCancelOrder)
+
+    2017-06-04 modify by zhangw
+    1)新增子订单表t_sub_orders，存储堂食加餐信息
+    2)修改订单表t_orders，新增f_hassuborder字段，是否有子订单(0-无，1-有)
+    3)修改充值订单表t_user_recharge_order，新增f_ordertype，子订单类型(0-默认订单，1-加餐订单)
+    4)修改创建充值订单接口createRechargeOrder新增可选入参ordertype，加餐订单是ordertype=1
+    5)新增创建子订单接口createSubOrder
+    6)新增完成子订单接口finishSubOrder
+    7)新增修改订单信息接口(支付方式修改)updateOrderInfo
+    8)新增修改子订单信息接口(支付方式修改)updateSubOrderInfo
+    9)修改获取订单详情接口getOrderinfo，出参info字段新增suborderlist字段，返回子订单信息
+
+    2017-06-05 modify by zhangw
+    1)新增堂食订单设置状态接口setOrderStatus
+    2)订单状态梳理
+        #目前已有订单状态#
+        0,初始 1,未付款 2,已付款 3,配送中 5,用餐中 100,已完成 -100逾期 -110退款待审核 -120退款审核通过 -130退款审核不通过 -200退款中 -300退款完成， -400已取消
+        #产品需求文档-订单状态#
+        外卖订单状态：
+            等待接单、等待付款、配送中、订单完成、订单取消、退款中、已退款
+        堂食订单状态：
+            等待付款、已预订、就餐中、已打包、未及时就餐、退款中、已退款、订单取消、订单完成
+
+        #梳理后订单状态#
+        a.外卖订单(t_orders,type=1)
+            正常流程：
+                初始状态[0] => 待付款[1] => 已付款[2](等待配送) => 配送中[3] => 配送完成[100](终结态)
+            异常流程：
+                超时未付款：
+                    初始状态[0] => 待付款[1] => 已关闭[-1000](超时未付款)(终结态)
+                同意退款：
+                    初始状态[0] => 待付款[1] => 已付款[2](等待配送) => 退款待审核[-110] => 退款审核通过[-120] => 退款中[-200] => 退款完成[-300](终结态)
+                不同意退款：
+                    初始状态[0] => 待付款[1] => 已付款[2](等待配送) => 退款待审核[-110] => 退款审核不通过[-130] => 已付款[2](等待配送)
+
+        b.堂食订单(t_orders,type=2)
+            正常流程：
+                初始状态[0] => 待付款[1] => 已付款[2] => 就餐中[5] => 订单完成[100](用餐结束)(终结态)
+                初始状态[0] => 待付款[1] => 已付款[2] => 申请打包[6] => 已打包[90](终结态)
+            异常流程：
+                超时未付款：
+                    初始状态[0] => 待付款[1] => 已关闭[-1000](超时未付款)(终结态)
+                逾期未就餐：
+                    打包：初始状态[0] => 待付款[1] => 已付款[2] => 逾期未就餐[-400] => 已打包[90](终结态)
+                    未打包：初始状态[0] => 待付款[1] => 已付款[2] => 逾期未就餐[-400] => 逾期关闭[-900](终结态)
+                同意退款：
+                    初始状态[0] => 待付款[1] => 已付款[2] => 退款待审核[-110] => 退款审核通过[-120] => 退款中[-200] => 退款完成[-300]
+                不同意退款：
+                    初始状态[0] => 待付款[1] => 已付款[2] => 退款待审核[-110] => 退款审核不通过[-130] => 已付款[2](等待就餐)
+        c.加餐子订单状态
+            初始状态[0] => 待付款[1] => 已付款[2](终结态)
+
+        d.备注：
+            1) 外卖订单|堂食订单，未付款订单超时未付款，自动设置成--已关闭[-1000](终结态)；
+            2) 堂食订单，过了就餐开始时间，未设置就餐中[5]，自动设置成--逾期未就餐[-400];
+            3) 堂食订单，逾期未就餐[-400]状态订单，过了当天，自动设置成--逾期关闭[-900](终结态)
+
+        f.终结态：
+            订单完成[100]
+            已打包[90]
+            退款完成[-300]
+            逾期关闭[-900]
+            已关闭[-1000]
+
+
+

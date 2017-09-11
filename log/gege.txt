@@ -1,0 +1,1 @@
+SELECT `f_oid`,`f_userid`,`f_mealsnum`,`f_deskid`,`f_ordermoney`,`f_status`,`f_endtime`,`f_startime` FROM `t_orders` WHERE  (  f_type = 2 and f_oid in (2017713,2017713,2017713,2017713,2017713,2017713,2017713,2017713,2017714,2017714,2017715,2017716,2017717,2017718,2017717,2017717,2017717,2017721) )

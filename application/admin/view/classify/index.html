@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>菜肴添加</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/add.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/food-gl.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+	<style>
+		.img-pos-icon{
+			position:relative;
+			left:97px;
+			top:-15px;
+			opacity:0.5;
+			visibility:visible;
+			z-index:100;
+		}
+		.input-text{margin-left:-20px}
+		.cwf input{cursor:pointer;}
+	</style>
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>门店管理</h3></div>
+	<div class="title-1"><h5 style="line-height: 50px;">门店：{$shopinfo.f_shopname}</h5></div>
+</div>
+<div class="today-search" style="margin-bottom:10px">
+	<ul>
+		<li id="xz-blue"><a href="{:url('Dishes/index?shopid='.$shopid)}">菜肴管理</a></li>
+		<li><a href="{:url('Shop/getDineshopSell?shopid='.$shopid)}">放号管理</a></li>
+		<li><a href="{:url('Shop/getDineshopDiscount?shopid='.$shopid)}">折扣管理</a></li>
+		<li><a href="{:url('Shop/getDesklist?shopid='.$shopid)}">桌号管理</a></li>
+	</ul>
+	<div class="title-2"><div><a href="{:url('addDishes?shopid='.$shopid)}">新增</a></div></div>
+	<div class="title-2"><div><a href="{:url('classify/index')}">菜肴分类管理</a></div></div>
+</div>
+<!-- <div class="input-names">
+	<div class="input-name">菜肴名称</div>
+	<div class="input-text"><input type="text" class="shuru" name="foodnames"></div>
+</div>
+<div class="input-img">
+	<div class="input-name">菜肴图片</div>
+	<div class="input-text">
+	<div><input class="tijiao" type="file" name="icons"></div> 
+	<div class="input-icons"><img src="./img/u3160.png"></div>
+	</div>
+</div>
+<div class="input-miaoshu">
+	<div class="input-name">菜肴描述</div>
+	<div class="input-text"><textarea name="miaoshu" class="shuru"></textarea></div>
+</div> -->
+<form action="{:url('classify/addClassify')}" method="post">
+<div class="input-img">
+	<div class="input-name">一级分类</div>
+	<div class="input-text" >
+	{if condition="count($list['yiji']) gt 0"}
+		
+		{volist name="list['yiji']" id="vo"}
+			<div class="cwf"><img name="{$vo.f_cid}" src="__LOCAL__/img/kaca.jpg" class="img-pos-icon img-pos" width="25" alt=""><input  type="text" value="{$vo.f_cname}" cid="{$vo.f_cid}" class="read" readonly></div>
+		{/volist}
+	{/if}
+		<div class="cwf"><img src="__LOCAL__/img/kaca.jpg" class="img-pos-icon" width="25" alt=""><input  type="text" class="yiji" name="yiji[]" placeholder="可不填"></div>
+		
+
+	<div class="input-icons"  id="kouwei"><a href="javascript:void(0)">+添加多个分类</a></div>
+	</div>
+</div>
+<div class="input-img">
+	<div class="input-name">二级分类</div>
+	<div class="input-text">
+	{if condition="count($list['erji']) gt 0"}
+		
+		{volist name="list['erji']" id="vo"}
+			<div class="cwf"><img name="{$vo.f_cid}"  src="__LOCAL__/img/kaca.jpg" class="img-pos-icon img-pos" width="25" alt=""><input  type="text" cid="{$vo.f_cid}" value="{$vo.f_cname}" class="read" readonly></div>
+		{/volist}
+	{/if}
+	<div class="cwf"><img src="__LOCAL__/img/kaca.jpg" class="img-pos-icon" width="25" alt=""><input  type="text" class="erji" name="erji[]" placeholder="可不填"></div>
+	<div class="input-icons" id="kouweii"><a href="javascript:void(0)">+添加多个分类</a></div>
+	</div>
+</div>
+
+<div class="input-names">
+	<div class="input-name input-foot"  style="border-top:1px solid black;padding-top:20px;"><input type="submit" class="submit" value="提交" style="width:15%;height:30px;background:rgb(45,44,65);border:1px solid rgb(45,44,65);color:white;float:right;"></div>
+</div>
+</form>
+<!-- <script type="text/javascript" src="js/md-add.js"></script> -->
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+</body>
+<script type="text/javascript">
+
+	$('#kouweii').bind('click',function(){
+
+		$('#kouweii').before('<div class="cwf"><img  src="" class="img-pos-icon img-pos" width="25" alt=""><input  type="text" value="" class="erji" name="erji[]" ></div>');
+	});
+	$('#kouwei').bind('click',function(){
+
+		$('#kouwei').before('<div class="cwf"><img  src="" class="img-pos-icon img-pos" width="25" alt=""><input  type="text" value="" class="yiji" name="yiji[]" ></div>');
+	});
+
+	$('.read').dblclick(function(){
+		$(this).prev('img').css('visibility','hidden');
+		$(this).removeAttr('readonly');
+
+
+	});
+	//ajax修改
+
+	$('.read').blur(function(){
+
+		$(this).attr('readonly','readonly');
+		$(this).prev('img').css('visibility','visible');
+		var val = $(this).val();
+		var f_cid = $(this).attr('cid');
+
+		// alert(val);
+		// alert(f_cid);
+		$.ajax({
+		   type: "GET",
+		   url: "{:url('classify/updateClassify')}",
+		   data: "cid="+f_cid+"&cname="+val,
+		   success: function(msg){
+		    	// alert(msg);
+		    if(msg == 2 || msg ==3){
+		     	alert('修改失败');
+		    }
+		    
+		   }
+		});
+
+	});
+
+	//ajax删除
+	$('.img-pos').click(function(){
+		var f_cid = $(this).attr('name');
+		var ff = $(this).parent('div');
+		// alert(f_cid);
+		bool = confirm('确定删除吗？');
+	
+		if(bool){
+			$.ajax({
+			   type: "GET",
+			   url: "{:url('classify/delClassify')}",
+			   data: "cid="+f_cid,
+			   success: function(msg){
+			     if(msg == 1){
+			     	// alert('删除成功');
+			     	ff.remove();
+			     }
+			    
+			   }
+			});
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>today-list当天列表</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/advance-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+	<style type="text/css">
+	*{margin:0;padding:0;list-style-type:none;}
+	a,img{border:0;}
+	body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+	/* demo */
+	.demo{width:500px;margin:40px auto;}
+	.demo span{display:inline-block;width:240px;}
+	.demo span input{padding:3px;width:120px;font-size:12px;font-family:Arial, Helvetica, sans-serif;}
+	</style>
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>预售列表</h3></div>
+	<!-- <div class="title-2">2017年3月14日 10:22</div> -->
+</div>
+<div class="demo" id="demoDate">
+	<span>日期筛选&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="" placeholder="日期选择" id="dataDay" onclick="SelectDate(this,'yyyy-MM-dd')"/>&nbsp;&nbsp;&nbsp;&nbsp;-----</span>
+	<span><input type="text" value="" placeholder="日期选择"  id="dataDay1" onclick="SelectDate(this,'yyyy-MM-dd')"/></span>
+</div>	
+<div class="demo" id="demoTime">
+	<span>时间段筛选&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="" placeholder="时间选择"  id="timeDay" onclick="SelectDate(this,'hh:mm:ss')"/>&nbsp;&nbsp;&nbsp;&nbsp;-----</span>
+	<span><input type="text" value="" id="timeDay1" placeholder="时间选择" onclick="SelectDate(this,'hh:mm:ss')"/></span>
+</div>	
+<div class="today-search">
+	<input type="text" name="orderId" id="caiyao" placeholder="输入菜肴名" style="height:30px;text-align: center"/>
+	<button type="button" class="btn btn-large btn-primary disabled" onclick="findOne()" style="height:40px;margin-top:-10px;">查询</button>
+	<button type="button" class="btn btn-large btn-primary disabled" onclick="daochu()" style="height:40px;margin-top:-10px;float: right;margin-right:15px">报表导出</button>
+</div>
+		
+<!-- <?php var_dump($orders);?> -->
+<div class="today-table">
+		<!-- 遮罩start -->
+			<div class="body-box">
+		<!-- 遮罩stop
+			</div>
+	<table class="table table-bordered" id="tablePage" style="float:left;"> -->
+			</div>
+		<input type="hidden" id="url" value="{:url('dineshop/order/getDetails')}">
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<td>订单号</td>
+			<td>就餐时间段</td>
+			<td>用户账号</td>
+			<td>就餐人数</td>
+			<td>桌号</td>
+			<td>菜肴名称</td>
+			<td>价格</td>
+			<td>状态</td>
+		</tr>
+		{volist name="orders" id="vo"}
+		<tr>
+			<td>{$id++}</td>
+			<td>{$vo.f_oid}</td>
+			<td>{$vo.f_eattime}</td>
+			<td>{$vo.f_userid}</td>
+			<td>{$vo.f_mealsnum}</td>
+			<td>{$vo.f_deskid}</td>
+			<td><div class="font-blue" oid="{$vo.f_oid}">查看菜单</div>
+
+			<div class="checkedout">
+				<ul id="food-list" class="none">
+					<li><h4>正在加载中请稍等</h4></li>
+				</ul>
+			</div>
+			</td>
+			<td>{$vo.f_ordermoney}</td>
+			<td>{$vo.f_status}</td>
+		</tr>
+		{/volist}
+		
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/checkdetails.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/adddate.js" ></script> 
+<script type="text/javascript">
+	//模糊查询
+	function findOne()
+	{
+		var dataDay = document.getElementById('dataDay').value;
+		var dataDay1 = document.getElementById('dataDay1').value;
+		var timeDay = document.getElementById('timeDay').value;
+		var timeDay1 = document.getElementById('timeDay1').value;
+		var name = document.getElementById('caiyao').value;
+		if(timeDay != '' && timeDay1 != ''){
+			if(dataDay == ''){
+				alert('起始日期不为空');
+			}
+			if(dataDay1 == ''){
+				alert('结束日期不为空');
+			}
+		}else if(timeDay != '' && timeDay1 == ''){
+			alert('结束时间不为空')
+		}
+			$.ajax({
+				type:'post',
+				url:'{:url("dineshop/order/getOneOrder")}',
+				data:"name="+name+"&dataDay="+dataDay+"&dataDay1="+dataDay1+"&timeDay="+timeDay+"&timeDay1="+timeDay1,
+				success:function(data){
+					// console.log(data);
+					$('.table').html('');
+					var id = 0;
+					msg = '<tr id="table-title"><td>序号</td><td>订单号</td><td>就餐时间段</td><td>用户账号</td><td>就餐人数</td><td>桌号</td><td>菜肴名称</td><td>价格</td><td>状态</td></tr>';
+					if(data != 0){
+						for(var i=0;i<data.length;i++){
+							msg += '<tr><td>'+ ++id +'</td><td>'+data[i]["f_oid"]+'</td><td>'+data[i]["f_eattime"]+'</td><td>'+data[i]["f_userid"]+'</td><td>'+data[i]["f_mealsnum"]+'</td><td>'+data[i]["f_deskid"]+'</td><td><div class="font-blue" onclick="checkfood('+data[i]["f_oid"]+',this)">查看菜单</div><div class="checkedout"><ul id="food-list" class="none"><li><h4>正在加载中请稍等</h4></li></ul></div></td><td>'+data[i]["f_ordermoney"]+'</td><td>'+data[i]["f_status"]+'</td></tr>';
+						}
+						// console.log(data);
+						msg += '<tr><td colspan="9"><a href={:url("order/getorderlist")}>返回</a></td></tr>';
+						$('.table').append(msg);
+
+					}else{
+						msg += '<tr><td colspan="9">没有此订单<a href={:url("order/getorderlist")}>返回</a></td></tr>'
+						$('.table').append(msg);
+					}
+					
+				},
+				dataType:'json',
+				error:function(data){
+					alert('请输入正确的订单号或者没有此订单');
+				}
+			});
+		
+	}
+
+	// 详细菜单
+	function checkfood(oid,o)
+	{
+
+	var bodyBox = document.getElementsByClassName("body-box");
+		$.ajax({
+			type:'POST',
+			data:'oid='+oid,
+			url:"{:url('dineshop/order/getDetails')}",
+			success:function(data)
+			{
+				var length = data.length;
+				msg = '<li><h4>查看菜单</h4></li>';
+				for(var i=0;i<length;i++){
+					msg += '<li><div id="food-name">' +data[i]["foodname"] + ' X'+ data[i]["foodnum"] + '</div><div id="food-pay">' + data[i]["foodprice"] + '</div></li>'
+				}
+				msg += '<li class="button" onclick="closeFood(this)"><div>关闭</div></li>';
+				// console.log(msg);
+				o.parentNode.childNodes[1].childNodes[0].innerHTML = msg;
+				// console.log(o.parentNode.childNodes[1].childNodes[0]);
+				o.parentNode.childNodes[1].setAttribute("id","block");
+				bodyBox[0].setAttribute("id","block");
+			},
+			dataType:'json'
+		});
+
+	}
+</script>
+</body>
+</html>

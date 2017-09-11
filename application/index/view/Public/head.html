@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta charset="UTF-8">
+	<title>闪味后台管理系统</title>
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/head-title.css">
+	<link rel="stylesheet" href="__LOCAL__/js/layer/mobile/need/layer.css">
+	<link rel="stylesheet" href="__LOCAL__/css/bootstrap.css">
+	<link rel="stylesheet" href="__LOCAL__/css/bootstrap.min.css">
+	<script src="__LOCAL__/js/jquery.min.js"></script>
+	<script src="__LOCAL__/js/bootstrap.js"></script>
+	<script src="__LOCAL__/js/bootstrap.min.js"></script>
+	<script src="__LOCAL__/js/layer/layer.js"></script>
+	<!-- <link rel="stylesheet" href="__LOCAL__/css/admin-menu.css"> -->
+</head>
+<body>
+<div class="admin-head">
+	<div class="admin-title">
+		<h2>闪味后台管理系统</h2>
+	</div>
+	<div class="admin-menu">
+		<ul class="admin-menu-list">
+			<li>你好&nbsp;&nbsp;<span>{:session('uname')}</span></li>
+			<li><a href="">个人中心</a></li>
+			<li><a href="javascript:void(0)" id="logout">退出登录</a></li>
+		</ul>
+	</div>
+</div>
+<div id="newTitle" style="position:absolute;top:4px;right:50%;display:none;">
+	<a href="{:url('admin/order/getorderlist')}" target="main" onclick="hide()"><h3>新的订单</h3></a>
+</div>
+<audio id="bgMusic" src="__LOCAL__/mp3/newOrder.mp3" >
+您的浏览器不支持 audio 标签。
+</audio>
+<input type="hidden" id="Orders" value="">
+</body>
+<script>
+	$("#logout").click(function(){
+		if(confirm('是否退出登录？')){
+			$.post("{:url('admin/User/logout')}",function(data){
+				if(data.msg == '退出登录成功!'){
+					window.top.location.href = "{:url('admin/Index/login')}";	
+				}
+			})
+		}
+		
+	})
+	$(function(){
+		firstOrder();
+		setInterval(getOrder,3000);
+	})
+
+	function getOrder()
+	{
+		$.post("{:url('admin/order/newOrder')}", function(data) {
+			var audio = document.getElementById('bgMusic');
+			 var obj = eval('(' + data + ')');
+			oldCount = $('#Orders').val();
+			newCount = obj.count;
+			if(newCount > oldCount){
+				 $('#Orders').val(newCount);
+				 if(audio.paused)                     {                 
+				      audio.play();//audio.play();// 这个就是播放  
+				  }else{
+				   audio.pause();// 这个就是暂停
+				  }
+				ha = setInterval(ss,1000);
+			}else{
+				// console.log(obj);
+			}
+
+		});
+	}
+	function firstOrder()
+	{
+		$.post("{:url('admin/order/newOrder')}", function(data) {
+			 var obj = eval('(' + data + ')');
+			$('#Orders').val(obj.count);
+		});
+	}
+
+	function ss()
+	{
+		if($('#newTitle').css('display') != 'none'){
+			$('#newTitle').hide();
+		}else{
+			$('#newTitle').show();
+		}
+		
+	}
+
+	function hide()
+	{
+		clearTimeout(ha);
+		$('#newTitle').hide();
+	}
+</script>
+</html>

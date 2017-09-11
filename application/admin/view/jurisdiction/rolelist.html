@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>today-list门店列表</title>
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/today-list.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/food-gl.css">
+	<link rel="stylesheet" type="text/css" href="__LOCAL__/css/bootstrap.min.css">
+</head>
+<body>
+<div class="today-title">
+	<div class="title-1"><h3>角色管理</h3></div>
+	<div class="title-1"><h5 style="line-height: 50px;">门店：撒网</h5></div>
+</div>
+<div class="today-search">
+	<ul>
+		<li id="xz-blue">角色列表</li>
+	</ul>
+	<div class="title-2"><div><a href="{:url('addRole')}">新增</a></div></div>
+</div>
+<div class="today-table">
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<td>角色名称</td>
+			<td>角色描述</td>
+			<td>添加时间</td>
+			<td>操作</td>
+		</tr>
+		{volist name="list" id="vo" key="k"}
+			<tr>
+				<td>{$k}</td>
+				<td>{$vo.rolename}</td>
+				<td>{$vo.describle}</td>
+				<td>{$vo.lasttime}</td>
+				<td><a href="javascript:void(0)" class="del" rid="{$vo.rid}">删除</a>&nbsp;&nbsp;<a href="{:url('roleAddModule')}?rid={$vo.rid}&name={$vo.rolename}">权限分配</a></td>
+			</tr>
+		{/volist}
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+<script type="text/javascript" src="__LOCAL__/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/jquery-2.0.2.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+</body>
+<script>
+	$(".del").click(function(){
+		url = "{:url('delRole')}";
+		rid = $(this).attr('rid');
+		ff = $(this).parent().parent('tr');
+		if(confirm("您确定要删除模块吗？")){
+			$.post(url,{rid:rid},function(data){
+				if(data == 1){
+					alert('删除成功');
+	                ff.remove();
+	            }else{
+	            	alert('删除失败');
+	            }
+				
+			});
+		}
+		
+	})
+</script>
+</html>

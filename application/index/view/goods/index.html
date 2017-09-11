@@ -1,0 +1,68 @@
+{extend name="Public/public"/}
+{block name="style"}
+<link rel="stylesheet" href="__LOCAL__/css/today-list.css">
+{/block}
+
+{block name="body"}
+<div class="today-title">
+	<div class="title-1"><h3>门店列表</h3></div>
+	<div class="title-2"><div><a href="md-add.html">新增</a></div></div>
+
+</div>
+	<div class="today-table">
+	<table class="table table-bordered" id="tablePage" style="float:left;">
+		<tr id="table-title">
+			<td>序号</td>
+			<td>菜肴图片</td>
+			<td>菜肴名称</td>
+			<td>一级分类</td>
+			<td>二级分类</td>
+			<td>口味种类</td>
+			<td>描述</td>
+			<td>店铺名称</td>
+			<td>价格</td>
+			<td>默认折扣</td>
+			<td>操作</td>
+
+		</tr>
+		<tr>
+			<td>1</td>
+			<td><img src="#" width="30px" height="30px"></td>
+			<td>撒网</td>
+			<td>好吃的酸菜鱼</td>
+			<td>是</td>
+			<td>13888888888</td>
+			<td>宝安海雅缤纷城5楼26号</td>
+			<td>10:00-22:00</td>
+			<td>123</td>
+			<td>123</td>
+			<td><a href="">修改</a>&nbsp;<a href="">删除</a></td>
+		</tr>
+		<!-- <tr>
+			<td>2</td>
+			<td><img src="#" width="30px" height="30px"></td>
+			<td>撒网</td>
+			<td>好吃的酸菜鱼</td>
+			<td>是</td>
+			<td>13888888888</td>
+			<td>宝安海雅缤纷城5楼26号</td>
+			<td>10:00-22:00</td>
+			<td><img src="#" width="30px" height="30px"></td>
+			<td><img src="#" width="30px" height="30px"></td>
+			<td><a href="">修改</a>&nbsp;<a href="food-gl.html">管理</a>&nbsp;<a href="">删除</a></td>
+		</tr> -->
+	</table>
+</div>
+<div class="today-page">
+	<div class="pagination pagination-large">
+	<div id="number"><input id="countnum" min="10" max="50" type="number" value="50" style="width:32px;height:35px;" onBlur="count()"></div>
+	  <ul id="page">
+	  	
+	  </ul>
+	<div id="number-show"><span>共180条。每页显示50条</span></div>
+	</div>
+</div>
+{/block}
+{block name="bootscript"}
+<script type="text/javascript" src="__LOCAL__/js/table-page.js"></script>
+{/block}

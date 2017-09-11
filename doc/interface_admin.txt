@@ -1,0 +1,315 @@
+后台相关接口:
+    1、登录接口(系统管理员: sysadmin，密码: 123456)
+        http://39.108.193.42/Service-master/public/index.php/api/User/login?username=sysadmin&passwordadmin=123456
+        入参：
+            username    登录用户名
+            password    登录密码
+            ip          登录设备IP地址
+        结果说明：
+            {"code":1,"msg":"successs","info":{"ck":"ck_ZDYZODLMNWE1NTDIYJAWMJJMODCZMDJJM2EZMDA0MJM=","uid":10001},"list":[]}
+            code > 0，即登录成功
+            ck 唯一标示用户登录态信息
+            uid 用户ID
+
+    2、退出登录
+        http://39.108.193.42/Service-master/public/index.php/api/User/logout?ck=ck_xxx&uid=xxx
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+        结果说明：
+            {"code":1,"msg":"successs","info":[],"list":[]}
+            code > 0，即退出登录成功
+
+    3、获取登录用户管理菜单
+        http://39.108.193.42/Service-master/public/index.php/api/User/getMenuList?ck=ck_xxx&uid=xxx
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+        结果说明：
+            mid             模块ID
+            modulename      模块名称
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+            childinfo       子节点信息
+
+    4、获取全部管理菜单(管理用)
+        http://39.108.193.42/Service-master/public/index.php/api/User/getAllMenuList?ck=ck_xxx&uid=xxx
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+        结果说明：
+            mid             模块ID
+            modulename      模块名称
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+            childinfo       子节点信息
+
+    5、用户相关
+        1)检查用户名是否被占用
+        http://39.108.193.42/Service-master/public/index.php/api/User/getMenuList?ck=ck_xxx&uid=xxx&username=zhangsan
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            username 待检测用户名
+
+        2)新增用户
+        http://39.108.193.42/Service-master/public/index.php/api/User/addUser?ck=ck_xxx&uid=xxx&username=zhangsan&password=123456&realname=张三
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            username 用户名
+            password 登录密码
+            realname 真实姓名(可选)
+
+        3)修改用户信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/updateUserInfo?ck=ck_xxx&uid=xxx&userid=10002&username=zhangsan&password=123456&realname=张三&userstatus=100&rolelist=10001,10002
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            userid 修改用户ID
+            username 用户名(可选)
+            password 登录密码(可选)
+            realname 真实姓名(可选)
+            userstatus 用户状态(可选)(100-正常,-100-禁用)
+            rolelist 用户分配的角色ID列表(英文逗号分隔字符串)
+
+        4)删除用户信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/delUser?ck=ck_xxx&uid=xxx&uidlist=10002,10003
+         入参：
+             ck  唯一标示用户登录态信息
+             uid 用户ID
+             uidlist 删除用户ID列表(英文逗号分隔字符串)
+
+        5)获取单个用户信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/getUserInfo?ck=ck_xxx&uid=xxx&userid=10001
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            userid 查询用户ID
+        结果说明：
+            uid           用户ID
+            username      用户名
+            password      用户密码(已加密)
+            realname      用户真实姓名
+            userstatus    用户状态(100-正常,-100-禁用)
+            addtime       用户添加时间
+            lasttime      用户信息最后更新时间
+            roleinfo      用户角色信息
+            rid           角色ID
+            rolename      角色名称
+
+        6)根据角色ID获取用户列表(默认查全部用户)
+        http://39.108.193.42/Service-master/public/index.php/api/User/getUserList?ck=ck_xxx&uid=xxx
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            rid 角色ID(可选)
+        结果说明：
+            uid           用户ID
+            username      用户名
+            realname      用户真实姓名
+            userstatus    用户状态(100-正常,-100-禁用)
+
+    6、角色相关
+        1)新增角色信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/addRole?ck=ck_xxx&uid=xxx&rolename=角色名称&describle=描述
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            rolename 角色名称
+            describle 角色描述
+
+        2)修改角色信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/updateRoleInfo?ck=ck_xxx&uid=xxx&rolename=角色名称&describle=描述&modulelist=10001,10002
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            rolename 角色名称
+            describle 角色描述
+            modulelist 角色分配的模块ID列表(英文逗号分隔字符串)
+
+        3)删除角色信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/delRole?ck=ck_xxx&uid=xxx&rid=10002
+         入参：
+             ck  唯一标示用户登录态信息
+             uid 用户ID
+             rid 删除角色ID
+
+        4)获取角色列表
+        http://39.108.193.42/Service-master/public/index.php/api/User/getRoleList?ck=ck_xxx&uid=xxx
+        结果说明：
+            rid         角色ID
+            rolename    角色名称
+            describle   角色描述
+            lasttime    最后更新时间
+
+        5)获取单个角色信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/getRoleInfo?ck=ck_xxx&uid=xxx&userid=10001&rid=10001
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            rid 角色ID
+        结果说明：
+            rid         角色ID
+            rolename    角色名称
+            describle   角色描述
+            userinfo    角色用户信息
+            uid         用户ID
+            username    用户名称
+            realname    用户真实姓名
+            userstatus  用户状态
+            moduleinfo  角色模块列表[10001,10002]
+
+    7、模块相关
+        1)新增模块信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/addModule?ck=ck_xxx&uid=xxx&modulename=角色名称&describle=描述
+        入参：
+            ck              唯一标示用户登录态信息
+            uid             用户ID
+            modulename      模块名称
+            describle       模块描述
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+
+        2)修改模块信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/updateModuleInfo?ck=ck_xxx&uid=xxx&mid=10002&modulename=角色名称&describle=描述
+        入参：
+            ck              唯一标示用户登录态信息
+            uid             用户ID
+            mid             模块ID
+            modulename      模块名称
+            describle       模块描述
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+
+        3)删除模块信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/delModule?ck=ck_xxx&uid=xxx&midlist=10005
+         入参：
+             ck         唯一标示用户登录态信息
+             uid        用户ID
+             midlist    删除用户ID列表(英文逗号分隔字符串)
+
+        4)获取单个模块信息
+        http://39.108.193.42/Service-master/public/index.php/api/User/getModuleInfo?ck=ck_xxx&uid=xxx&userid=10001&mid=10001
+        入参：
+            ck  唯一标示用户登录态信息
+            uid 用户ID
+            mid 模块ID
+        结果说明：
+            mid             模块ID
+            modulename      模块名称
+            describle       模块描述
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+            lasttime        最后更新时间
+
+        5)获取模块列表
+        http://39.108.193.42/Service-master/public/index.php/api/User/getModuleList?ck=ck_xxx&uid=xxx
+        结果说明：
+            mid             模块ID
+            modulename      模块名称
+            describle       模块描述
+            moduletype      模块类型(0-虚节点,1-实节点)
+            xpath           模块访问路径(虚节点为空)
+            parentid        父模块ID(0为顶级模块)
+            showorder       显示顺序
+            lasttime        最后更新时间
+           http://boss.yee.website/api/shop/modDiscountTimeslot?timeslot=05:00-06:00,06:00-07:00 
+    8、店铺相关
+        1)店铺折扣时间表
+            获取店铺折扣时间表  http://39.108.193.42/Service-master/public/index.php/api/shop/getDiscountTimeslot
+            新增店铺折扣时间表  http://boss.yee.website/api/shop/addDiscountTimeslot?timeslot=05:00-06:00,06:00-07:00
+            删除店铺折扣时间表
+            http://boss.yee.website/api/shop/delDiscountTimeslot?slotid=80,81
+        2)获取店铺折扣信息
+            获取店铺折扣信息 http://39.108.193.42/Service-master/public/index.php/api/shop/getDineshopDiscount?shopid=1
+            添加店铺折扣信息 http://boss.yee.website/api/shop/addDineshopDiscount?shopid=1&date=2017-05-17&timeslot=6&discount=4|1@0.6$3|2@50
+            修改店铺折扣信息 http://boss.yee.website/api/shop/modDineshopDiscount?id=10&discount=5|1@0.6$3|2@50
+            删除店铺折扣信息 http://boss.yee.website/api/shop/delDineshopDiscount?id=10&discount=5|1@0.6$3|2@50
+        3)后台获取店铺信息列表  
+        http://39.108.193.42/Service-master/public/index.php/api/shop/getDineshopList?page=1&pagesize=20
+        4)获取店铺详情
+        http://39.108.193.42/Service-master/public/index.php/api/shop/getDineshopInfo?shopid=1
+        返回参数说明：
+        id: 1,  订单ID
+        userid: 1,  用户ID
+        shopname: "深运潮州粥",  店铺名称
+        status: 0,  店铺状态（0初始，1审核中，100审核通过，-100审核不通过，-300已下架）
+        shopdesc: "",  店铺描述
+        shopicon: "http://p1.meituan.net/200.0/deal/15c8885d14f18774938a88752f08bb1e49194.jpg@118_0_466_466a%7C267h_267w_2e_90Q",  店铺图标
+        shophone: "0755-28635923",  店铺联系方式
+        address: "中银花园1号楼B-8（中银大厦旁）",  店铺地址
+        cuisineid: 1, 菜系ID
+        cuisinename: "鲁菜",  菜系名称
+        menulist: "1,2,3,4,5,6,7,8",  菜品ID
+        maplon: "114.073984",  坐标
+        maplat: "22.553192",  坐标
+        sales: 200, 月销量
+        deliveryfee: 6, 配送费
+        minprice: 20, 起送金额
+        preconsume: 30, 人均消费
+        isbooking: 0, 是否可以预定
+        opentime: "10:00-23:00", 营业时间
+        isaway: 1, 是否可以外卖
+        deliverytime: "00:01-02:45,16:50-23:59",  订单配送时间
+        addtime: "2017-04-24 21:03:03", 添加时间
+        disheslist: [ 菜品列表
+            {
+            id: 1,  菜名ID
+            icon: "https://img.meituan.net/100.100.90/wmproduct/712a233b4018a100bdf7a668132ab49386611.jpg",
+            dishesname: "葱香油焖大虾",  菜名
+            price: "88.0000",  菜价
+            classifyname: "招牌推荐",  菜名分类
+            cuisinename: "鲁菜" 菜系
+            }
+        ]
+        5)获取店铺对应配送员
+        http://39.108.193.42/Service-master/public/index.php/api/shop/getDistripList?shopid=1
+        id: 3,  配送员ID
+        shopid: 1,  店铺ID
+        distripname: "任我行",  配送员姓名
+        distripmobile: "18018738566"  配送员联系方式
+    9、订单相关    
+        1)获取订单列表
+        ordertype(订单类型)=1外卖订单，2食堂订单，startime订单起始时间，endtime订单结束时间，shopname店铺名称
+        http://39.108.193.42/Service-master/public/index.php/api/order/getOrderlist?startime=2017/05/07&endtime=2017/05/14&shopname=&page=1&pagesize=20&ordertype=1
+        2)处理订单
+        http://39.108.193.42/Service-master/public/index.php/api/order/processOrder?ck=xxx&uid=xxx&orderid=1&status=3&userid=100003
+        3)审核退款订单
+        http://39.108.193.42/Service-master/public/index.php/api/order/checkupCancelOrder?ck=xxx&uid=xxx&orderid=1&checkupstatus=1
+        入参：
+            uid             登录用户ID
+            orderid         订单ID
+            checkupstatus   审核状态(0-审核不通过，1-审核通过)
+        结果说明：
+            {"code":1,"msg":"success","info":[],"list":[]}
+            code > 0，即订单审核成功
+
+        4)根据用户ID获取店铺信息
+        http://39.108.193.42/Service-master/public/index.php/api/shop/getUserDineshopInfo?ck=xxx&uid=xxx&userid=10001
+        入参：
+            ck          唯一标示用户登录态信息
+            uid         登录用户ID
+            userid      查询用户ID
+        结果说明：
+            {"code":1,"msg":"success","info":[],"list":[]}
+            code > 0，即查询成功，info字段为店铺相关信息
+
+    10、菜肴相关
+	1)添加/修改菜肴分类
+	cname:菜肴分类名,type:type=1表示第一分类,type=2表示第二分类,type=3表示口味
+	http://api.yee.website/api/classify/addClassify?adduser=10001&cname=%E6%9D%A5%E6%B5%8B%E8%AF%95%E7%9A%84%E8%8F%9C&type=1
+	2)删除菜肴分类
+	cid:菜肴分类id,type:type=1表示第一分类,type=2表示第二分类,type=3表示口味
+	http://api.yee.website/api/classify/delClassify?adduser=10001&cid=1&type=1
+	
