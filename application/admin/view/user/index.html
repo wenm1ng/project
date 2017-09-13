@@ -1,0 +1,126 @@
+{extend name="index/index"/}
+{block name="user_index"}
+<div class="col-sm-12"> 
+   <div class="ibox float-e-margins"> 
+    <div class="ibox-title"> 
+     <h5>用户列表 <small>分类，查找</small></h5>
+     <div class="ibox-tools"> 
+      <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a> 
+      <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#"> <i class="fa fa-wrench"></i> </a> 
+      <ul class="dropdown-menu dropdown-user"> 
+       <li><a href="table_data_tables.html#">选项1</a> </li> 
+       <li><a href="table_data_tables.html#">选项2</a> </li> 
+      </ul> 
+      <a class="close-link"> <i class="fa fa-times"></i> </a> 
+     </div> 
+    </div> 
+    <div class="ibox-content"> 
+     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
+      <div class="row">
+       <div class="col-sm-12">
+        <form action="__URL__/index" method="get">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
+          <label>
+         <input type="submit" class="form-control input-sm" aria-controls="DataTables_Table_0" value="查询"/>
+         </label>
+        </div>     
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
+        <label>性别：
+          <select name="sex" class="form-control input-sm" aria-controls="DataTables_Table_0" style="width:100px"/>
+            <option value="">--请选择--</option>
+            <option value="m" <if condition="$Think.get.sex eq m">selected</if>>男</option>
+            <option value="w" <if condition="$Think.get.sex eq w">selected</if>>女</option>
+          </select>
+        </label>
+        </div>
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
+         <label>用户名：<input type="text" class="form-control input-sm" aria-controls="DataTables_Table_0" name="username" value="{$Think.get.username}" style="width:100px"/></label>
+        </div>
+        </form>
+       </div>
+      </div>
+      <div style="height:10px">
+      </div>
+
+      <table class="table table-striped table-bordered table-hover dataTables-example dataTable " id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"> 
+       <thead> 
+        <tr role="row" align="center">
+         <th class="center " tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 80px;align:center">选择</th>
+         <th class="center " tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 150px;">ID</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">用户名</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">权限</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">添加时间</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">操作</th>
+        </tr> 
+       </thead> 
+       <tbody> 
+        {foreach name="list" item="row"}    
+        <tr class="gradeA odd" align="center"> 
+         <td class="sorting_1"><input type="checkbox" value="{$row['user_id']}"/></td>          
+         <td class=" ">{$row['user_id']}</td> 
+         <td class=" ">{$row['user_name']}</td> 
+         <td class="center ">
+          {if condition="$row.is_admin eq 0"}<font size="" color="">普通用户</font>{/if}
+          {if condition="$row.is_admin eq 1"}<font size="5" color="green">超级管理员</font>{/if}          
+        </td>
+         <td class="center ">{$row['create_time']}</td> 
+         <td class="center ">
+          <a class="btn btn-danger btn-rounded" href="">删除</a>
+          <a class="btn btn-primary btn-rounded" href="">修改</a>
+          <a class="btn btn-info btn-rounded" href="">详细信息</a>
+          </td>
+        </tr>
+        {/foreach}
+        <tr>
+          <td colspan="7">
+            <a href='javascript:void(0)' class="alldel"><button type="button" class="btn btn-w-m btn-success" >全选</button></a>
+            <a href="javascript:void(0)" class="nodel"><button type="button" class="btn btn-w-m btn-primary" >全不选</button></a>
+            <a href="javascript:void(0)" class="fandel"><button type="button" class="btn btn-w-m btn-info" >反选</button></a>
+            <a href="javascript:void(0)" class="del"><button type="button" class="btn btn-w-m btn-danger" >批量删除</button></a>
+          </td>
+        </tr>
+       </tbody> 
+      </table>
+      <div class="row">
+       <div class="col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+         <ul class="pagination" style="float:right">
+          <li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous"> {$p->render} </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+{/block}
+{block name="title"}用户列表{/block}
+{block name="script"}
+  <script type="text/javascript">
+  // 全选
+   $(".alldel").click(function(){
+    $(".dataTable").find("tr").each(function(){
+      $(this).find(":checkbox").attr('checked',true);
+    })
+   })
+
+   // 全不选
+   $(".nodel").click(function(){
+      $(".dataTable").find("tr").each(function(){
+        // alert('2222');
+        $(this).find(":checkbox").attr('checked',false);
+      })
+   })
+  // 反选
+    $(".fandel").click(function(){
+        $(".dataTable").find("tr").each(function(){
+            if($(this).find(":checkbox").attr("checked")){
+                $(this).find(":checkbox").attr("checked",false);
+            }else{
+                $(this).find(":checkbox").attr("checked",true);
+            }
+        }) 
+    })
+</script>
+{/block}

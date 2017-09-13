@@ -33,5 +33,9 @@ class Base_1 extends Controller
 		}
 	}
 
+	public function obj_to_array($list){
+		return json_decode(json_encode($list),true);
+	}
+
 }
 ?>

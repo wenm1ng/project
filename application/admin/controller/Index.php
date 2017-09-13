@@ -1,11 +1,12 @@
 <?php
 namespace app\admin\controller;
 
-use \base\Base;
+use \base\Base_1;
 use think\Db;
-class Index extends Base
+use think\Controller;
+class Index extends Controller
 {
-	
+	//后台
     public function login()
     {
         return view('login');
@@ -17,6 +18,7 @@ class Index extends Base
         return json(['data'=>'sss','code'=>1,'message'=>'操作完成']);
     }
 
+    //后台首页
     public function index(){
         return view('index');
     }

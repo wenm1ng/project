@@ -1,8 +1,241 @@
-{extend name="public/public" /}
-{block name="style"}{/block}
-{block name="body"}
-	
-{/block}
-{block name="script"}
-	
-{/block}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title> think-php-{block name="title"}{/block} </title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script type="text/javascript" language="javascript" src="__ROOT__/admin/js/jquery-1.8.3.min.js"></script> 
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="__ROOT__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__ROOT__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__ROOT__/admin/css/animate.css" rel="stylesheet">
+    <link href="__ROOT__/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="__ROOT__/css/head-title.css"> -->
+    <style>
+        *{
+            margin:0 auto;
+            padding:0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .admin-head{
+            width:100%;
+            height:55px;
+        /*  //Firefox4.0-           
+            -moz-box-shadow:投影方式 X轴偏移量 Y轴偏移量阴影模糊半径 阴影扩展半径 阴影颜色;  
+            //Safariand Google chrome10.0-  
+            -webkit-box-shadow:投影方式 X轴偏移量 Y轴偏移量阴影模糊半径 阴影扩展半径 阴影颜色;  
+            //Firefox4.0+、 Google chrome 10.0+ 、 Oprea10.5+ and IE9  
+            //box-shadow:  投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色;*/ 
+            -webkit-box-shadow:  3px 1px 14px rgb(215,215,215);  
+            -moz-box-shadow:  3px 1px 14px rgb(215,215,215);  
+            box-shadow:  3px 1px 14px rgb(215,215,215);  
+        }
+        .admin-title{
+            width:19%;
+            height:55px;
+            float:left;
+            padding-left:1%;
+            line-height: 55px;
+        }
+        .admin-menu{
+            width:80%;
+            float:left;
+            padding-top:15px;
+        }
+
+        .admin-menu-list{
+            /*padding-left:40%;*/
+            float:right;
+            width:20%;
+            list-style:none;
+            /*background:pink;*/
+            margin-right: -20%;
+        }
+
+        .admin-menu-list > li{
+            text-align: center;
+            float:left;
+            border-right:1px solid black;
+            padding-right:20px;
+            padding-left: 20px;
+        }
+        .admin-menu-list > li:last-child{
+            border:none;
+            border-right:0px;
+        }
+        .admin-menu-list > li > a{
+            color:rgb(0,102,204);
+        }
+    </style>
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" >
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs" style="font-size:20px;">
+                                        <i class="fa fa-area-chart"></i>
+                                        <strong class="font-bold">thinkPHP</strong>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="logo-element">
+                        </div>
+                    </li>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">分类</span>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="{:url('home')}">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">主页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <span class="nav-label">用户管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="__MODULE__/User/add">添加用户</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="{:url('user/index')}">用户列表</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="line dk"></li>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">分类</span>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">分类管理</span><span class="label label-warning pull-right"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="__MODULE__/cate/add">添加分类</a>
+                            </li>
+                            <li><a class="J_menuItem" href="__MODULE__/cate/index">分类列表</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">商品管理 </span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="__MODULE__/Goods/add">添加商品</a>
+                            </li>
+                            <li><a class="J_menuItem" href="__MODULE__/Goods/index">商品列表</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li>
+                        
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">订单管理 </span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="__MODULE__/Order/index">查看订单</a>
+                            </li>
+                            
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        
+                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">评论管理 </span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="__MODULE__/comment/index">查看评论</a>
+                            </li>
+                            
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">友情链接</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="__MODULE__/Link/add">添加链接</a>
+                            </li>
+                            <li><a class="J_menuItem" href="__MODULE__/Link/index">查看友情链接</a>
+                            </li>
+                           
+                            
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--顶部导航开始-->
+        <div class="admin-head">
+            <div class="admin-menu">
+                <ul class="admin-menu-list">
+                    <li class="white" style="color:white">你好&nbsp;&nbsp;<span>{:session('username')}</span></li>
+                    <li><a href="" class="white" style="color:white">个人中心</a></li>
+                    <li><a href="javascript:void(0)" id="logout" class="white" style="color:white">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="page-wrapper" class="gray-bg dashbard-1" style="height:823px">
+            {block name="index"}{/block}
+        </div>
+        <!--顶部导航结束-->
+
+        <!--右侧部分开始-->
+        {block name="user_index"}{/block}
+        <!--右侧部分结束-->
+    </div>
+
+    <!-- 全局js -->
+    <script src="__ROOT__/admin/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__ROOT__/admin/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="__ROOT__/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="__ROOT__/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="__ROOT__/admin/js/plugins/layer/layer.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="__ROOT__/admin/js/hAdmin.js?v=4.1.0"></script>
+    <script type="text/javascript" src="__ROOT__/admin/js/index.js"></script>
+
+    <!-- 第三方插件 -->
+    <!-- // <script src="__ROOT__/admin/js/plugins/pace/pace.min.js"></script> -->
+<div style="text-align:center;">
+<p>来源:<a href="" target="_blank">左岸时光</a></p>
+</div>
+</body>
+<script>
+
+    $("#logout").click(function(){
+        if(confirm('是否退出登录？')){
+            $.post("{:url('admin/User/logout')}",function(data){
+                if(data.msg == '退出登录成功!'){
+                    window.top.location.href = "{:url('admin/Index/login')}";   
+                }
+            })
+        }
+        
+    })
+</script>
+{block name="script"}{/block}
+</html>
