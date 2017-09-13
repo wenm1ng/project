@@ -72,20 +72,50 @@ class User extends Controller
     }
 
     //用户列表
+    // public function index(){
+    //     if(UID){
+    //         $table_name = "user";
+    //         $list = Db::name($table_name)->select();
+    //         //把分页数据赋值给模板变量
+    //         $p = new \think\Page($list,2);
+    //         // $list =$this->obj_to_array($list);
+    //         // $this->assign('list',$list);
+    //         $this->assign('p',$p);
+
+    //         // print_r($p);exit;
+    //         return $this->fetch();
+    //     }else{
+    //         $this->redirect('admin');
+    //     }
+    // }
     public function index(){
         if(UID){
             $table_name = "user";
-            $list = Db::name($table_name)->select();
+            $list = Db::name($table_name)->paginate(10);
             //把分页数据赋值给模板变量
-            $p = new \think\Page($list,10);
-            // $list =$this->obj_to_array($list);
+            // $p = new \think\Page($list,2);
+            $this->assign('page',$list);
+            $list =$this->obj_to_array($list);
             $this->assign('list',$list);
-            $this->assign('p',$p);
+            $this->assign('meta_title','用户列表');
 
-            // print_r($p);exit;
+            // print_r($list);exit;
             return $this->fetch();
         }else{
             $this->redirect('admin');
+        }
+    }
+
+    //将对象转为数组
+    public function obj_to_array($list){
+        return json_decode(json_encode($list),true);
+    }
+
+    public function addinfo(){
+        if(input()){
+
+        }else{
+            return view('addinfo',['meta_title'=>'新增用户']);
         }
     }
 }

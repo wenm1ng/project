@@ -1,0 +1,293 @@
+{extend name="index/index"/}
+{block name="body"}
+  <div class="col-sm-12" style="float:right;width:89%;"> 
+   <div class="ibox float-e-margins"> 
+    <div class="ibox-title"> 
+     <h5>{$meta_title}</h5> 
+    </div> 
+    <div class="ibox-content" style="height:800px"> 
+     <form class="form-horizontal m-t" id="signupForm" action="__MODULE__/User/insert" method="post" > 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">用户名：</label> 
+       <div class="col-sm-3"> 
+        <input id="username" name="loginName" value="" class="form-control" type="text" value="" aria-required="true" aria-invalid="true" placeholder="用作登录的账号"/>
+        <span class="help-block m-b-none" id="usernames"></span>  
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">真实姓名：</label> 
+       <div class="col-sm-3"> 
+        <input name="user_name" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">密码：</label> 
+       <div class="col-sm-3"> 
+        <input id="password" name="pwd" class="form-control" type="password" /> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">确认密码：</label> 
+       <div class="col-sm-3"> 
+        <input id="confirm_password" name="repwd" class="form-control" type="password" />  
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">E-mail：</label> 
+       <div class="col-sm-3"> 
+        <input id="email" name="email" class="form-control" type="email" /> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">手机：</label> 
+       <div class="col-sm-3"> 
+        <input name="phone" class="form-control phone" type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">身份证号：</label> 
+       <div class="col-sm-3"> 
+        <input name="id_number" class="form-control id_number" type="number" /> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">车牌号：</label> 
+       <div class="col-sm-3"> 
+        <input name="car_number" class="form-control car_number" type="text" /> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">性别：</label> 
+       <label class="col-sm-1 control-label" style="text-align:center">女：<input id="sex" name="sex"  type="radio" value="w" /></label> 
+       <label class="col-sm-1 control-label" style="text-align:center">男：<input id="" name="sex"  type="radio" value="m"/></label> 
+
+<!--        <div class="col-sm-5 control-labelm> 
+ 
+          <div class="col-sm-2 control-label" style="text-align:center;margin:3px">女：<input id="" name="sex"  type="radio" /></div>  
+          <div class="col-sm-2 control-label">男：<input id="" name="sex"  type="radio" /></div>  
+       </div>  -->
+      </div> 
+      <div class="form-group"> 
+       <div class="col-sm-3 col-sm-offset-3"> 
+        <div class="checkbox"> 
+         <label> <input type="checkbox" class="checkbox" id="agree" name="agree" /> 我已经认真阅读并同意《H+使用协议》 </label> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <div class="col-sm-3 col-sm-offset-4"> 
+        <input class="btn btn-primary" type="submit" value="添加" />&nbsp;&nbsp;&nbsp;&nbsp; 
+        <input class="btn btn-primary" type="reset" value="重置" /> 
+       </div> 
+      </div> 
+     </form> 
+    </div> 
+   </div> 
+  </div>  
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+    // 直接提交时赋值false；
+    flag=false;
+    //用户名验证
+    $("#username").focus(function(){
+        //清除span
+        $(this).next('span').remove();
+        if($(this).val()==null){
+          //1.获取焦点的提示信息
+          $("<span>请输入正确的信息</span>").css('color','red').insertAfter($(this));
+          flag=false;
+        }else{
+          flag=false;
+        }        
+    }).blur(function(){
+        
+
+        //2.失去焦点 获取用户值 正则的判断
+        //获取用户值
+        s=$(this);
+        //清除
+        s.next('span').remove();
+        ss=s.val();
+        // alert(ss);
+        //匹配正则
+        if(ss.match(/^\w{4,16}$/)==null){
+            // alert('此用户不符合正则');
+            $("<span>请输入4-16位任意的数字字母下划线</span>").css('color','red').insertAfter(s);
+            flag=false;
+        }else{
+            //3.Ajax的验证
+            $.get('__MODULE__/User/ajax',{username:ss},function(data){
+                // alert(data);
+                //判断
+                if(data==1){
+                    $(this).next('span').remove();
+                    $("<span>此用户已经存在</span>").css('color','red').insertAfter(s);
+                        flag=false;
+                }else{
+                    $(this).next('span').remove();
+                    $("<span>此用户可用</span>").css('color','green').insertAfter(s);
+                      flag=true;
+                }
+            });
+        }
+    });
+
+    //真实姓名验证
+    $(".user_name").click(function(){
+    	 //清除span
+        $(this).next('span').remove();
+    }).blur(function(){
+    	name = $(this).val();
+    	if(name == ''){
+            $("<span>请输入真实姓名</span>").css('color','red').insertAfter(e);
+    	}
+    })
+
+    //邮箱验证
+    $("#email").focus(function(){
+        //清除span
+        $(this).next('span').remove();
+        if($(this).val()==null){
+          //1.获取焦点的提示信息
+          $("<span>请输入邮箱</span>").css('color','red').insertAfter($(this));
+            flag=false;
+        }else{
+            flag=false;
+        }              
+      }).blur(function(){
+         e=$(this);
+          //清除
+          e.next('span').remove();
+          ee=e.val();
+          // 邮箱规则
+          var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+          if(!myreg.test(ee))
+          {
+            $(this).next('span').remove();
+            $("<span>邮箱名不符合规则</span>").css('color','red').insertAfter(e);
+            flag=true;
+         }else{
+              //Ajax的验证
+              $.get('__MODULE__/User/ajaxe',{email:ee},function(data){
+                  // alert(data);
+                  //判断
+                  if(data==1){
+                      $(this).next('span').remove();
+                      $("<span>此邮箱已存在</span>").css('color','red').insertAfter(e);
+                        flag=false;
+                  }else{
+                      $(this).next('span').remove();
+                      $("<span>该邮箱可用</span>").css('color','green').insertAfter(e);
+                        flag=true;
+                  }
+              });          
+          }              
+      });
+
+   // 密码验证
+    $("#password").focus(function(){
+        //清除span
+        $(this).next('span').remove();
+        //1.获取焦点的提示信息
+        $("<span>请设定密码</span>").css('color','red').insertAfter($(this));
+    }).blur(function(){
+        //2.失去焦点 获取用户值 正则的判断
+        //获取用户值
+        s=$("#password");
+        //清除
+        s.next('span').remove();
+        ss=s.val();
+        // alert(ss);
+        //匹配正则
+        if(ss.match(/^\w{6,16}$/)==null){
+            // alert('此用户不符合正则');
+            $("<span>请输入6-16位字符，可使用数字字母及下划线的组合</span>").css('color','red').insertAfter(s);
+        }else{
+            // 确认密码
+            $("#confirm_password").click(function(){
+                $(this).next('span').remove();                
+            }).blur(function(){
+                repwd=$(this).val();
+                if(repwd!=ss){
+                  $(this).next('span').remove();
+                  $("<span>两次密码不一致</span>").css('color','red').insertAfter($(this));
+                    flag=false;
+                }
+            });            
+        }
+    });
+
+    // 确认密码的判断
+    $("#confirm_password").click(function(){
+        $(this).next('span').remove();                
+    }).blur(function(){
+        repwd=$(this).val();
+        ss=$("#password").val();
+        if(repwd!=ss){
+          $(this).next('span').remove();
+          $("<span>两次密码不一致</span>").css('color','red').insertAfter($(this));
+            flag=false;
+        }
+    });
+
+    //电话验证
+    $(".phone").click(function(){
+    	$(this).next('span').remove(); 
+    	
+    }).blur(function(){
+    	phone = $(this).val();
+    	reg = /^1[34578]\d{9}$/;
+    	if(!reg.test(phone)){
+    		$("<span>请输入正确的电话号码</span>").css('color','red').insertAfter($(this));
+            flag=false;
+    	}
+    })
+
+    //身份证验证
+    $(".id_number").click(function(){
+    	$(this).next('span').remove(); 
+    	
+    }).blur(function(){
+    	id_number = $(this).val();
+    	reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+    	if(!reg.test(id_number)){
+    		$("<span>请输入正确的身份证号码</span>").css('color','red').insertAfter($(this));
+            flag=false;
+    	}
+    })
+
+    //车牌号验证
+    $(".car_number").click(function(){
+    	$(this).next('span').remove(); 
+    	
+    }).blur(function(){
+    	car_number = $(this).val();
+    	reg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+    	if(!reg.test(car_number)){
+    		$("<span>请输入正确的车牌号码</span>").css('color','red').insertAfter($(this));
+            flag=false;
+    	}
+    })
+
+    // 判断空值
+    if($("#username").val()==null || $("#password").val()==null || $("#confirm_password").val()==null || $("#email").val()==null || ($("input:radio").attr('checked') === undefined) ){
+      flag==false;
+    }
+
+    // if($("input:radio").attr('checked') === undefined ){
+    //   alert($("input:radio").attr('checked'));
+    // }
+    //4.表单提交
+    $("form").submit(function(){
+        // alert('ssss');
+        // return false;
+        if(!flag){
+               return false;
+        }else{
+               return true;
+        }
+    });
+</script>  
+{/block}

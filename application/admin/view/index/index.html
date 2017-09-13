@@ -197,13 +197,16 @@
                 </ul>
             </div>
         </div>
-        <div id="page-wrapper" class="gray-bg dashbard-1" style="height:823px">
+        
+        <!-- <div style="float:left"><h2>{block name="meta_title"}{/block}</h2></div> -->
+        <!-- <div id="page-wrapper" class="gray-bg dashbard-1" style="height:823px">
             {block name="index"}{/block}
-        </div>
+        </div> -->
         <!--顶部导航结束-->
 
         <!--右侧部分开始-->
         {block name="user_index"}{/block}
+        {block name="body"}{/block}
         <!--右侧部分结束-->
     </div>
 
@@ -236,6 +239,10 @@
         }
         
     })
+
+    // $(".nav").find('li').click(function(){
+        
+    // })
 </script>
 {block name="script"}{/block}
 </html>

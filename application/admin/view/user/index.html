@@ -1,24 +1,16 @@
 {extend name="index/index"/}
 {block name="user_index"}
-<div class="col-sm-12"> 
+<div class="col-sm-12" style="float:right;width:89%"> 
    <div class="ibox float-e-margins"> 
     <div class="ibox-title"> 
-     <h5>用户列表 <small>分类，查找</small></h5>
-     <div class="ibox-tools"> 
-      <a class="collapse-link"> <i class="fa fa-chevron-up"></i> </a> 
-      <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#"> <i class="fa fa-wrench"></i> </a> 
-      <ul class="dropdown-menu dropdown-user"> 
-       <li><a href="table_data_tables.html#">选项1</a> </li> 
-       <li><a href="table_data_tables.html#">选项2</a> </li> 
-      </ul> 
-      <a class="close-link"> <i class="fa fa-times"></i> </a> 
-     </div> 
+     <h5>{$meta_title}</h5>
     </div> 
     <div class="ibox-content"> 
      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
       <div class="row">
        <div class="col-sm-12">
         <form action="__URL__/index" method="get">
+        <a href="{:url('addinfo')}" class="btn btn-w-m btn-success" >新增</a>
         <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
           <label>
          <input type="submit" class="form-control input-sm" aria-controls="DataTables_Table_0" value="查询"/>
@@ -28,8 +20,8 @@
         <label>性别：
           <select name="sex" class="form-control input-sm" aria-controls="DataTables_Table_0" style="width:100px"/>
             <option value="">--请选择--</option>
-            <option value="m" <if condition="$Think.get.sex eq m">selected</if>>男</option>
-            <option value="w" <if condition="$Think.get.sex eq w">selected</if>>女</option>
+            <option value="m" {if condition="$Think.get.sex eq m"}selected{/if}>男</option>
+            <option value="w" {if condition="$Think.get.sex eq w"}selected{/if}>女</option>
           </select>
         </label>
         </div>
@@ -54,7 +46,7 @@
         </tr> 
        </thead> 
        <tbody> 
-        {foreach name="list" item="row"}    
+        {foreach name="list.data" item="row"}    
         <tr class="gradeA odd" align="center"> 
          <td class="sorting_1"><input type="checkbox" value="{$row['user_id']}"/></td>          
          <td class=" ">{$row['user_id']}</td> 
@@ -85,7 +77,7 @@
        <div class="col-sm-6">
         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
          <ul class="pagination" style="float:right">
-          <li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous"> {$p->render} </li>
+          <li class="paginate_button previous disabled" aria-controls="DataTables_Table_0" tabindex="0" id="DataTables_Table_0_previous"> {$page->render()} </li>
          </ul>
         </div>
        </div>
