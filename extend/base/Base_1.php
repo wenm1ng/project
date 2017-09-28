@@ -17,7 +17,7 @@ class Base_1 extends Controller
 		define('UID', self::is_login());
 		// error_lo('uid',session::get('uid'));
 		if(!UID){
-			$this->redirect('admin/Index/login');
+			$this->redirect('admin/Login/login');
 		}
 	}
 

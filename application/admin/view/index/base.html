@@ -12,12 +12,11 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <script type="text/javascript" language="javascript" src="__ROOT__/admin/js/jquery-1.8.3.min.js"></script> 
-
     <link rel="shortcut icon" href="favicon.ico"> <link href="__ROOT__/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="__ROOT__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="__ROOT__/admin/css/animate.css" rel="stylesheet">
     <link href="__ROOT__/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <script type="text/javascript" language="javascript" src="__ROOT__/admin/js/jquery-1.8.3.min.js"></script> 
     <!-- <link rel="stylesheet" type="text/css" href="__ROOT__/css/head-title.css"> -->
     <style>
         *{
@@ -77,6 +76,7 @@
             color:rgb(0,102,204);
         }
     </style>
+    
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" >
@@ -218,28 +218,43 @@
     <script src="__ROOT__/admin/js/plugins/layer/layer.min.js"></script>
 
     <!-- 自定义js -->
-    <script src="__ROOT__/admin/js/hAdmin.js?v=4.1.0"></script>
-    <script type="text/javascript" src="__ROOT__/admin/js/index.js"></script>
-
+    <!-- <script src="__ROOT__/admin/js/hAdmin.js?v=4.1.0"></script>
+    <script type="text/javascript" src="__ROOT__/admin/js/index.js"></script> -->
+    
     <!-- 第三方插件 -->
     <!-- // <script src="__ROOT__/admin/js/plugins/pace/pace.min.js"></script> -->
 <div style="text-align:center;">
-<p>来源:<a href="" target="_blank">左岸时光</a></p>
+<p>来源:<a href="" target="_blank">文明博客</a></p>
 </div>
 </body>
 <script>
 
     $("#logout").click(function(){
         if(confirm('是否退出登录？')){
-            $.post("{:url('admin/User/logout')}",function(data){
+            $.post("{:url('admin/login/logout')}",function(data){
                 if(data.msg == '退出登录成功!'){
-                    window.top.location.href = "{:url('admin/Index/login')}";   
+                    window.top.location.href = "{:url('admin/login/login')}";   
                 }
             })
         }
         
     })
 
+    $(".ajax-post").click(function(){
+        url = $('form').attr('action');
+        target_form = $(this).attr('target-form');
+        form = $('.'+target_form);
+        query = form.serialize();
+
+        $.post(url,query,function(data){
+            if(data.code == 1){
+                alert(data.msg);
+                window.location.href = data.url;
+            }else{
+                alert(data.msg);
+            }
+        },'json')
+    })
     // $(".nav").find('li').click(function(){
         
     // })

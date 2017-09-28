@@ -1,4 +1,4 @@
-{extend name="index/index"/}
+{extend name="index/base"/}
 {block name="body"}
   <div class="col-sm-12" style="float:right;width:89%;"> 
    <div class="ibox float-e-margins"> 
@@ -6,7 +6,7 @@
      <h5>{$meta_title}</h5> 
     </div> 
     <div class="ibox-content" style="height:800px"> 
-     <form class="form-horizontal m-t" id="signupForm" action="__MODULE__/User/insert" method="post" > 
+     <form class="form-horizontal" id="signupForm" action="{:url('addinfo')}" method="post" > 
       <div class="form-group"> 
        <label class="col-sm-3 control-label">用户名：</label> 
        <div class="col-sm-3"> 
@@ -15,7 +15,7 @@
        </div> 
       </div> 
       <div class="form-group"> 
-       <label class="col-sm-3 control-label">真实姓名：</label> 
+       <label class="col-sm-3 control-label">昵称：</label> 
        <div class="col-sm-3"> 
         <input name="user_name" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
        </div> 
@@ -23,13 +23,13 @@
       <div class="form-group"> 
        <label class="col-sm-3 control-label">密码：</label> 
        <div class="col-sm-3"> 
-        <input id="password" name="pwd" class="form-control" type="password" /> 
+        <input id="password" name="password" class="form-control" type="password" /> 
        </div> 
       </div> 
       <div class="form-group"> 
        <label class="col-sm-3 control-label">确认密码：</label> 
        <div class="col-sm-3"> 
-        <input id="confirm_password" name="repwd" class="form-control" type="password" />  
+        <input id="confirm_password" name="repassword" class="form-control" type="password" />  
        </div> 
       </div> 
       <div class="form-group"> 
@@ -44,22 +44,22 @@
         <input name="phone" class="form-control phone" type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/> 
        </div> 
       </div> 
-      <div class="form-group"> 
+      <!-- <div class="form-group"> 
        <label class="col-sm-3 control-label">身份证号：</label> 
        <div class="col-sm-3"> 
         <input name="id_number" class="form-control id_number" type="number" /> 
        </div> 
-      </div> 
-      <div class="form-group"> 
+      </div>  -->
+      <!-- <div class="form-group"> 
        <label class="col-sm-3 control-label">车牌号：</label> 
        <div class="col-sm-3"> 
         <input name="car_number" class="form-control car_number" type="text" /> 
        </div> 
-      </div> 
+      </div>  -->
       <div class="form-group"> 
        <label class="col-sm-3 control-label">性别：</label> 
-       <label class="col-sm-1 control-label" style="text-align:center">女：<input id="sex" name="sex"  type="radio" value="w" /></label> 
-       <label class="col-sm-1 control-label" style="text-align:center">男：<input id="" name="sex"  type="radio" value="m"/></label> 
+       <label class="col-sm-1 control-label" style="text-align:center">女：<input id="sex" name="sex"  type="radio" value="2" /></label> 
+       <label class="col-sm-1 control-label" style="text-align:center">男：<input id="" name="sex"  type="radio" value="1"/></label> 
 
 <!--        <div class="col-sm-5 control-labelm> 
  
@@ -67,16 +67,16 @@
           <div class="col-sm-2 control-label">男：<input id="" name="sex"  type="radio" /></div>  
        </div>  -->
       </div> 
-      <div class="form-group"> 
+      <!-- <div class="form-group"> 
        <div class="col-sm-3 col-sm-offset-3"> 
         <div class="checkbox"> 
          <label> <input type="checkbox" class="checkbox" id="agree" name="agree" /> 我已经认真阅读并同意《H+使用协议》 </label> 
         </div> 
        </div> 
-      </div> 
+      </div>  -->
       <div class="form-group"> 
        <div class="col-sm-3 col-sm-offset-4"> 
-        <input class="btn btn-primary" type="submit" value="添加" />&nbsp;&nbsp;&nbsp;&nbsp; 
+        <a class="btn btn-primary ajax-post" target-form="form-horizontal"/>添加</a>
         <input class="btn btn-primary" type="reset" value="重置" /> 
        </div> 
       </div> 
@@ -87,7 +87,7 @@
 {/block}
 {block name="script"}
 <script type="text/javascript">
-
+    
     // 直接提交时赋值false；
     flag=false;
     //用户名验证
@@ -245,31 +245,31 @@
     	}
     })
 
-    //身份证验证
-    $(".id_number").click(function(){
-    	$(this).next('span').remove(); 
+    // //身份证验证
+    // $(".id_number").click(function(){
+    // 	$(this).next('span').remove(); 
     	
-    }).blur(function(){
-    	id_number = $(this).val();
-    	reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
-    	if(!reg.test(id_number)){
-    		$("<span>请输入正确的身份证号码</span>").css('color','red').insertAfter($(this));
-            flag=false;
-    	}
-    })
+    // }).blur(function(){
+    // 	id_number = $(this).val();
+    // 	reg = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+    // 	if(!reg.test(id_number)){
+    // 		$("<span>请输入正确的身份证号码</span>").css('color','red').insertAfter($(this));
+    //         flag=false;
+    // 	}
+    // })
 
-    //车牌号验证
-    $(".car_number").click(function(){
-    	$(this).next('span').remove(); 
+    // //车牌号验证
+    // $(".car_number").click(function(){
+    // 	$(this).next('span').remove(); 
     	
-    }).blur(function(){
-    	car_number = $(this).val();
-    	reg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
-    	if(!reg.test(car_number)){
-    		$("<span>请输入正确的车牌号码</span>").css('color','red').insertAfter($(this));
-            flag=false;
-    	}
-    })
+    // }).blur(function(){
+    // 	car_number = $(this).val();
+    // 	reg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+    // 	if(!reg.test(car_number)){
+    // 		$("<span>请输入正确的车牌号码</span>").css('color','red').insertAfter($(this));
+    //         flag=false;
+    // 	}
+    // })
 
     // 判断空值
     if($("#username").val()==null || $("#password").val()==null || $("#confirm_password").val()==null || $("#email").val()==null || ($("input:radio").attr('checked') === undefined) ){

@@ -4,13 +4,9 @@ namespace app\admin\controller;
 use \base\Base_1;
 use think\Db;
 use think\Controller;
-class Index extends Controller
+class Index extends Base_1
 {
-	//后台
-    public function login()
-    {
-        return view('login');
-    }
+
     public function test()
     {
         
@@ -20,6 +16,6 @@ class Index extends Controller
 
     //后台首页
     public function index(){
-        return view('index');
+        return view('base');
     }
 }

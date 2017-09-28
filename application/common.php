@@ -313,3 +313,13 @@ function excelColumnName($index)
     else
         throw new Exception("Invalid Column # " . ($index + 1));
 }
+
+
+function log_error($name, $text) {
+    if(!file_exists('./log')){
+        mkdir('./log');
+    }
+    $myfile = fopen("./log/" . $name . ".txt", "a+") or die("Unable to open file!");
+    fwrite($myfile, $text . "---------" . date("Y-m-d G:i:s") . "\r\n");
+    fclose($myfile);
+}

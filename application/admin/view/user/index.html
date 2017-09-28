@@ -1,4 +1,4 @@
-{extend name="index/index"/}
+{extend name="index/base"/}
 {block name="user_index"}
 <div class="col-sm-12" style="float:right;width:89%"> 
    <div class="ibox float-e-margins"> 
@@ -9,7 +9,7 @@
      <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline" role="grid">
       <div class="row">
        <div class="col-sm-12">
-        <form action="__URL__/index" method="get">
+        <form action="__URL__/index" method="get" class="form-post">
         <a href="{:url('addinfo')}" class="btn btn-w-m btn-success" >新增</a>
         <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
           <label>
@@ -18,11 +18,7 @@
         </div>     
         <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">
         <label>性别：
-          <select name="sex" class="form-control input-sm" aria-controls="DataTables_Table_0" style="width:100px"/>
-            <option value="">--请选择--</option>
-            <option value="m" {if condition="$Think.get.sex eq m"}selected{/if}>男</option>
-            <option value="w" {if condition="$Think.get.sex eq w"}selected{/if}>女</option>
-          </select>
+          
         </label>
         </div>
         <div id="DataTables_Table_0_filter" class="dataTables_filter" style="float:right">

@@ -11,65 +11,10 @@ use think\Session;
 use think\Db;
 use think\Page;
 
-
-class User extends Controller
+class User extends Base_1
 {
     
-    public function __construct(){
-        parent::__construct();
-        define('UID',session::get('uid'));
-        $this->username = session::get('username');
-    }
-
-    public function login(){
-        if(empty(input('loginName'))){
-            $this->error('请填写登录账号！');
-        }
-        if(empty(input('password'))){
-            $this->error('请填写登录密码！');
-        }
-        // print_r(111);exit;
-        $table_name = 'user';
-        $where = array(
-            'loginName' => input('loginName'),
-            );
-        $info = Db::name($table_name)->where($where)->find();
-        if(!empty($info)){
-            if($info['is_admin'] == 1){
-                if($info['password'] == input('password')){
-                    session::set('uid',$info['user_id']);
-                    session::set('loginName',$info['loginName']);
-                    session::set('username',$info['user_name']);
-                    session::set('sign',sha1(md5($info['loginName']).'wenminghenshuai'));
-                    
-                    $this->success('登录成功',url('admin/index/index'));
-                }else{
-                    $this->error('密码错误');
-                }
-            }else{
-                $this->error('您没有权限！');
-            }
-        }else{
-            $this->error('该用户不存在！');
-        }
-    }
-
-    /**
-     * 退出登录
-     * @return \think\response\Json
-     */
-    public function logout()
-    {
-        // $this->model = new AdminUserModel();
-        session(null);
-        if (!session::has('uid')) {
-            // return json(self::sucres());
-            $this->success('退出登录成功!',url('admin/Index/login'));
-        } else {
-            // return json(self::erres("退出登录失败"));
-            $this->error('退出登录失败!');
-        }
-    }
+    
 
     //用户列表
     // public function index(){
@@ -112,8 +57,69 @@ class User extends Controller
     }
 
     public function addinfo(){
-        if(input()){
+        if(Request::instance()->isPost()){
+            if(empty($_POST['loginName'])){
+                $this->error('用户名不能为空！');exit;
+            }
+            if(empty($_POST['user_name'])){
+                $this->error('昵称不能为空！');exit;
+            }
+            if(empty($_POST['password'])){
+                $this->error('密码不能为空！');exit;
+            }
+            if(empty($_POST['repassword'])){
+                $this->error('确认密码不能为空！');exit;
+            }
+            if($_POST['password'] != $_POST['repassword']){
+                $this->error('两次密码不一致');exit;
+            }
+            if(empty($_POST['email'])){
+                $this->error('邮箱不能为空！');exit;
+            }
 
+            $email_info = Db::name('user')->where("email",'=',"{$_POST['email']}")->find();
+            if(!empty($email_info)){
+                $this->error('该邮箱已被注册！');exit;
+            }
+
+            if(empty($_POST['phone'])){
+                $this->error('手机号不能为空！');exit;
+            }
+            $phone_info = Db::name('user')->where("phone",'=',"{$_POST['phone']}")->find();
+            if(!empty($phone_info)){
+                $this->error('该手机号已被注册！');exit;
+            }
+
+            if(empty($_POST['sex'])){
+                $this->error('性别不能为空！');exit;
+            }
+            
+            $data = array(
+                'loginName' => $_POST['loginName'],
+                'password' => $_POST['password'],
+                'user_name' => $_POST['user_name'],
+                'is_admin' => 1,
+                'status' => 1,
+                'sex' => $_POST['sex'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+                'create_time' => date('Y-m-d')
+                );
+
+            //判断是否存在该用户名的用户
+            $info = Db::name('user')->where("loginName",'=',"{$_POST['loginName']}")->find();
+
+            if(empty($info)){
+                $result = Db::name('user')->insert($data);
+                if($result){
+                    $this->success('添加用户成功','index');
+                }else{
+                    log_error('fail_sql',Db::getlastsql());
+                    $this->error('添加用户失败');
+                }
+            }else{
+                $this->error('该用户名已存在，请换一个用户名！');exit;
+            }
         }else{
             return view('addinfo',['meta_title'=>'新增用户']);
         }
