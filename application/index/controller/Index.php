@@ -17,7 +17,8 @@ class Index extends Base_2
         
         // echo Db::getlastsql();exit;
         // $this->view->info = $userinfo;
-    	return view('index');
+        $name = session::get('home_username','home');
+    	return view('index',['name'=>$name]);
     }
     
 }

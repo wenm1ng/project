@@ -1,0 +1,34 @@
+{extend name="index/base" /}
+{block name="body"}
+	 
+<div class="ibox float-e-margins"> 
+    <div class="ibox-title"> 
+     <h5>{$meta_title}</h5> 
+    </div> 
+    <div class="ibox-content" style="height:800px"> 
+      <div class="contact-box" style=""> 
+	   <a href=""> 
+	    <div class="col-sm-4"> 
+	     <div class="text-center"> 
+	      <img src="" style="width:100px;height:100px" style="width:100px" alt="">
+	     </div> 
+	    </div></a>
+	   <div class="col-sm-8">
+	  		<h2>30天内访问人次：</h2>
+	  		<span>{$person_time}</span>
+
+	  		<h2>一年内访问人次：</h2>
+	  		<span>{$person_time_year}</span>
+
+	  		<h2>历史访问人数：</h2>
+	  		<span>{$person_num}</span>
+	   </div>
+	   <!-- <div class="clearfix"></div>
+	   <a href="__MODULE__/login/logout" class="btn btn-primary btn-lg" style="position:relative;left:160px">退出后台管理</a> 
+	  </div>  -->
+	  <!-- <div class="col-sm-12" style="float:right;width:89%;"> 
+    </div>  -->
+   		</div> 
+  	</div> 
+</div> 
+{/block}

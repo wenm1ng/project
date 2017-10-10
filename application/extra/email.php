@@ -1,0 +1,9 @@
+<?php
+//发送邮件相关配置
+return[
+    'EMAIL_SMTP'=>'smtp.exmail.qq.com',
+    'EMAIL_ADDRESS'=>'736038880@qq.com',
+    'EMAIL_LOGINNAME'=>'736038880@qq.com',
+    'EMAIL_PASSWORD'=>'193zhanshengziji',
+    'port'=>25
+];

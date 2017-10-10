@@ -290,4 +290,21 @@ return [
         "overtime_closed" => 900, //超时未付款自动关闭
         "overtime_repast" => 1800, //逾期未就餐
     ),
+    //验证码
+    'captcha' => [
+        //验证字符集合
+        'codeset' => '23456789abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNPQRSTUVWXY',
+        //字体大小
+        'fontSize' => 18,
+        //是否画混淆曲线
+        'useCurve' => true,
+        //验证图片码高度
+        'imageH' => 40,
+        //验证码宽度
+        'imageW' => 130,
+        //验证码位数
+        'lenght' => 4,
+        //验证成功后是否重置
+        'reset' => true,
+    ],
 ];

@@ -37,7 +37,7 @@ class Login extends Controller
 	                    session::set('username',$info['user_name']);
 	                    session::set('sign',sha1(md5($info['loginName']).'wenminghenshuai'));
 	                    
-	                    $this->success('登录成功',url('admin/index/index'));
+	                    $this->success('登录成功',url('admin/index/home'));
 	                }else{
 	                    $this->error('密码错误');
 	                }
