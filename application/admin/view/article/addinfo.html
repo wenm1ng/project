@@ -1,0 +1,52 @@
+{extend name="index/base"/}
+{block name="body"}
+  <div class="col-sm-12" style="float:right;width:89%;"> 
+   <div class="ibox float-e-margins"> 
+    <div class="ibox-title"> 
+     <h5>{$meta_title}</h5> 
+    </div> 
+    <div class="ibox-content" style="height:800px"> 
+     <form class="form-horizontal" id="signupForm" action="{:url('addinfo')}" method="post" > 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">文章标题：</label> 
+       <div class="col-sm-8"> 
+        <input id="username" name="title" value="" class="form-control" type="text" value="" aria-required="true" aria-invalid="true" />
+        <span class="help-block m-b-none" id="usernames"></span>  
+       </div> 
+      </div> 
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">文章关键词：</label> 
+       <div class="col-sm-8"> 
+        <input name="key" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
+       </div> 
+      </div> 
+
+      <div class="form-group"> 
+       <label class="col-sm-3 control-label">文章内容：</label> 
+       <div class="col-sm-8"> 
+        <textarea id="content" name="content" required></textarea>
+       </div> 
+      </div> 
+      
+     
+      <div class="form-group"> 
+       <div class="col-sm-8 col-sm-offset-4"> 
+        <a  class="btn btn-primary ajax-post" target-form="form-horizontal"/>添加</a>
+        <input class="btn btn-primary" type="reset" value="重置" /> 
+       </div> 
+      </div> 
+     </form> 
+    </div> 
+   </div> 
+  </div>  
+{/block}
+{block name="script"}
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript">
+    var ue = UE.getEditor('content',{
+        initialFrameHeight:300
+    });
+   
+</script>  
+{/block}

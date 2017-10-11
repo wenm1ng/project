@@ -76,7 +76,7 @@
             color:rgb(0,102,204);
         }
     </style>
-    
+    {block name="style"}{/block}
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" >
@@ -132,11 +132,9 @@
                         <span class="ng-scope">分类</span>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">分类管理</span><span class="label label-warning pull-right"></span></a>
+                        <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">文章管理</span><span class="label label-warning pull-right"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="__MODULE__/cate/add">添加分类</a>
-                            </li>
-                            <li><a class="J_menuItem" href="__MODULE__/cate/index">分类列表</a>
+                            <li><a class="J_menuItem" href="{:url('article/index')}">文章列表</a>
                             </li>
                         </ul>
                     </li>
@@ -205,7 +203,6 @@
         <!--顶部导航结束-->
 
         <!--右侧部分开始-->
-        {block name="user_index"}{/block}
         {block name="body"}{/block}
         <!--右侧部分结束-->
     </div>
@@ -240,6 +237,31 @@
         
     })
 
+    // 全选
+   $(".alldel").click(function(){
+    $(".dataTable").find("tr").each(function(){
+      $(this).find(":checkbox").prop('checked',true);
+    })
+   })
+
+   // 全不选
+   $(".nodel").click(function(){
+      $(".dataTable").find("tr").each(function(){
+        // alert('2222');
+        $(this).find(":checkbox").prop('checked',false);
+      })
+   })
+  // 反选
+    $(".fandel").click(function(){
+        $(".dataTable").find("tr").each(function(){
+            if($(this).find(":checkbox").prop("checked")){
+                $(this).find(":checkbox").prop("checked",false);
+            }else{
+                $(this).find(":checkbox").prop("checked",true);
+            }
+        }) 
+    })
+
     $(".ajax-post").click(function(){
         url = $('form').attr('action');
         target_form = $(this).attr('target-form');
@@ -254,6 +276,23 @@
                 alert(data.msg);
             }
         },'json')
+    })
+
+    $(".ajax-del").click(function(){
+        url = $(this).attr('url');
+        
+        $('.ids:checked').each(function(index, el) {
+            ids += ',' + $(this).val();
+        });
+        console.log(query);return false;
+        $.post(url,query,function(data){
+            if(data.code == 1){
+                alert(data.msg);
+                window.location.href = data.url;
+            }else{
+                alert(data.msg);
+            }
+        })
     })
     // $(".nav").find('li').click(function(){
         

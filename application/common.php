@@ -359,3 +359,7 @@ function log_error($name, $text) {
         }
         return $mail->Send() ? true : $mail->ErrorInfo;
     }
+
+    function obj_to_array($list){
+        return json_decode(json_encode($list),true);
+    }

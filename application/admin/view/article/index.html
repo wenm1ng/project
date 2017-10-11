@@ -35,25 +35,27 @@
         <tr role="row" align="center">
          <th class="center " tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 80px;align:center">选择</th>
          <th class="center " tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 150px;">ID</th>
-         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">用户名</th>
-         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">权限</th>
-         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">添加时间</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">标题</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 200px;">关键词</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">状态</th>
+         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 250px;">创建时间</th>
          <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">操作</th>
         </tr> 
        </thead> 
        <tbody> 
         {foreach name="list.data" item="row"}    
         <tr class="gradeA odd" align="center"> 
-         <td class="sorting_1"><input type="checkbox" value="{$row['user_id']}"/></td>          
-         <td class=" ">{$row['user_id']}</td> 
-         <td class=" ">{$row['user_name']}</td> 
+         <td class="sorting_1"><input type="checkbox" value="{$row['article_id']}" class="ids"/></td>          
+         <td class=" ">{$row['article_id']}</td> 
+         <td class=" ">{$row['title']}</td> 
+         <td class=" ">{$row['key']}</td> 
          <td class="center ">
-          {if condition="$row.is_admin eq 0"}<font size="" color="">普通用户</font>{/if}
-          {if condition="$row.is_admin eq 1"}<font size="5" color="green">超级管理员</font>{/if}          
+          {if condition="$row.status eq 0"}<font size="" color="">禁用</font>{/if}
+          {if condition="$row.status eq 1"}<font size="5" color="green">启用</font>{/if}          
         </td>
          <td class="center ">{$row['create_time']}</td> 
          <td class="center ">
-          <a class="btn btn-danger btn-rounded" href="">删除</a>
+          <a class="btn btn-danger btn-rounded" href="{:url('delinfo?id='.$row['article_id'])}">删除</a>
           <a class="btn btn-primary btn-rounded" href="">修改</a>
           <a class="btn btn-info btn-rounded" href="">详细信息</a>
           </td>
@@ -64,7 +66,7 @@
             <a href='javascript:void(0)' class="alldel"><button type="button" class="btn btn-w-m btn-success" >全选</button></a>
             <a href="javascript:void(0)" class="nodel"><button type="button" class="btn btn-w-m btn-primary" >全不选</button></a>
             <a href="javascript:void(0)" class="fandel"><button type="button" class="btn btn-w-m btn-info" >反选</button></a>
-            <a href="javascript:void(0)" class="del"><button type="button" class="btn btn-w-m btn-danger" >批量删除</button></a>
+            <a href="javascript:void(0)" class="del ajax-del" url="{:url('delinfo')}"><button type="button" class="btn btn-w-m btn-danger" >批量删除</button></a>
           </td>
         </tr>
        </tbody> 
