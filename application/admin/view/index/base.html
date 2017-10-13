@@ -16,6 +16,8 @@
     <link href="__ROOT__/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="__ROOT__/admin/css/animate.css" rel="stylesheet">
     <link href="__ROOT__/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/huploadify/Huploadify.css" rel="stylesheet">
+    <script src="/layer/layer.js"></script>
     <script type="text/javascript" language="javascript" src="__ROOT__/admin/js/jquery-1.8.3.min.js"></script> 
     <!-- <link rel="stylesheet" type="text/css" href="__ROOT__/css/head-title.css"> -->
     <style>
@@ -281,11 +283,13 @@
     $(".ajax-del").click(function(){
         url = $(this).attr('url');
         
+        ids = "";
         $('.ids:checked').each(function(index, el) {
             ids += ',' + $(this).val();
         });
-        console.log(query);return false;
-        $.post(url,query,function(data){
+        // alert(ids);return false;
+        
+        $.post(url,{ids:ids},function(data){
             if(data.code == 1){
                 alert(data.msg);
                 window.location.href = data.url;

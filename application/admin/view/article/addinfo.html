@@ -1,4 +1,11 @@
 {extend name="index/base"/}
+{block name="style"}
+  <style>
+    .upload_img{
+      background: green;
+    }
+  </style>
+{/block}
 {block name="body"}
   <div class="col-sm-12" style="float:right;width:89%;"> 
    <div class="ibox float-e-margins"> 
@@ -7,7 +14,7 @@
     </div> 
     <div class="ibox-content" style="height:800px"> 
      <form class="form-horizontal" id="signupForm" action="{:url('addinfo')}" method="post" > 
-      <div class="form-group"> 
+      <!-- <div class="form-group"> 
        <label class="col-sm-3 control-label">文章标题：</label> 
        <div class="col-sm-8"> 
         <input id="username" name="title" value="" class="form-control" type="text" value="" aria-required="true" aria-invalid="true" />
@@ -20,14 +27,53 @@
         <input name="key" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
        </div> 
       </div> 
-
-      <div class="form-group"> 
+      <div class="form-group-separator"></div> -->
+      
+      <div class="form-group">
+          <label class="col-sm-2 control-label">文章标题：</label>
+          <div class="col-sm-6">
+              <input id="username" name="title" value="" class="form-control" type="text" value="" aria-required="true" aria-invalid="true" />
+              <span class="help-block m-b-none" id="usernames"></span> 
+          </div>
+      </div>
+      <div class="form-group-separator"></div>
+      
+      <div class="form-group">
+          <label class="col-sm-2 control-label">文章关键词：</label>
+          <div class="col-sm-6">
+             <input name="key" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
+          </div>
+      </div>
+      <!-- <div class="form-group"> 
        <label class="col-sm-3 control-label">文章内容：</label> 
        <div class="col-sm-8"> 
         <textarea id="content" name="content" required></textarea>
        </div> 
-      </div> 
+      </div>  -->
+    <div class="form-group-separator"></div>
+
       
+      <div class="form-group">
+          <label class="col-sm-2 control-label">文章内容：</label>
+          <div class="col-sm-6">
+              <textarea id="content" name="content" required></textarea>
+          </div>
+      </div>
+       
+    <div class="form-group-separator"></div>
+
+      <div class="form-group">
+          <label class="col-sm-2 control-label">文章图片：</label>
+          <div class="col-sm-2">
+              <div id="upload" class="input-group col-sm-12"></div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-sm-2 control-label"> </label>
+          <div class="col-sm-6">
+              <div class="input-group col-sm-12 upload_img"></div>
+          </div>
+      </div>
      
       <div class="form-group"> 
        <div class="col-sm-8 col-sm-offset-4"> 
@@ -43,10 +89,48 @@
 {block name="script"}
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="/huploadify/jquery.Huploadify.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/huploadify/viewimg.js" charset="UTF-8"></script>
 <script type="text/javascript">
     var ue = UE.getEditor('content',{
         initialFrameHeight:300
     });
    
+   function delimg(obj){
+        $(obj).parent().remove();
+    }
+   // layer.alert('你懂我',{icon:5});
+   //上传图片
+    $('#upload').Huploadify({
+        auto:true,
+        fileTypeExts:'*.jpg; *.png; *.gif;',
+        multi:false,//是否允许选择多个文件
+        fileSizeLimit:15000,//允许上传的文件大小，单位KB
+        fileObjName: 'download',//在后端接受文件的参数名称，如PHP中的$_FILES['file']
+        buttonText: '上传图片',//上传按钮上的文字
+        uploader:"{:url('File/upload')}",
+        onUploadStart:function(xhr){
+            var num = $('.img_li').length;
+            if (num == 1) {
+                layer.alert("文章图片最多只能上传1张！",{icon:5});
+                return false;
+            }else{
+                return true;
+            }
+
+        },
+        onUploadComplete:function(data){
+            var data = $.parseJSON(data);
+            var src = '';
+            if(data.status){
+                src = data.url || '__ROOT__/uploads/' + data.savepath;
+                $('.upload_img').append(
+                    '<div class="img_li col-sm-3"><input type="hidden" name="img[]" value="__ROOT__' + src + '"><a class="del_span" href="javascript:;" onclick="delimg(this)">删除</a><img class="viewer-item" width="200px" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;" src="__ROOT__' + src + '"/></div>'
+                );
+            } else {
+                layer.alert(data.info,{icon:5});
+            }
+        }
+    });
 </script>  
 {/block}

@@ -17,8 +17,16 @@ class Index extends Base_2
         
         // echo Db::getlastsql();exit;
         // $this->view->info = $userinfo;
+        //获取文章信息
+        $article_list = Db::name('article')->order('create_time desc')->select();
+        foreach ($article_list as $key => $val) {
+        	//过滤掉Img标签
+        	$content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $val['content']);
+        	$article_list[$key]['content'] = mb_strimwidth($content, 0 , 100 ,'...');
+        }
         $name = session::get('home_username','home');
-    	return view('index',['name'=>$name]);
+
+    	return view('index',['name'=>$name,'article_list'=>$article_list]);
     }
     
 }

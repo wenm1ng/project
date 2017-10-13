@@ -41,7 +41,8 @@
 				$data['create_userid'] 		= $this->uid;
 				$data['create_username'] 	= $this->username;
 				$data['create_time'] 		= date('Y-m-d H:i:s');
-
+				$data['img']				= input('img/a')[0];
+				// print_r($data);exit;
 				if(Db::name('article')->insert($data)){
 					$this->success('添加成功','index');
 				}else{
@@ -55,7 +56,7 @@
 		public function delinfo(){
 			if(Request::instance()->isPost()){
 				//多选删除
-				$ids = implode(',', input());
+				$ids = explode(',', trim(input('ids'),','));
 				$map['article_id'] = array('in' , $ids); 
 			}else{
 				//单删除
