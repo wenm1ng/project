@@ -19,6 +19,7 @@
 <link rel="stylesheet" type="text/css" href="/plugin/Hui-iconfont/1.0.8/iconfont.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/pifu/pifu.css" />
+{block name="style"}{/block}
 <!--[if lt IE 9]>
 <link href="/staticRes/lib/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
@@ -76,23 +77,23 @@
             </div> -->
 
             <div class="modal-body">
-            	<button type="button" style="float:right" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            	<div class="signin-head"><h3 style="text-align:center">用户登录</h3></div>
-			    <br>
-			    <form action="{:url('home/user/login')}" method="post">
-			        <input type="text" class="form-control col-sm-12" name="loginName" placeholder="用户名" required autofocus style="height:30px"/>
-			        <input type="password" class="form-control col-sm-12" name="password" placeholder="密码" required style="height:30px;"/>
-			        <!-- <a href="javascript:void(0)" class="btn btn-lg btn-primary btn-block"  id="sub">登录</a> -->
-			        <input type="submit" class="btn btn-lg btn-primary btn-block" value="登录">
-			    </form>
-			    <label class="checkbox">
-			        <input type="checkbox" value="remember-me"> 记住我
-			    </label>
+              <button type="button" style="float:right" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <div class="signin-head"><h3 style="text-align:center">用户登录</h3></div>
+          <br>
+          <form action="{:url('home/user/login')}" method="post">
+              <input type="text" class="form-control col-sm-12" name="loginName" placeholder="用户名" required autofocus style="height:30px"/>
+              <input type="password" class="form-control col-sm-12" name="password" placeholder="密码" required style="height:30px;"/>
+              <!-- <a href="javascript:void(0)" class="btn btn-lg btn-primary btn-block"  id="sub">登录</a> -->
+              <input type="submit" class="btn btn-lg btn-primary btn-block" value="登录">
+          </form>
+          <label class="checkbox">
+              <input type="checkbox" value="remember-me"> 记住我
+          </label>
                 <a href="javascript:void(0)" id="register">注册账号</a>
             </div>
 
             <!--<div class="modal-footer">-->
-            	<!--<button type="button" class="btn" id="sendbtn">确 定</button>
+              <!--<button type="button" class="btn" id="sendbtn">确 定</button>
                 <button type="button" class="btn" data-dismiss="modal">取 消</button>-->
                 <!--<button class="btn submit-btn ajax-post reset" id="submit" type="submit" target-form="form-horizontal">确 定</button>-->
             <!--</div>-->
@@ -204,7 +205,7 @@
 <script type="text/javascript" src="/js/common.js"></script>
 <script> $(function(){ $(window).on("scroll",backToTopFun); backToTopFun(); }); </script>
 <script type="text/javascript" src="/plugin/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
-
+{block name="script"}{/block}
 <script>
 $(function(){
 //幻灯片
@@ -223,8 +224,8 @@ jQuery(".slideTxtBox").slide({titCell: ".hd ul", mainCell: ".bd ul", autoPage: t
 });
 
 $('#login').click(function(){
-	// $('#modal-1').toggle();
-	$('#modal-1').modal();
+  // $('#modal-1').toggle();
+  $('#modal-1').modal();
 })
 
 $('#register').click(function(){

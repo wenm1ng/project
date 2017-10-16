@@ -1,8 +1,11 @@
-{include file="index/base" /}
+{extend name="index/base"/}
+{block name="style"}
+	<link rel="stylesheet" type="text/css" href="/css/jquery.sinaEmotion.css" />
+{/block}
 {block name="body"}
 	<!--导航条-->
 <nav class="breadcrumb">
-  <div class="container"> <i class="Hui-iconfont">&#xe67f;</i> <a href="index.html" class="c-primary">首页</a> <span class="c-gray en">&gt;</span>  <span class="c-gray">文章</span> <span class="c-gray en">&gt;</span>  <span class="c-gray">个人博客应该选择什么样的域名和域名后缀</span></div>
+  <div class="container"> <i class="Hui-iconfont">&#xe67f;</i> <a href="index.html" class="c-primary">首页</a> <span class="c-gray en">&gt;</span>  <span class="c-gray">文章</span> <span class="c-gray en">&gt;</span>  <span class="c-gray">{$info.title}</span></div>
 </nav>
 
 <section class="container pt-20">
@@ -13,35 +16,30 @@
 				<div class="col-lg-9 col-md-9 w_main_left">
 					<div class="panel panel-default  mb-20">
 						<div class="panel-body pt-10 pb-10">
-							<h2 class="c_titile">我的个人博客之——阿里云空间选择</h2>
-							<p class="box_c"><span class="d_time">发布时间：2017-02-05</span><span>编辑：<a href="mailto:wfyv@qq.com">wilco</a></span><span>阅读（88646）</span></p>
+							<h2 class="c_titile">{$info.title}</h2>
+							<p class="box_c"><span class="d_time">发布时间：{$info.create_time}</span><span>编辑：<a href="mailto:wfyv@qq.com">{$info.create_username}</a></span><span>阅读（{$info.read_num}）</span></p>
 							<ul class="infos">
-								      <p>之前服务器放在电信机房， 联通用户访问速度很不稳定，经常出现访问速度慢的问题，换到阿里云解决了之前的问题。很多人都问我的博客选得什么空间，一年的费用得多少钱，今天我列个表出来，供大家参考。</p>
-								<p>&nbsp;<img src="temp/at1.png" alt="个人博客阿里云空间选择" width="700" height="886"></p>
-								<p>对于访问量不大，小型网站带宽可以选择1M的，每个月<span class="cny" style="margin: 0px 1px; padding: 0px; border: 0px; font-family: Arial; line-height: 20px; font-size: 20px; vertical-align: baseline; color: rgb(255, 102, 0); white-space: nowrap;">¥</span><span class="money" style="margin: 0px; padding: 0px; border: 0px; font-family: 微软雅黑, 'Microsoft Yahei', 'Hiragino Sans GB', tahoma, arial, 宋体; line-height: 20px; font-size: 20px; vertical-align: baseline; color: rgb(255, 102, 0); white-space: nowrap;">56.80</span>一年也就568块钱，每天投入也就不到2块钱。</p>
-								<p><img src="temp/at2.png" alt="个人博客阿里云空间选择"></p>
-								<p><strong>1、为什么选Linux？</strong></p>
-								<p>程序用PHP，速度快，配置低（windows必选1G的内存Linux选512MB能同样达到要求）。Linux的系统安全性非常高。Linux服务器的维护与扩展到性价比和性能都高于Windows。</p>
-								<p>1) 最流行的服务器端操作系统，强大的安全性和稳定性</p>
-								<p>2) 免费且开源，轻松建立和编译源代码</p>
-								<p>3) 通过SSH方式远程访问您的云服务器</p>
-								<p>4) 一般用于高性能web等服务器应用，支持常见的PHP/Python等编程语言，支持MySQL等数据库（需自行安装)</p>
-								<p><strong>2、操作系统为什么选CentOS 安全加固版（推荐）？</strong></p>
-								<p>在原 CentOS镜像的基础上，系统进一步安全加固，安装了阿里云独有的入侵防御系统，系统中会出现aegis进程，该系统增加了实时后门，Webshell检测，更加智能的暴力破解防御和多种入侵行为监控，让服务器更加安全可靠。</p>
-								<p><a href="http://www.aliyun.com/product/ecs" target="_blank"><strong><span style="color: rgb(0, 0, 255);">前往阿里云官网购买&gt;&gt;</span></strong></a></p>
-								<p>&nbsp;</p><p align="center" class="pageLink"></p>
-								
+						      	{$info.content}
 							</ul>
 															
 							<div class="keybq">
-						    	<p><span>关键字</span>：<a class="label label-default">个人博客</a><a class="label label-default">阿里云</a><a class="label label-default">空间</a></p>    
+						    	<p><span>关键字</span>：{volist name="info.key" id="vo"}<a class="label label-default" href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd={$vo}&rsv_pq=9f746fc5000162cf&rsv_t=8c36PyGPA479WqdKR0Dw8pcD0zLs1P%2FkMnhM5hZMbCh4JfCIuPZcZeocoBA&rqlang=cn&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug7=100&rsv_sug2=0&inputT=2469&rsv_sug4=2909">{$vo}</a>{/volist}</p>    
 						    </div>
 							
 							
 							
 							<div class="nextinfo">
-								<p class="last">上一篇：<a href="#">免费收录网站搜索引擎登录口大全</a></p>
-								<p class="next">下一篇：<a href="#">javascript显示年月日时间代码</a></p>
+								{empty name="last_info"}
+								<p class="last">上一篇：没有了</p>
+								{else/}
+								<p class="last">上一篇：<a href="{:url('viewinfo?id='.$last_info.article_id)}">{$last_info.title}</a></p>
+								{/empty}
+
+								{empty name="next_info"}
+								<p class="next">下一篇：没有了</p>
+								{else/}
+								<p class="next">下一篇：<a href="{:url('viewinfo?id='.$next_info.article_id)}">{$next_info.title}</a></p>
+								{/empty}
 						    </div>
 							
 						</div>
@@ -87,7 +85,16 @@
                     <!--用于评论-->
                     <div class="mt-20" id="ct">
                         <div id="err" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
-                        <textarea id="textarea1" name="comment" style="height:200px;" placeholder="看完不留一发？"> </textarea>
+
+
+                        <div id="out" style="height:auto; width: 400px; border: 1px dashed #000000; padding: 10px;"></div>
+						<textarea class="emotion" cols="58" rows="5" style="font-size: 13px;"></textarea>
+						<br />
+						<input id="face" type="button" value="表情" />
+						<input id="analytic" type="button" value="解析" onClick="out()" />
+						<br />
+
+						
                         <div class="text-r mt-10">
                             <button onclick="getPlainTxt()" class="btn btn-primary radius" > 发表评论</button>
                         </div>
@@ -152,29 +159,40 @@
 </section>
 {/block}
 {block name="script"}
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.sinaEmotion.js"></script>
 	<script type="text/javascript">
     $(function () {
-    		$("img.lazyload").lazyload({failurelimit : 3});
+    		// $("img.lazyload").lazyload({failurelimit : 3});
     	
-        wangEditor.config.printLog = false;
-        var editor1 = new wangEditor('textarea1');
-        editor1.config.menus = ['insertcode', 'quote', 'bold', '|', 'img', 'emotion', '|', 'undo', 'fullscreen'];
-        editor1.config.emotions = { 'default': { title: '老王表情', data: 'plugin/wangEditor/emotions1.data'}, 'default2': { title: '老王心情', data: 'plugin/wangEditor/emotions3.data'}, 'default3': { title: '顶一顶', data: 'plugin/wangEditor/emotions2.data'}};
-        editor1.create();
+      //   wangEditor.config.printLog = false;
+      //   var editor1 = new wangEditor('textarea1');
+      //   editor1.config.menus = ['insertcode', 'quote', 'bold', '|', 'img', 'emotion', '|', 'undo', 'fullscreen'];
+      //   editor1.config.emotions = { 'default': { title: '老王表情', data: 'plugin/wangEditor/emotions1.data'}, 'default2': { title: '老王心情', data: 'plugin/wangEditor/emotions3.data'}, 'default3': { title: '顶一顶', data: 'plugin/wangEditor/emotions2.data'}};
+      //   editor1.create();
 
         //show reply
-        $(".hf").click(function () {
-            pId = $(this).attr("name");
-            $(this).parents(".commentList").find(".cancelReply").trigger("click");
-            $(this).parent(".comment-body").append($(".comment").clone(true));
-            $(this).parent(".comment-body").find(".comment").removeClass("hidden");
-            $(this).hide();
-        });
-        //cancel reply
-        $(".cancelReply").on('click',function () {
-            $(this).parents(".comment-body").find(".hf").show();
-            $(this).parents(".comment-body").find(".comment").remove();
-        });
+        // $(".hf").click(function () {
+        //     pId = $(this).attr("name");
+        //     $(this).parents(".commentList").find(".cancelReply").trigger("click");
+        //     $(this).parent(".comment-body").append($(".comment").clone(true));
+        //     $(this).parent(".comment-body").find(".comment").removeClass("hidden");
+        //     $(this).hide();
+        // });
+        // //cancel reply
+        // $(".cancelReply").on('click',function () {
+        //     $(this).parents(".comment-body").find(".hf").show();
+        //     $(this).parents(".comment-body").find(".comment").remove();
+        // });
+
+        // 绑定表情
+		$('#face').SinaEmotion($('.emotion'));
+
+		// 测试本地解析
+		function out() {
+			var inputText = $('.emotion').val();
+			$('#out').html(AnalyticEmotion(inputText));
+		}
     });
 
 </script>
