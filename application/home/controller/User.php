@@ -7,8 +7,9 @@
 	use think\Validate;
 	use PHPMailer\PHPMailer;
 	use PHPMailer\Exception;
+	use base\Base_2;
 
-	Class User extends Controller{
+	Class User extends Base_2{
 		
 
 		//前台登录

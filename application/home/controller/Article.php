@@ -6,10 +6,13 @@
 	use think\Session;
 	use think\Request;
 	use think\View;
+	use base\Base_2;
 
-	class Article extends Controller
+	class Article extends Base_2
 	{
+
 		public function viewinfo(){
+
 			if(Request::instance()->isPost()){
 				//别人评论了
 			}else{
@@ -25,7 +28,12 @@
 				$next_info = Db::name('article')->where("article_id > '{$info['article_id']}'")->order('article_id')->find();
 
 				$view = new View();
-				return $view->fetch('viewinfo',['info'=>$info,'last_info'=>$last_info,'next_info'=>$next_info]);
+				if(!empty(session::get('home_username'))){
+					$username = session::get('home_username');
+				}else{
+					$username = '游客'.mt_rand(99999,999999);
+				}
+				return $view->fetch('viewinfo',['info'=>$info,'last_info'=>$last_info,'next_info'=>$next_info,'username'=>$username]);
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 {extend name="index/base"/}
 {block name="style"}
-	<link rel="stylesheet" type="text/css" href="/css/jquery.sinaEmotion.css" />
+	<link href="http://www.js-css.cn/jscode/jscode.css" rel="stylesheet" />
+	<link href="/css/smohan.face.css" type="text/css" rel="stylesheet">
 {/block}
 {block name="body"}
 	<!--导航条-->
@@ -47,13 +48,13 @@
 					
 					<div class="panel panel-default  mb-20">
 						<div class="tab-category">
-                <a href=""><strong>评论区</strong></a>
-            </div>
+			                <a href=""><strong>评论区</strong></a>
+			            </div>
 						<div class="panel-body">
 							<div class="panel-body" style="margin: 0 3%;">
                     <div class="mb-20">
                     	<ul class="commentList">
-                            <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
                                 <div class="comment-main">
                                     <header class="comment-header">
                                         <div class="comment-meta"><a class="comment-author" href="#">老王</a>
@@ -65,7 +66,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/696C8A17B3383B88804BA92ECBAA5D81/100"></i></a>
+                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/696C8A17B3383B88804BA92ECBAA5D81/100"></i></a>
                                 <div class="comment-main">
                                     <header class="comment-header">
                                         <div class="comment-meta"><a class="comment-author" href="#">老王</a>
@@ -87,12 +88,16 @@
                         <div id="err" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
 
 
-                        <div id="out" style="height:auto; width: 400px; border: 1px dashed #000000; padding: 10px;"></div>
-						<textarea class="emotion" cols="58" rows="5" style="font-size: 13px;"></textarea>
-						<br />
-						<input id="face" type="button" value="表情" />
-						<input id="analytic" type="button" value="解析" onClick="out()" />
-						<br />
+                        <div id="Smohan_FaceBox">
+						   <textarea name="text" id="Smohan_text" class="smohan_text"></textarea>
+						   <p>
+						   <a href="javascript:void(0)" class="face" title="表情"></a>
+						   <button class="button" id="Smohan_Showface">显示表情</button>
+						   </p>
+						</div>
+						<!--/表情盒子-->
+						<!--解析表情-->
+						<div id="Zones"></div>
 
 						
                         <div class="text-r mt-10">
@@ -159,41 +164,42 @@
 </section>
 {/block}
 {block name="script"}
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.sinaEmotion.js"></script>
+	<script src="/js/jquery-1.8.2.min.js" type="text/javascript"></script> 
+	<script type="text/javascript" src="/js/smohan.face.js" charset="utf-8"></script>
 	<script type="text/javascript">
-    $(function () {
-    		// $("img.lazyload").lazyload({failurelimit : 3});
-    	
-      //   wangEditor.config.printLog = false;
-      //   var editor1 = new wangEditor('textarea1');
-      //   editor1.config.menus = ['insertcode', 'quote', 'bold', '|', 'img', 'emotion', '|', 'undo', 'fullscreen'];
-      //   editor1.config.emotions = { 'default': { title: '老王表情', data: 'plugin/wangEditor/emotions1.data'}, 'default2': { title: '老王心情', data: 'plugin/wangEditor/emotions3.data'}, 'default3': { title: '顶一顶', data: 'plugin/wangEditor/emotions2.data'}};
-      //   editor1.create();
+   	$(function (){
+		$("a.face").smohanfacebox({
+			Event : "click",	//触发事件	
+			divid : "Smohan_FaceBox", //外层DIV ID
+			textid : "Smohan_text" //文本框 ID
+		});
+		//解析表情  $('#Zones').replaceface($('#Zones').html());
+	});
+	//Demo测试
+	$('#Smohan_Showface').click(function() {
+		content = $('#Smohan_text').val();
 
-        //show reply
-        // $(".hf").click(function () {
-        //     pId = $(this).attr("name");
-        //     $(this).parents(".commentList").find(".cancelReply").trigger("click");
-        //     $(this).parent(".comment-body").append($(".comment").clone(true));
-        //     $(this).parent(".comment-body").find(".comment").removeClass("hidden");
-        //     $(this).hide();
-        // });
-        // //cancel reply
-        // $(".cancelReply").on('click',function () {
-        //     $(this).parents(".comment-body").find(".hf").show();
-        //     $(this).parents(".comment-body").find(".comment").remove();
-        // });
+		
+		div = '<li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/696C8A17B3383B88804BA92ECBAA5D81/100"></i></a>'+
+	                '<div class="comment-main">'+
+	                    '<header class="comment-header">'+
+	                        '<div class="comment-meta"><a class="comment-author" href="#">'+ "{$username}" +'</a>'+
+	                            '<time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20" class="f-r">2014-8-31 15:20</time>'+
+	                        '</div>'+
+	                    '</header>'+
+	                    '<div class="comment-body">'+
+	                        '<p> '+ content +'</p>'+
+	                    '</div>'+
+	                '</div>'+
+	            '</li>';
+	    // $(this).parents('div').find('.comment:last').replaceface(div);
+		$('.commentList').append(div);
+		$('.commentList').(div);
+		 // $('#Zones').fadeIn(360);
+		 // $('#Zones').html($('#Smohan_text').val());
+		 // $('#Zones').replaceface($('#Zones').html());//替换表情
 
-        // 绑定表情
-		$('#face').SinaEmotion($('.emotion'));
+		});
 
-		// 测试本地解析
-		function out() {
-			var inputText = $('.emotion').val();
-			$('#out').html(AnalyticEmotion(inputText));
-		}
-    });
-
-</script>
+	</script>
 {/block}
