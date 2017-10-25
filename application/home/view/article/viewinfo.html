@@ -100,8 +100,8 @@
                     <div class="mt-20" id="ct">
                         <div id="err" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
 
-						<div id="Smohan_FaceBox0">
-						   <textarea name="content" class="smohan_text" style="width:662px"></textarea>
+						<div id="Smohan_FaceBox">
+						   <textarea name="content" id="Smohan_text" class="smohan_text" style="width:662px"></textarea>
 						   <p>
 						   <a href="javascript:void(0)" class="face" title="表情"></a>
 						   <!-- <button class="button" id="Smohan_Showface" style="float:left;margin-left:60%;margin-top:40px">显示表情</button> -->
@@ -181,70 +181,78 @@
 	<script type="text/javascript" src="/js/smohan.face.js" charset="utf-8"></script>
 	<script type="text/javascript">
    	$(function (){
-		// $("a.face").smohanfacebox({
-		// 	Event : "click",	//触发事件	
-		// 	divid : "Smohan_FaceBox", //外层DIV ID
-		// 	textid : "Smohan_text" //文本框 ID
-		// });
+		$("a.face").smohanfacebox({
+			Event : "click",	//触发事件	
+			divid : "Smohan_FaceBox", //外层DIV ID
+			textid : "Smohan_text" //文本框 ID
+		});
 
-		faceid = 0;
+		$("a.face1").smohanfacebox1({
+			Event : "click",	//触发事件	
+			divid : "Smohan_FaceBox1", //外层DIV ID
+			textid : "Smohan_text" //文本框 ID
+		});
 
-		$('a.face').each(function(){
-			$(this).smohanfacebox({
-				Event : "click",	//触发事件	
-				divid : "Smohan_FaceBox" + faceid, //外层DIV ID
-				textid : "Smohan_text"//文本框 ID
-			});
-			faceid++;
-		})
+		// faceid = 0;
+
+		// $('a.face').each(function(){
+		// 	$(this).smohanfacebox({
+		// 		Event : "click",	//触发事件	
+		// 		divid : "Smohan_FaceBox" + faceid, //外层DIV ID
+		// 		textid : "Smohan_text"//文本框 ID
+		// 	});
+		// 	faceid++;
+		// })
 		//解析表情  $('#Zones').replaceface($('#Zones').html());
 		$(".comment-content").each(function(){
 			$(this).replaceface($(this).html());
 		})
-	});
-	//Demo测试
-	$('#Smohan_Showface').click(function() {
-		content = $('.Smohan_text').val();
-		to_user_id = $('#create_userid').val();
-		to_user_name = $('#create_username').val();
-		article_id = {:input('id')};
-		$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
-			if(data.code == 1){
-				layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
-				setTimeout(function(){
-					window.location.reload();
-				}, 1500)
+
+		//Demo测试
+		$('#Smohan_Showface').click(function() {
+			content = $('.Smohan_text').val();
+			to_user_id = $('#create_userid').val();
+			to_user_name = $('#create_username').val();
+			article_id = {:input('id')};
+			$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
+				if(data.code == 1){
+					layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
+					setTimeout(function(){
+						window.location.reload();
+					}, 1500)
+				}else{
+					layer.alert(data.msg,{icon:5});
+				}
+			})
+		});
+
+		reply = 0;
+		$('.reply').click(function(){
+			id = $(this).attr('dataid');
+			div = '<div id="Smohan_FaceBox1" class="comment comment-reply" style="float:right;width:640px;margin-top:20px">'+
+			            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
+			                '<textarea class="textarea smohan_text1" id="Smohan_text1" style="height:100px;" > </textarea>'+
+			                '<p><a href="javascript:void(0)" class="face1" title="表情"></a></p>'+
+			                '<button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>'+
+			                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
+			        '</div>';
+			if(reply == 0){
+				$(this).parents('li').append(div);
+				reply = 1;
 			}else{
-				layer.alert(data.msg,{icon:5});
+				$('.comment-reply').css('display','none');
+				reply = 0;
 			}
+
+			$('.no_reply').click(function(){
+				$(this).parents('.comment-reply').toggle();
+			})
 		})
-	});
-
-	reply = 0;
-	$('.reply').click(function(){
-		id = $(this).attr('dataid');
-		div = '<div id="Smohan_FaceBox'+ id +'" class="comment comment-reply" style="float:right;width:640px;margin-top:20px">'+
-		            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
-		                '<textarea class="textarea" style="height:100px;" > </textarea>'+
-		                '<p><a href="javascript:void(0)" class="face" title="表情"></a></p>'+
-		                '<button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>'+
-		                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
-		        '</div>';
-		if(reply == 0){
-			$(this).parents('li').append(div);
-			reply = 1;
-		}else{
-			$('.comment-reply').css('display','none');
-			reply = 0;
-		}
-
 		$('.no_reply').click(function(){
 			$(this).parents('.comment-reply').toggle();
 		})
-	})
-	$('.no_reply').click(function(){
-		$(this).parents('.comment-reply').toggle();
-	})
+	});
+	
 
 	</script>
 {/block}
