@@ -19,5 +19,9 @@ class Base_2 extends Controller
 		$this->uid = !empty(session::get('home_uid'))?session::get('home_uid'):"";
 		$this->username = !empty(session::get('home_username'))?session::get('home_username'):"";
 	}
+
+	public function obj_to_array($list){
+		return json_decode(json_encode($list),true);
+	}
 }
 ?>

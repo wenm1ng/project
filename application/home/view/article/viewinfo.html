@@ -1,6 +1,5 @@
 {extend name="index/base"/}
 {block name="style"}
-	<link href="http://www.js-css.cn/jscode/jscode.css" rel="stylesheet" />
 	<link href="/css/smohan.face.css" type="text/css" rel="stylesheet">
 {/block}
 {block name="body"}
@@ -19,6 +18,8 @@
 						<div class="panel-body pt-10 pb-10">
 							<h2 class="c_titile">{$info.title}</h2>
 							<p class="box_c"><span class="d_time">发布时间：{$info.create_time}</span><span>编辑：<a href="mailto:wfyv@qq.com">{$info.create_username}</a></span><span>阅读（{$info.read_num}）</span></p>
+							<input type="hidden" name="" id="create_userid" value="{$info.create_userid}">
+							<input type="hidden" name="" id="create_username" value="{$info.create_username}">
 							<ul class="infos">
 						      	{$info.content}
 							</ul>
@@ -54,58 +55,70 @@
 							<div class="panel-body" style="margin: 0 3%;">
                     <div class="mb-20">
                     	<ul class="commentList">
-                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
-                                <div class="comment-main">
-                                    <header class="comment-header">
-                                        <div class="comment-meta"><a class="comment-author" href="#">老王</a>
-                                            <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20" class="f-r">2014-8-31 15:20</time>
-                                        </div>
-                                    </header>
-                                    <div class="comment-body">
-                                        <p> 是的</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/696C8A17B3383B88804BA92ECBAA5D81/100"></i></a>
-                                <div class="comment-main">
-                                    <header class="comment-header">
-                                        <div class="comment-meta"><a class="comment-author" href="#">老王</a>
-                                            <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20" class="f-r">2014-8-31 15:20</time>
-                                        </div>
-                                    </header>
-                                    <div class="comment-body">
-                                        <p> +1</p>
-                                    </div>
-                                </div>
-                            </li>
+                    		{volist name="article_list.data" id="vo"}
+                    		{eq name="vo.is_reply" value="0"}
+	                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+	                                <div class="comment-main">
+	                                    <header class="comment-header">
+	                                        <div class="comment-meta">
+	                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name}</a>{/eq}
+	                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
+	                                        </div>
+	                                    </header>
+	                                    <div class="comment-body">
+	                                        <div class="comment-content"> {$vo.content}</div>
+	                                    	<a href="javascript:void(0)" style="float:right;" class="reply" dataid="{$i}">回复</a>
+	                                    </div>
+	                                </div>
+	                            </li>
+                            {else /}
+                            	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+	                                <div class="comment-main">
+	                                    <header class="comment-header">
+	                                        <div class="comment-meta">
+	                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name} 回复：{$vo.to_user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name} 回复：{$vo.to_user_name}</a>{/eq}
 
+	                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
+	                                        </div>
+	                                    </header>
+	                                    <div class="comment-body">
+	                                        <div class="comment-content"> {$vo.content}</div>
+	                                    	<a href="javascript:void(0)" style="float:right;" class="reply">回复</a>
+	                                    </div>
+	                                </div>
+	                            </li>
+                            {/eq}
+                            {/volist}
                         </ul>
     
+                    </div>
+                    <div class="_page">
+                    	{$article_page}
                     </div>
                     <div class="line"></div>
                     <!--用于评论-->
                     <div class="mt-20" id="ct">
                         <div id="err" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
 
-
-                        <div id="Smohan_FaceBox">
-						   <textarea name="text" id="Smohan_text" class="smohan_text"></textarea>
+						<div id="Smohan_FaceBox0">
+						   <textarea name="content" class="smohan_text" style="width:662px"></textarea>
 						   <p>
 						   <a href="javascript:void(0)" class="face" title="表情"></a>
-						   <button class="button" id="Smohan_Showface">显示表情</button>
+						   <!-- <button class="button" id="Smohan_Showface" style="float:left;margin-left:60%;margin-top:40px">显示表情</button> -->
 						   </p>
-						</div>
+						</div>	
+                        
 						<!--/表情盒子-->
 						<!--解析表情-->
 						<div id="Zones"></div>
 
 						
                         <div class="text-r mt-10">
-                            <button onclick="getPlainTxt()" class="btn btn-primary radius" > 发表评论</button>
+                            <button id="Smohan_Showface" class="btn btn-primary radius" > 发表评论</button>
                         </div>
                     </div>
                     <!--用于回复-->
-                    <div class="comment hidden mt-20">
+                    <div class="comment hidden">
                         <div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
                             <textarea class="textarea" style="height:100px;" > </textarea>
                             <button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>
@@ -168,38 +181,70 @@
 	<script type="text/javascript" src="/js/smohan.face.js" charset="utf-8"></script>
 	<script type="text/javascript">
    	$(function (){
-		$("a.face").smohanfacebox({
-			Event : "click",	//触发事件	
-			divid : "Smohan_FaceBox", //外层DIV ID
-			textid : "Smohan_text" //文本框 ID
-		});
+		// $("a.face").smohanfacebox({
+		// 	Event : "click",	//触发事件	
+		// 	divid : "Smohan_FaceBox", //外层DIV ID
+		// 	textid : "Smohan_text" //文本框 ID
+		// });
+
+		faceid = 0;
+
+		$('a.face').each(function(){
+			$(this).smohanfacebox({
+				Event : "click",	//触发事件	
+				divid : "Smohan_FaceBox" + faceid, //外层DIV ID
+				textid : "Smohan_text"//文本框 ID
+			});
+			faceid++;
+		})
 		//解析表情  $('#Zones').replaceface($('#Zones').html());
+		$(".comment-content").each(function(){
+			$(this).replaceface($(this).html());
+		})
 	});
 	//Demo测试
 	$('#Smohan_Showface').click(function() {
-		content = $('#Smohan_text').val();
+		content = $('.Smohan_text').val();
+		to_user_id = $('#create_userid').val();
+		to_user_name = $('#create_username').val();
+		article_id = {:input('id')};
+		$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
+			if(data.code == 1){
+				layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
+				setTimeout(function(){
+					window.location.reload();
+				}, 1500)
+			}else{
+				layer.alert(data.msg,{icon:5});
+			}
+		})
+	});
 
-		
-		div = '<li class="item cl"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/696C8A17B3383B88804BA92ECBAA5D81/100"></i></a>'+
-	                '<div class="comment-main">'+
-	                    '<header class="comment-header">'+
-	                        '<div class="comment-meta"><a class="comment-author" href="#">'+ "{$username}" +'</a>'+
-	                            '<time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20" class="f-r">2014-8-31 15:20</time>'+
-	                        '</div>'+
-	                    '</header>'+
-	                    '<div class="comment-body">'+
-	                        '<p> '+ content +'</p>'+
-	                    '</div>'+
-	                '</div>'+
-	            '</li>';
-	    // $(this).parents('div').find('.comment:last').replaceface(div);
-		$('.commentList').append(div);
-		$('.commentList').(div);
-		 // $('#Zones').fadeIn(360);
-		 // $('#Zones').html($('#Smohan_text').val());
-		 // $('#Zones').replaceface($('#Zones').html());//替换表情
+	reply = 0;
+	$('.reply').click(function(){
+		id = $(this).attr('dataid');
+		div = '<div id="Smohan_FaceBox'+ id +'" class="comment comment-reply" style="float:right;width:640px;margin-top:20px">'+
+		            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
+		                '<textarea class="textarea" style="height:100px;" > </textarea>'+
+		                '<p><a href="javascript:void(0)" class="face" title="表情"></a></p>'+
+		                '<button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>'+
+		                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
+		        '</div>';
+		if(reply == 0){
+			$(this).parents('li').append(div);
+			reply = 1;
+		}else{
+			$('.comment-reply').css('display','none');
+			reply = 0;
+		}
 
-		});
+		$('.no_reply').click(function(){
+			$(this).parents('.comment-reply').toggle();
+		})
+	})
+	$('.no_reply').click(function(){
+		$(this).parents('.comment-reply').toggle();
+	})
 
 	</script>
 {/block}

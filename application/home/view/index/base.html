@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="/plugin/Hui-iconfont/1.0.8/iconfont.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/pifu/pifu.css" />
+
+
 {block name="style"}{/block}
 <!--[if lt IE 9]>
 <link href="/staticRes/lib/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
@@ -416,13 +418,13 @@ $('#register').click(function(){
         target_form = $(this).attr('target-form');
         form = $('.'+target_form);
         query = form.serialize();
-
+        // alert(query);return;
         $.post(url,query,function(data){
             if(data.code == 1){
-                alert(data.msg);
+                layer.alert(data.msg,{icon:6});
                 window.location.href = data.url;
             }else{
-                alert(data.msg);
+                layer.alert(data.msg,{icon:5});
             }
         },'json')
     })
