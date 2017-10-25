@@ -1,0 +1,57 @@
+.input-names,.input-img,.input-miaoshu{
+	width:99%;
+	padding-left:1%;
+	padding-bottom:5px;
+	padding-top:5px;
+	height:30px;
+	line-height:30px;
+}
+.input-names div,.input-img div,.input-miaoshu{
+	float:left;
+}
+.input-name{
+	width:8%;
+	float:left;
+	font-size:18px;
+}
+.input-text{
+	width:92%;
+}
+.input-text input{
+	width:90%;
+}
+.input-text textarea{
+	width:90%;
+	height:60px;
+	resize:none;
+}
+.input-miaoshu{
+	height:80px;
+}
+.input-img{
+	height:60px;
+}
+.wmf{
+	width:20%;
+}
+.wmf input{
+	width:30%;
+}
+.cwf{
+	width:10%;
+}
+.cwf input{
+	width:60%;
+}
+.phone{
+	width:20%;
+}
+.input-foot{
+	width:50%;
+	padding-right:25%;
+	padding-left: 25%;
+	float:none;
+}
+.back{
+	width:20%;
+}

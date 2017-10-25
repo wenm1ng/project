@@ -1,0 +1,77 @@
+*{
+	margin:0 auto;
+	padding:0;
+}
+
+body{
+	background:rgb(250,250,250);
+}
+
+.today-title,.today-search,.today-table,.today-page{
+	padding-left:1%;
+	width:99%;
+	height:50px;
+	padding-bottom:5px;
+	padding-top:5px;
+}
+
+.title-1{
+	padding-right:3%;
+}
+.title-1,.title-2{
+	float:left;
+	height:60px;
+	line-height: 60px;
+}
+.title-2{
+	float:right;
+	margin-right:2%;
+}
+.title-2 div{
+	height:45px;
+	width:115px;
+	line-height:45px;
+	background:rgb(45,44,65);
+	border:0;
+	text-align: center;
+	vertical-align:middle;
+}
+.title-2 a{
+	color:white;
+}
+.font-blue{
+	color:rgb(0,153,204);
+}
+.font-red{
+	color:rgb(255,0,0);
+}
+.table tr td{
+	text-align: center;
+	vertical-align: middle;
+}
+.table tr td:nth-child(6){
+	text-align:left;
+}
+.table tr:nth-child(1) td:nth-child(6){
+	text-align:center;
+}
+#page-touch{
+	background:rgb(45,44,65);
+	color:white;
+}
+#page li a:hover{
+	background:rgb(45,44,65);
+	color:white;
+}
+#number,#page{
+	float:left;
+}
+#number{
+	padding-right:3%;
+}
+#number-show{
+	float:right;
+	height:44px;
+	line-height: 44px;
+	padding-right:3%;
+}

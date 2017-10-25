@@ -1,0 +1,54 @@
+*{
+	margin:0 auto;
+	padding:0;
+}
+a{
+	text-decoration: none;
+}
+.admin-head{
+	width:100%;
+	height:55px;
+/*	//Firefox4.0-  			
+	-moz-box-shadow:投影方式 X轴偏移量 Y轴偏移量阴影模糊半径 阴影扩展半径 阴影颜色;  
+	//Safariand Google chrome10.0-  
+	-webkit-box-shadow:投影方式 X轴偏移量 Y轴偏移量阴影模糊半径 阴影扩展半径 阴影颜色;  
+	//Firefox4.0+、 Google chrome 10.0+ 、 Oprea10.5+ and IE9  
+	//box-shadow:  投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色;*/ 
+	-webkit-box-shadow:  3px 1px 14px rgb(215,215,215);  
+	-moz-box-shadow:  3px 1px 14px rgb(215,215,215);  
+	box-shadow:  3px 1px 14px rgb(215,215,215);  
+}
+.admin-title{
+	width:19%;
+	height:55px;
+	float:left;
+	padding-left:1%;
+	line-height: 55px;
+}
+.admin-menu{
+	width:80%;
+	float:left;
+	padding-top:15px;
+}
+
+.admin-menu-list{
+	padding-left:60%;
+	width:40%;
+	list-style:none;
+	background:pink;
+}
+
+.admin-menu-list > li{
+	text-align: center;
+	float:left;
+	border-right:1px solid black;
+	padding-right:20px;
+	padding-left: 20px;
+}
+.admin-menu-list > li:last-child{
+	border:none;
+	border-right:0px;
+}
+.admin-menu-list > li > a{
+	color:rgb(0,102,204);
+}
