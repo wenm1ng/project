@@ -18,7 +18,7 @@ class Index extends Base_2
         // echo Db::getlastsql();exit;
         // $this->view->info = $userinfo;
         //获取文章信息
-        $article_list = Db::name('article')->order('create_time desc')->select();
+        $article_list = Db::name('article')->where("status = 1")->order('create_time desc')->select();
         foreach ($article_list as $key => $val) {
         	//过滤掉Img标签
         	$content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $val['content']);

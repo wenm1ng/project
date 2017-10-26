@@ -106,11 +106,28 @@ $(function() {
 
 
   /*******************************************************************************************************************************/
+  //隐藏表情
+  $.fn.hiddenface = function(){
+  	var defaults = {
+		Event : "click", //响应事件		
+		divid : "Smohan_FaceBox1", //表单ID（textarea外层ID）
+		textid : "Smohan_text1" //文本框ID
+	};
+	var options = $.extend(defaults,options);
+	var $btn = $(this);//取得触发事件的ID
+
+	//BTN触发事件，显示或隐藏表情层
+	$btn.live(options.Event,function(e) {
+		$('#SmohanFaceBox1').hide(360);
+		$btn.removeClass('in');
+		});
+  }
+
   $.fn.smohanfacebox1 = function(options) {
 		var defaults = {
 		Event : "click", //响应事件		
 		divid : "Smohan_FaceBox1", //表单ID（textarea外层ID）
-		textid : "TextArea1" //文本框ID
+		textid : "Smohan_text1" //文本框ID
 		};
 		var options = $.extend(defaults,options);
 		var $btn = $(this);//取得触发事件的ID
@@ -120,27 +137,31 @@ $(function() {
 	    for(i=0;i<60;i++){  //通过循环创建60个表情，可扩展
 		 faceimg+='<li><a href="javascript:void(0)"><img src="/images/face/'+(i+1)+'.gif" face="<emt>'+(i+1)+'</emt>"/></a></li>';
 		 };
+		 // console.log($("#"+options.divid));
+		 dataid = $("#"+options.divid).attr('dataid');
+
 		$("#"+options.divid).prepend("<div id='SmohanFaceBox1'><span class='Corner'></span><div class='Content'><h3><span>常用表情</span><a class='close' title='关闭'></a></h3><ul>"+faceimg+"</ul></div></div>");
 	     $('#SmohanFaceBox1').css("display",'none');//创建完成后先将其隐藏
+
 		//创建表情框结束
-		
 		var $facepic = $("#SmohanFaceBox1 li img");
 		//BTN触发事件，显示或隐藏表情层
 		$btn.live(options.Event,function(e) {
 			if($('#SmohanFaceBox1').is(":hidden")){
-			$('#SmohanFaceBox1').show(360);
-			$btn.addClass('in');
+				$('#SmohanFaceBox1').show(360);
+				$btn.addClass('in');
 			}else{
-			$('#SmohanFaceBox1').hide(360);
-			$btn.removeClass('in');
-				}
-			});
+				$('#SmohanFaceBox1').hide(360);
+				$btn.removeClass('in');
+				alert($('#SmohanFaceBox1').length);
+			}
+		});
 		//插入表情
 		$facepic.die().click(function(){
 		     $('#SmohanFaceBox1').hide(360);
 			 //$("#"+options.textid).focus();
 			 //$("#"+options.textid).val($("#"+options.textid).val()+$(this).attr("face"));
-			 $("#"+options.textid).die().insertContent1($(this).attr("face1"));
+			 $("#"+options.textid).die().insertContent1($(this).attr("face"));
 			 $btn.removeClass('in');
 			});			
 		//关闭表情层

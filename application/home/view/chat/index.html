@@ -1,0 +1,52 @@
+{extend name="index/base" /}
+{block name="style"}
+	<link rel="stylesheet" type="text/css" href="/css/timeline.css" />
+{/block}
+{block name="body"}
+	<section class="container mt-20">
+    <div class="container-fluid">
+        <div class="timeline">
+        	{volist name="list.data" id="vo"}
+				<div class="cd-timeline-block">
+				    <div class="cd-timeline-img cd-picture">
+				        <img src="/images/timeline/cd-icon-location.svg" alt="position">
+				    </div>
+				    <div class="cd-timeline-content">
+				        <h4>{$vo.title}</h4>
+				        <p>{$vo.content}</p>
+				        <a href="javascript:void(0)" class="f-r"><input class="btn btn-success size-S" type="button" value="更多"></a>
+				        <span class="cd-date">{$vo.create_time}</span>
+				    </div>
+				</div>
+
+			{/volist}
+        </div>
+    </div>
+
+</section>
+{/block}
+{block name="script"}
+	<script> $(function(){ $(window).on("scroll",backToTopFun); backToTopFun(); }); </script>
+	<script>
+	    $(function () {
+	        //on scolling, show/animate timeline blocks when enter the viewport
+	        $(window).on('scroll', function () {
+	            $('.cd-timeline-block').each(function () {
+	                if ($(this).offset().top <= $(window).scrollTop() + $(window).height() * 0.75 && $(this).find('.cd-timeline-img').hasClass('is-hidden')) {
+	                    $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+	                }
+	                if ($(window).scrollTop() - $(this).offset().top > 0) {
+	                    $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden').removeClass('bounce-in');
+	                }
+	                
+	            });
+	           $('.cd-timeline-block').each(function(){
+	                if($(this).offset().top < $(window).scrollTop()+$(window).height()*0.75) {
+	                    $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden');
+	                }
+	            });
+	        });
+	    });
+
+	</script>
+{/block}

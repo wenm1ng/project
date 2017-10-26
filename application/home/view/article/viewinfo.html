@@ -55,42 +55,46 @@
 							<div class="panel-body" style="margin: 0 3%;">
                     <div class="mb-20">
                     	<ul class="commentList">
-                    		{volist name="article_list.data" id="vo"}
-                    		{eq name="vo.is_reply" value="0"}
-	                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
-	                                <div class="comment-main">
-	                                    <header class="comment-header">
-	                                        <div class="comment-meta">
-	                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name}</a>{/eq}
-	                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
-	                                        </div>
-	                                    </header>
-	                                    <div class="comment-body">
-	                                        <div class="comment-content"> {$vo.content}</div>
-	                                    	<a href="javascript:void(0)" style="float:right;" class="reply" dataid="{$i}">回复</a>
-	                                    </div>
-	                                </div>
-	                            </li>
-                            {else /}
-                            	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
-	                                <div class="comment-main">
-	                                    <header class="comment-header">
-	                                        <div class="comment-meta">
-	                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name} 回复：{$vo.to_user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name} 回复：{$vo.to_user_name}</a>{/eq}
+                    		{empty name="article_list.data"}
+                    			<span>还没有小伙伴评论，快来抢沙发啦~~！</span>
+                    		{else /}
+                    			{volist name="article_list.data" id="vo"}
+	                    		{eq name="vo.is_reply" value="0"}
+		                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+		                                <div class="comment-main">
+		                                    <header class="comment-header">
+		                                        <div class="comment-meta">
+		                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name}</a>{/eq}
+		                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
+		                                        </div>
+		                                    </header>
+		                                    <div class="comment-body">
+		                                        <div class="comment-content"> {$vo.content}</div>
+		                                    	<a href="javascript:void(0)" style="float:right;" dataid="{$vo.user_id}" dataname="{$vo.user_name}" class="reply" dataid="{$i}">回复</a>
+		                                    </div>
+		                                </div>
+		                            </li>
+	                            {else /}
+	                            	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+		                                <div class="comment-main">
+		                                    <header class="comment-header">
+		                                        <div class="comment-meta">
+		                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name} 回复：{$vo.to_user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name} 回复：{$vo.to_user_name}</a>{/eq}
 
-	                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
-	                                        </div>
-	                                    </header>
-	                                    <div class="comment-body">
-	                                        <div class="comment-content"> {$vo.content}</div>
-	                                    	<a href="javascript:void(0)" style="float:right;" class="reply">回复</a>
-	                                    </div>
-	                                </div>
-	                            </li>
-                            {/eq}
-                            {/volist}
+		                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
+		                                        </div>
+		                                    </header>
+		                                    <div class="comment-body">
+		                                        <div class="comment-content"> {$vo.content}</div>
+		                                    	<a href="javascript:void(0)" style="float:right;" dataid="{$vo.user_id}" dataname="{$vo.user_name}" class="reply">回复</a>
+		                                    </div>
+		                                </div>
+		                            </li>
+	                            {/eq}
+	                            {/volist}
+                    		{/empty}
+                    		
                         </ul>
-    
                     </div>
                     <div class="_page">
                     	{$article_page}
@@ -114,14 +118,14 @@
 
 						
                         <div class="text-r mt-10">
-                            <button id="Smohan_Showface" class="btn btn-primary radius" > 发表评论</button>
+                            <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" > 发表评论</button>
                         </div>
                     </div>
                     <!--用于回复-->
                     <div class="comment hidden">
                         <div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
                             <textarea class="textarea" style="height:100px;" > </textarea>
-                            <button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>
+                            <button type="button" class="btn btn-primary radius mt-10">回复</button>
                             <a class="cancelReply f-r mt-10">取消回复</a>
                     </div>
 
@@ -137,26 +141,12 @@
 			</div>
 			<div class="tab-category-item">
 				<ul class="index_recd">
+					{volist name="article_hot" id="vo"}
 					<li>
-						<a href="#">阻止a标签href默认跳转事件</a>
-						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
+						<a href="{:url('viewinfo?id='.$vo['article_id'])}">{$vo.title}</a>
+						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> {$vo.read_num} </p>
 					</li>
-					<li >
-						<a href="#">PHP面试题汇总</a>
-						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-					</li>
-					<li >
-						<a href="#">阻止a标签href默认跳转事件</a>
-						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-					</li>
-					<li >
-						<a href="#">阻止a标签href默认跳转事件</a>
-						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-					</li>
-					<li >
-						<a href="#">PHP面试题汇总</a>
-						<p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-					</li>
+					{/volist}
 				</ul>
 			</div>
 		</div>
@@ -187,11 +177,7 @@
 			textid : "Smohan_text" //文本框 ID
 		});
 
-		$("a.face1").smohanfacebox1({
-			Event : "click",	//触发事件	
-			divid : "Smohan_FaceBox1", //外层DIV ID
-			textid : "Smohan_text" //文本框 ID
-		});
+		
 
 		// faceid = 0;
 
@@ -209,8 +195,8 @@
 		})
 
 		//Demo测试
-		$('#Smohan_Showface').click(function() {
-			content = $('.Smohan_text').val();
+		$('.Smohan_Showface').click(function() {
+			content = $('.smohan_text').val();
 			to_user_id = $('#create_userid').val();
 			to_user_name = $('#create_username').val();
 			article_id = {:input('id')};
@@ -227,30 +213,60 @@
 		});
 
 		reply = 0;
+		
 		$('.reply').click(function(){
-			id = $(this).attr('dataid');
+			
 			div = '<div id="Smohan_FaceBox1" class="comment comment-reply" style="float:right;width:640px;margin-top:20px">'+
 			            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
-			                '<textarea class="textarea smohan_text1" id="Smohan_text1" style="height:100px;" > </textarea>'+
+			                '<textarea class="textarea smohan_text1" id="Smohan_text1"  style="height:100px;" > </textarea>'+
 			                '<p><a href="javascript:void(0)" class="face1" title="表情"></a></p>'+
-			                '<button onclick="hf(this);" type="button" class="btn btn-primary radius mt-10">回复</button>'+
+			                '<button type="button" class="btn btn-primary radius mt-10 Smohan_Showface">回复</button>'+
 			                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
 			        '</div>';
 			if(reply == 0){
 				$(this).parents('li').append(div);
 				reply = 1;
+
+				$("a.face1").smohanfacebox1({
+					Event : "click",	//触发事件	
+					divid : "Smohan_FaceBox1", //外层DIV ID
+					textid : "Smohan_text1" //文本框 ID
+				});
+
+				to_user_id = $(this).attr('dataid');
+				to_user_name = $(this).attr('dataname');
+
+				$('.Smohan_Showface').click(function() {
+					content = $(this).parent('div').find('#Smohan_text1').val();
+					article_id = {:input('id')};
+					$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:1},function(data){
+						if(data.code == 1){
+							layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
+							setTimeout(function(){
+								window.location.reload();
+							}, 1500)
+						}else{
+							layer.alert(data.msg,{icon:5});
+						}
+					})
+				});
+
 			}else{
-				$('.comment-reply').css('display','none');
+				$('#Smohan_FaceBox1').css('display','none');
+				$('.comment-reply').remove();
+				
 				reply = 0;
 			}
 
 			$('.no_reply').click(function(){
-				$(this).parents('.comment-reply').toggle();
+				$('#Smohan_FaceBox1').css('display','none');
+				$(this).parents('.comment-reply').remove();
+				reply = 0;
 			})
 		})
-		$('.no_reply').click(function(){
-			$(this).parents('.comment-reply').toggle();
-		})
+
+
+		
 	});
 	
 

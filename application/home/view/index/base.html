@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>老王个人博客 — 一个站在java开发之路上的草根程序员个人博客网站</title>
+<title>小明个人博客 — 一个站在php开发之路上的草根程序员个人博客网站</title>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="keywords" content="个人博客,王风宇个人博客,个人博客系统,老王博客,王风宇">
-<meta name="description" content="Lao王博客系统，一个站在java开发之路上的草根程序员个人博客网站。">
+<meta name="keywords" content="个人博客,文明个人博客,个人博客系统,小明博客,文明">
+<meta name="description" content="小明个人博客 — 一个站在php开发之路上的草根程序员个人博客网站">
 <LINK rel="Bookmark" href="favicon.ico" >
 <LINK rel="Shortcut Icon" href="favicon.ico" />
 <!--[if lt IE 9]>
@@ -32,15 +32,15 @@
     <div class="navbar navbar-fixed-top">
         <div class="container cl">
             <a class="navbar-logo hidden-xs" href="index.html">
-                <img class="logo" src="" alt="Lao王博客" />
+                <img class="logo" src="" alt="小明博客" />
             </a>
-            <a class="logo navbar-logo-m visible-xs" href="index.html">Lao王博客</a>
+            <a class="logo navbar-logo-m visible-xs" href="index.html">小明博客</a>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);" onclick="showSide();">&#xe667;</a>
             <nav class="nav navbar-nav nav-collapse w_menu" role="navigation">
                 <ul class="cl">
-                    <li class="active"> <a href="index.html" data-hover="首页">首页</a> </li>
+                    <li class="active"> <a href="{:url('index/index/index')}" data-hover="首页">首页</a> </li>
                     <li> <a href="about.html" data-hover="关于我">关于我</a> </li>
-                    <li> <a href="mood.html" data-hover="碎言碎语">碎言碎语</a> </li>
+                    <li> <a href="{:url('chat/index')}" data-hover="碎言碎语">碎言碎语</a> </li>
                     <li><a href="article.html" data-hover="学无止尽">学无止尽</a></li>
                     <li> <a href="board.html" data-hover="留言板">留言板</a> </li>
                 </ul>
@@ -54,9 +54,9 @@
                             </ul>-->
                             <!-- onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" -->
                             <?php if(empty($name)){?>
-                            您好,<a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="img/qq.jpg" title="登入">请登录</a>
+                            您好,<a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
                             <?php }else{ ?>
-                            您好,{$name}<a href="{:url('home/user/logout')}"><img class="avatar size-S" src="img/qq.jpg" title="退出登录">退出登录</a>
+                            您好,{$name}<a href="{:url('home/user/logout')}"><img class="avatar size-S" src="/img/qq.jpg" title="退出登录">退出登录</a>
                             <?php }?>
                     </li>
                 </ul>
@@ -195,8 +195,8 @@
 
 <footer class="footer mt-20">
     <div class="container-fluid" id="foot">
-        <p>Copyright &copy; 2016-2017 www.wfyvv.com <br>
-            <a href="#" target="_blank">皖ICP备17002922号</a>  更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a><br>
+        <p>Copyright &copy; 2016-2017 www.aiyanxin.club <br>
+            <a href="http://icp.chinaz.com/aiyanxin.club" target="_blank">粤ICP备17115499号-1</a>  
         </p>
     </div>
 </footer>
