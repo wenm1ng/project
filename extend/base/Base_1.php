@@ -1,4 +1,5 @@
 <?php
+//后台首页父类控制器
 namespace base;
 
 use base\Errcode;

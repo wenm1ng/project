@@ -16,13 +16,14 @@ class Base_2 extends Controller
 	public $uid;
 	public $username;
 	public $ip;
+	public $key;
 
 	public function __construct(){
 		parent::__construct();
 		$this->uid = !empty(session::get('home_uid'))?session::get('home_uid'):"";
 		$this->username = !empty(session::get('home_username'))?session::get('home_username'):"";
 		$this->ip = $_SERVER['REMOTE_ADDR'];
-
+		$this->key = 'jfYnb51fubczY5Vkbnc';
 		//进行访客登记
 		$ipInfo = Db::name('ip')->where("ip_address = '{$this->ip}'")->find();
 

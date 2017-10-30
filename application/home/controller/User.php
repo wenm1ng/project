@@ -5,13 +5,13 @@
 	use think\Controller;
 	use think\Session;
 	use think\Validate;
-	use PHPMailer\PHPMailer;
-	use PHPMailer\Exception;
+	use phpmailer\PHPMailer;
+	use phpmailer\Exception;
 	use base\Base_2;
 
 	Class User extends Base_2{
-		
 
+		
 		//前台登录
 		public function login(){
 			if(empty(input('loginName'))){
@@ -27,6 +27,10 @@
 	            );
 	        $info = Db::name($table_name)->where($where)->find();
 	        if(!empty($info)){
+	        	if($info['status'] == 0){
+	        		$this->error('该账号还未激活！');exit;
+	        	}
+
                 if($info['password'] == input('password')){
                     session::set('home_uid',$info['user_id'],'home');
                     session::set('home_loginName',$info['loginName'],'home');
@@ -84,9 +88,9 @@
 			}
 
 			$data['user_name']   = input('user_name');
-			$data['create_time'] = date('Y-m-d');
+			$data['create_time'] = date('Y-m-d H:i:s');
 
-			if(Db::name('user_home')->insert($data)){
+			if($insertId = Db::name('user_home')->insertGetId($data)){
 				//第一种 失败
 				// //进行邮件发送
 				// $message = '你好';
@@ -102,43 +106,46 @@
 		  //       $content='恭喜你，邮件测试成功。';
 		  //       dump(send_mail($toemail,$name,$subject,$content));exit;
 
-				//第三种
+				//第三种 成功
 
 
 
-	        // $toemail = $data['email'];//定义收件人的邮箱
+	        $toemail = $data['email'];//定义收件人的邮箱
 
-	        // $mail = new PHPMailer();
+	        $mail = new phpmailer();
 
-	        // $mail->isSMTP();// 使用SMTP服务
-	        // $mail->CharSet = "utf8";// 编码格式为utf8，不设置编码的话，中文会出现乱码
-	        // $mail->Host = "smtp.163.com";// 发送方的SMTP服务器地址
-	        // $mail->SMTPAuth = true;// 是否使用身份验证
-	        // $mail->Username = "736038880@qq.com";// 发送方的QQ邮箱用户名，就是自己的邮箱名
-	        // $mail->Password = "xxxx";// 发送方的邮箱密码，不是登录密码,是qq的第三方授权登录码,要自己去开启,在邮箱的设置->账户->POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务 里面
-	        // $mail->SMTPSecure = "ssl";// 使用ssl协议方式,
-	        // $mail->Port = 465;// QQ邮箱的ssl协议方式端口号是465/587
+	        $mail->isSMTP();// 使用SMTP服务
+	        $mail->CharSet = "utf8";// 编码格式为utf8，不设置编码的话，中文会出现乱码
+	        $mail->Host = "smtp.163.com";// 发送方的SMTP服务器地址
+	        $mail->SMTPAuth = true;// 是否使用身份验证
+	        $mail->Username = "st_yanxin@163.com";// 发送方的QQ邮箱用户名，就是自己的邮箱名
+	        $mail->Password = "zhanshengziji99";// 发送方的邮箱密码，不是登录密码,是qq的第三方授权登录码,要自己去开启,在邮箱的设置->账户->POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务 里面
+	        $mail->SMTPSecure = "ssl";// 使用ssl协议方式,
+	        $mail->Port = 465;// QQ邮箱的ssl协议方式端口号是465/587
+	        $mail->IsHTML(false);
 
-         //    $mail->setFrom("xxxxx@qq.com","xxxx");// 设置发件人信息，如邮件格式说明中的发件人,
-         //    $mail->addAddress($toemail,'xxxxx');// 设置收件人信息，如邮件格式说明中的收件人
-         //    $mail->addReplyTo("xxxxx@qq.com","Reply");// 设置回复人信息，指的是收件人收到邮件后，如果要回复，回复邮件将发送到的邮箱地址
-         //    //$mail->addCC("xxx@163.com");// 设置邮件抄送人，可以只写地址，上述的设置也可以只写地址(这个人也能收到邮件)
-         //    //$mail->addBCC("xxx@163.com");// 设置秘密抄送人(这个人也能收到邮件)
-         //    //$mail->addAttachment("bug0.jpg");// 添加附件
+            $mail->setFrom("st_yanxin@163.com","小明博客");// 设置发件人信息，如邮件格式说明中的发件人,
+            $mail->addAddress($toemail, $data['user_name']);// 设置收件人信息，如邮件格式说明中的收件人
+            $mail->addReplyTo("st_yanxin@163.com","Reply（回复）");// 设置回复人信息，指的是收件人收到邮件后，如果要回复，回复邮件将发送到的邮箱地址
+            //$mail->addCC("xxx@163.com");// 设置邮件抄送人，可以只写地址，上述的设置也可以只写地址(这个人也能收到邮件)
+            //$mail->addBCC("xxx@163.com");// 设置秘密抄送人(这个人也能收到邮件)
+            //$mail->addAttachment("bug0.jpg");// 添加附件
 
+            //激活用的token
+            $token = md5('home'.'User'.'register'.date('Y-m-d').$this->key);
+            $userid = base64_encode($insertId).'gm5Bi';
+            $content = url('User/active?token='.$token.'&userid='.$userid);
 
-         //    $mail->Subject = "这是一个测试邮件";// 邮件标题
-         //    $mail->Body = "邮件内容是 <b>我就是玩玩</b>，哈哈哈！";// 邮件正文
-         //    //$mail->AltBody = "This is the plain text纯文本";// 这个是设置纯文本方式显示的正文内容，如果不支持Html方式，就会用到这个，基本无用
+            $mail->Subject = "小明博客激活邮件";// 邮件标题
+            $mail->Body = "你好：".$toemail."! 
+            你需要点击以下链接来激活你的小明博客账户: ".$_SERVER['HTTP_HOST'].$content;// 邮件正文
+            //$mail->AltBody = "This is the plain text纯文本";// 这个是设置纯文本方式显示的正文内容，如果不支持Html方式，就会用到这个，基本无用
 
-         //    if(!$mail->send()){// 发送邮件
-         //        echo "Message could not be sent.";
-         //        echo "Mailer Error: ".$mail->ErrorInfo;// 输出错误信息
-         //    }else{
-         //        echo '发送成功';
-         //    }
+            if(!$mail->send()){// 发送邮件
+            	log_error('send_fail'.date('Y-m-d'),$mail->ErrorInfo);// 记录错误信息
+            }
 
-				$this->success('注册成功');
+			$this->success('注册成功，请前往邮箱激活账号');	
 				
 			}else{
 				log_error('fail_sql',Db::getlastsql());
@@ -166,6 +173,27 @@
 				return 1;
 			}
 			
+		}
+
+
+		//激活账户
+		public function active(){
+			if(input('token') && input('userid')){
+				if(md5('home'.'User'.'register'.date('Y-m-d').$this->key) == input('token')){
+					$replace = str_replace('gm5Bi','',input('userid'));
+					$userid = base64_decode($replace);
+					// echo $userid;
+					if($result = Db::name('user_home')->where("user_id = '{$userid}'")->update(array('status'=>1))){
+						$this->success('激活成功！','index/index/index');
+					}else{
+						$this->error('无效操作！');
+					}
+				}else{
+					$this->error('无效操作！');
+				}
+			}else{
+				$this->error('无效操作！');
+			}
 		}
 	}
  ?>

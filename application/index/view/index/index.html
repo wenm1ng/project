@@ -29,55 +29,45 @@
         </div>
         <div class="art_content">
             <ul class="index_arc">
-                {volist name="article_list" id="vo"}
-                <li class="index_arc_item">
-                    <a href="#" class="pic">
-                        <img class="lazyload" data-original="temp/art.jpg" alt="应该选" />
-                    </a>
-                    <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a></h4>
-                    <div class="date_hits">
-                        <span>{$vo.create_username}</span>
-                        <span>{$vo.create_time}</span>
-                        <!-- <span><a href="/article-lists/10.html">程序人生</a></span> -->
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
-                        <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span class="cy_cmt_count">20</span></p>
-                    </div>
-                    <div class="desc">{$vo.content}</div>
-                </li>
+                {volist name="article_list.data" id="vo"}
+                    
+                {empty name="vo.img"}
+                    <li class="index_arc_item no_pic">
+                        <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a></h4>
+                        <div class="date_hits">
+                            <span>{$vo.create_username}</span>
+                            <span>{$vo.create_time}</span>
+                            <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> {$vo.read_num}</p>
+                            <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span id="sourceId::105" class="cy_cmt_count">{$vo.comment_count}</span></p>
+                        </div>
+                        <div class="desc">{$vo.content}</div>
+                    </li>
+                    {else /}
+                    <li class="index_arc_item">
+                        <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}" class="pic">
+                            <img class="lazyload" data-original="temp/art.jpg" src="{$vo.img}" alt="无法加载该图片" />
+                        </a>
+                        <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'] )}">{$vo.title}</a></h4>
+                        <div class="date_hits">
+                            <span>{$vo.create_username}</span>
+                            <span>{$vo.create_time}</span>
+                            <!-- <span><a href="/article-lists/10.html">程序人生</a></span> -->
+                            <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> {$vo.read_num}</p>
+                            <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span class="cy_cmt_count">{$vo.comment_count}</span></p>
+                        </div>
+                        <div class="desc">{$vo.content}</div>
+                    </li>
+                {/empty}
                 {/volist}
                 
-                <li class="index_arc_item no_pic">
-                    <h4 class="title"><a href="/article/5.html">个人博客应该选择什么样的域名和域名后缀</a></h4>
-                    <div class="date_hits">
-                        <span>老王</span>
-                        <span>2个月前</span>
-                        <span><a href="/article-lists/10.html">建站</a></span>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276 °</p>
-                        <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span id="sourceId::105" class="cy_cmt_count">20</span></p>
-                    </div>
-                    <div class="desc"> 不论搭建什么样的网站，选择一个好的域名都是很有必要的，选择一个好的域名对网站的意义也是不言而喻的。每一个网站都有之对应的域名，就像人的名字一样。每个人都想自己有个好听的名字，网站也是一样。一个网站可以有多个域名，但是一个域名只能对应一个网站。&nbsp;一、域名要好记，方便输入&nbsp; &nbsp; &nbsp; &nbsp;域名本身的意义就是为了人们方便记忆才使用的，不然都用IP地址就好了。所以，网站域名一定要选择好记忆的。因为域名是</div>
-                </li>
-                
-                <li class="index_arc_item">
-                <a href="/article/4" class="pic">
-                    <img class="lazyload" data-original="temp/art.jpg" alt="centos 6.5 nginx安装及配置" >
-                </a>
-            <h4 class="title"><a href="/article/4">centos 6.5 nginx安装及配置</a></h4>
-            <div class="date_hits">
-                <span>老王</span>
-                <span>2017-3-15</span>
-                <span>
-                    <a href="/article?t=1">程序人生</a>
-                </span>
-                <p class="hits"><i class="Hui-iconfont" title="点击量"></i> 13° </p>
-                <p class="commonts"><i class="Hui-iconfont" title="评论"></i> <span class="cy_cmt_count">0</span></p>
+            </ul>
+            <div class="pagination" style="width:100%;">
+                {$_page->render()}
             </div>
-            <div class="desc">linux环境中nginx安装及配置简要概述。。。</div>
-        </ul>
-        <div class="text-c mb-20" id="moreBlog">
-            <a class="btn  radius btn-block " href="javascript:;" onclick="moreBlog();">点击加载更多</a>
+        <!-- <div class="text-c mb-20" id="moreBlog">
+            <a class="btn  radius btn-block road" href="javascript:;">点击加载更多</a>
             <a class="btn  radius btn-block hidden" href="javascript:;">加载中……</a>
-        </div>
+        </div> -->
         </div>
   </div>
   
@@ -123,32 +113,18 @@
             </div>
             <div class="tab-category-item">
                 <ul class="index_recd">
+                    {volist name="article_hot" id="vo"}
                     <li>
-                        <a href="#">阻止a标签href默认跳转事件</a>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
+                        <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> {$vo.read_num} </p>
                     </li>
-                    <li >
-                        <a href="#">PHP面试题汇总</a>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-                    </li>
-                    <li >
-                        <a href="#">阻止a标签href默认跳转事件</a>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-                    </li>
-                    <li >
-                        <a href="#">阻止a标签href默认跳转事件</a>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-                    </li>
-                    <li >
-                        <a href="#">PHP面试题汇总</a>
-                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> 276 </p>
-                    </li>
+                    {/volist}
                 </ul>
             </div>
         </div>
         
         <!--点击排行-->
-        <div class="bg-fff box-shadow radius mb-20">
+        <!-- <div class="bg-fff box-shadow radius mb-20">
             <div class="tab-category">
                 <a href=""><strong>点击排行</strong></a>
             </div>
@@ -184,7 +160,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         
         <!--标签-->
         <div class="bg-fff box-shadow radius mb-20">
@@ -255,4 +231,51 @@
   </div>
   
 </section>
+{/block}
+{block name="script"}
+<script>
+    //获取滚动条当前的位置
+    function getScrollTop() {
+    var scrollTop = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+        scrollTop = document.documentElement.scrollTop;
+    }else if (document.body) {
+        scrollTop = document.body.scrollTop;
+    }
+    
+        return scrollTop;
+    }
+
+    //获取当前可是范围的高度
+    function getClientHeight() {
+        var clientHeight = 0;
+    if (document.body.clientHeight && document.documentElement.clientHeight) {
+        clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+    }else {
+        clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+        return clientHeight;
+    }
+
+    //获取文档完整的高度
+    function getScrollHeight() {
+        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    } 
+
+    //初始化页数
+    page = 0;
+
+    window.onscroll = function () {
+        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+
+            // var newnode = document.createElement("a");
+            // newnode.setAttribute("href", "#");
+            // newnode.innerHTML = "new item";
+            // document.body.appendChild(newnode);
+            // var newline = document.createElement("br");
+            // document.body.appendChild(newline); 
+            $.post("{:url('index/addcontent')}",{page:page},)
+        }
+    } 
+</script>
 {/block}
