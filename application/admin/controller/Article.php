@@ -67,7 +67,7 @@
 				$this->success('删除成功');
 			}else{
 				log_error('fail_sql'.date('Y-m-d'), Db::getlastsql());
-				$this->success('删除失败');
+				$this->error('删除失败');
 			}
 		}
 	}

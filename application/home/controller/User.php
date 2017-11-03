@@ -8,10 +8,19 @@
 	use phpmailer\PHPMailer;
 	use phpmailer\Exception;
 	use base\Base_2;
+	use think\Request;
 
 	Class User extends Base_2{
 
-		
+		public $uid;
+		public $username;
+
+		public function __construct(){
+			parent::__construct();
+			$this->uid = session::get('home_uid');
+			$this->username = session::get('home_username');
+		}
+
 		//前台登录
 		public function login(){
 			if(empty(input('loginName'))){
@@ -32,10 +41,10 @@
 	        	}
 
                 if($info['password'] == input('password')){
-                    session::set('home_uid',$info['user_id'],'home');
-                    session::set('home_loginName',$info['loginName'],'home');
-                    session::set('home_username',$info['user_name'],'home');
-                    session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'),'home');
+                    session::set('home_uid',$info['user_id']);
+                    session::set('home_loginName',$info['loginName']);
+                    session::set('home_username',$info['user_name']);
+                    session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
                     
 
                     $this->success('登录成功','index/index/index');
@@ -50,8 +59,11 @@
 		//前台退出登录
 		public function logout(){
 		 	// $this->model = new AdminUserModel();
-	        session(null,'home');
-	        if (!session::has('home_uid','home')) {
+	        session('home_uid',null);
+    		session('home_loginName',null);
+    		session('home_username',null);
+    		session('home_sign',null);
+	        if (!session::has('home_uid')) {
 	            // return json(self::sucres());
 	            $this->success('退出登录成功!',url('index/index/index'));
 	        } else {
@@ -109,6 +121,7 @@
 				//第三种 成功
 
 
+			$momo = $data['phpmailer'];
 
 	        $toemail = $data['email'];//定义收件人的邮箱
 
@@ -195,5 +208,96 @@
 				$this->error('无效操作！');
 			}
 		}
+
+		//个人中心页面
+		public function center(){
+			if(!empty($this->uid)){
+				if(Request::instance()->isPost()){
+					//修改个人信息
+					if(empty(input('img'))){
+						$this->error('请上传头像');exit;
+					}
+					if(empty(input('username'))){
+						$this->error('请填写昵称');exit;
+					}
+
+					$data['img'] 			= input('img');
+					$data['user_name'] 		= input('username');
+					$data['update_time'] 	= date('Y-m-d H:i:s');
+
+					if(Db::name('user_home')->where("user_id = '{$this->uid}'")->update($data)){
+						session::set('home_username',input('username'));
+						$this->success('修改成功');
+					}else{
+						$this->error('修改失败');
+					}
+				}else{
+					//获取用户相关信息
+
+					$info = Db::name('user_home')->where("user_id = '{$this->uid}'")->find();
+					$meta_title = '个人信息';
+					return view('center',['meta_title'=>$meta_title,'info'=>$info]);
+				}
+			}else{
+				$this->error('您还未登录，无法查看该页面','index/index/index');
+			}
+			
+		}
+
+		//修改密码页面
+		public function password(){
+			if(!empty($this->uid)){
+				if(Request::instance()->isPost()){
+					//修改个人信息
+					if(empty(input('originpsw'))){
+						$this->error('请输入原密码');
+					}
+					if(empty(input('newpsw'))){
+						$this->error('请输入新密码');
+					}
+					if(empty(input('confirmpsw'))){
+						$this->error('请输入确认密码');
+					}
+					if(input('newpsw') != input('confirmpsw')){
+						$this->error('两次输入的密码不一致');
+					}
+
+					if(strlen(input('newpsw')) < 6){
+						$this->error('密码长度必须大于6位数');
+					}
+
+
+					$info = Db::name('user_home')->where("user_id = '{$this->uid}'")->find();
+
+					if(strlen(input('newpsw')) == $info['password']){
+						$this->error('新密码不能和原密码相同');
+					}
+					if(input('originpsw') != $info['password']){
+						$this->error('原密码输入不正确');
+					}
+
+					$data['password'] = input('newpsw');
+					$data['update_time'] = date('Y-m-d H:i:s');
+					if(Db::name('user_home')->where("user_id = '{$this->uid}'")->update($data)){
+		        		session('home_uid',null);
+		        		session('home_loginName',null);
+		        		session('home_username',null);
+		        		session('home_sign',null);
+
+						$this->success('修改成功','index/index/index');
+					}else{
+						$this->error('修改失败');
+					}
+				}else{
+					//页面
+					$meta_title = '修改密码';
+					return view('password',['meta_title'=>$meta_title]);
+				}
+			}else{
+				$this->error('您还未登录，无法查看该页面','index/index/index');
+			}
+		}
 	}
+
+	
  ?>

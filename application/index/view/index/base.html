@@ -19,7 +19,9 @@
 <link rel="stylesheet" type="text/css" href="/plugin/Hui-iconfont/1.0.8/iconfont.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/pifu/pifu.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" /> -->
 <link rel="stylesheet" href="/css/page.css">
+<!-- <script src="/js/bootstrap.min.js"></script> -->
 
 
 {block name="style"}{/block}
@@ -57,7 +59,7 @@
                             <?php if(empty($name)){?>
                             您好,<a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
                             <?php }else{ ?>
-                            您好,{$name}<a href="{:url('home/user/logout')}"><img class="avatar size-S" src="/img/qq.jpg" title="退出登录">退出登录</a>
+                            您好,<a href="{:url('home/User/center')}">{$name}</a><a href="{:url('home/user/logout')}"><img class="avatar size-S" src="/img/qq.jpg" title="退出登录">退出登录</a>
                             <?php }?>
                     </li>
                 </ul>
@@ -161,7 +163,6 @@
                     <input name="phone" class="form-control phone" type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/> 
                    </div> 
                   </div> 
-                  <!-- <div><img src="{:captcha_src()}" class="verify" onclick="javascript:this.src='{:captcha_src()}?rand='+Math.random()" ></div> -->
                   <!-- <div class="form-group col-sm-12" style="margin-top:20px"> 
                    <label class="col-sm-5 control-label">身份证号：</label> 
                    <div class="col-sm-5"> 

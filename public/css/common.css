@@ -430,3 +430,5 @@ ul.infos p {
         -moz-transform: translateY(0)
     }
 }
+
+.form-group-separator + div{margin-top:10px;margin-bottom: 10px}

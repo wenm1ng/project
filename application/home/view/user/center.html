@@ -1,0 +1,105 @@
+{extend name="index/base" /}
+{block name="style"}
+{/block}
+{block name="body"}
+	<section class="container" style="margin-bottom:30%">
+	    <div class="container-fluid">
+	        <div class="about">
+	            <div class="tab-content">
+	            	<a href="{:url('center')}" class="btn">修改信息</a>
+	            	<a href="{:url('password')}" class="btn">修改密码</a>
+				<!-- 修改密码表单 -->
+				<form action="{:url('center')}" method="post" class="form-horizontal">
+					<!-- <div class="form-item">
+						<label class="item-label">密码：<span class="check-tips">（请输入密码）</span></label>
+						<div class="controls">
+							<input type="password" name="password" class="text input-large"  autocomplete="off"/>
+						</div>
+					</div> -->
+					<label class="item-label">头像：</label>
+					
+			    	<div class="input-group col-sm-12 upload_img">
+			    		<div class="col-sm-3 imgg" style="margin-top:10px">
+			    			{empty name="info.img"}
+			    				<img class="viewer-item" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;" src="/images/user-4.png" width="200px">
+			    				{else /}
+			    				<img class="viewer-item" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;" src="{$info.img}" width="200px">
+			    				<input type="hidden" name="img" value="{$info.img}">
+			    			{/empty}
+			    			
+			    		</div>
+			    	</div>
+			        <div class="form-group-separator"></div>
+
+			        <div class="form-item">
+			            
+			            <div class="col-sm-2">
+			                <div id="upload" class="input-group col-sm-12">
+			                	
+			                </div>
+			            </div>
+			        </div>
+			        <div class="form-group-separator"></div>
+					
+					<div class="input-group col-sm-12">
+						<label class="item-label">昵称：</label>
+						<input type="text" name="username" value="{$info.user_name}" id="" class="text input-large form-control">
+					</div>
+			        <div class="form-group-separator"></div>
+
+					<div class="input-group col-sm-12">
+						<div class="form-item">
+							<a class="btn submit-btn ajax-post reset" target-form="form-horizontal">确 认</a>
+						</div>
+					</div>
+				</form>
+				</div>
+	        </div>
+	    </div>
+	</section>
+{/block}
+{block name="script"}
+	<script src="/huploadify/viewimg.js"></script>
+	<script src="/huploadify/jquery.Huploadify.js"></script>
+	<script>
+		function delimg(obj){
+	        $(obj).prev().remove();
+	        $(obj).remove();
+	    }
+		//上传图片
+	    $('#upload').Huploadify({
+	        auto:true,
+	        fileTypeExts:'*.jpg; *.png; *.gif;',
+	        multi:false,//是否允许选择多个文件
+	        fileSizeLimit:4096,//允许上传的文件大小，单位KB
+	        fileObjName: 'download',//在后端接受文件的参数名称，如PHP中的$_FILES['file']
+	        buttonText: '上传头像',//上传按钮上的文字
+	        uploader:"{:url('admin/File/upload')}",
+	        onUploadStart:function(xhr){
+	            var num = $('.img_li').length;
+	            if (num == 1) {
+	                layer.alert("头像只能上传一张！",{icon:5});
+	                return false;
+	            }else{
+	                return true;
+	            }
+
+	        },
+	        onUploadComplete:function(data){
+
+	            var data = $.parseJSON(data);
+	            var src = '';
+	            if(data.status){
+	            	// img = $(".imgg").clone();
+	            	$(".imgg").remove();
+	                src = '__ROOT__/uploads/' + data.savepath;
+	                $('.upload_img').append(
+	                    '<div class="img_li" style="margin-top:10px"><input type="hidden" name="img" value="__ROOT__' + src + '"><img class="viewer-item" width="200px" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;" src="__ROOT__' + src + '"/></div><a class="del_span" href="javascript:;" onclick="delimg(this)">删除</a>'
+	                );
+	            } else {
+	                layer.alert(data.info,{icon:5});
+	            }
+	        }
+	    });
+	</script>
+{/block}
