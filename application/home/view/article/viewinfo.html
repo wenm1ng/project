@@ -55,12 +55,32 @@
 							<div class="panel-body" style="margin: 0 3%;">
                     <div class="mb-20">
                     	<ul class="commentList">
+                    		<!-- <div style="border:1px solid #ccc;padding:20px">
+                    			<li class="item cl comment"> 
+	                    			<a href="#" ><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+	                                <div class="comment-main">
+	                                    <header class="comment-header">
+	                                        <div class="comment-meta">
+	                                        	<a class="comment-author" href="#">ggg</a>
+	                                            <time title="bbb" datetime="2014-08-31T03:54:20" class="f-r"></time>
+	                                        </div>
+	                                    </header>
+	                                    <div class="comment-body">
+	                                        <div class="comment-content">bbbvbvb</div>
+	                                    	<a href="javascript:void(0)" style="float:right;" dataid="1" dataname="" class="reply">回复</a>
+	                                    </div>
+	                                </div>
+	                                
+	                            </li>
+                    		</div> -->
+                    		
                     		{empty name="article_list.data"}
                     			<span>还没有小伙伴评论，快来抢沙发啦~~！</span>
                     		{else /}
                     			{volist name="article_list.data" id="vo"}
-	                    		{eq name="vo.is_reply" value="0"}
-		                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
+
+	                    		<div style="border:1px solid #ccc;padding:20px;margin:20px 0px" class="out-div">
+		                            <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='vo.img'}/images/user-4.png{else /}{$vo.img}{/empty}"></i></a>
 		                                <div class="comment-main">
 		                                    <header class="comment-header">
 		                                        <div class="comment-meta">
@@ -70,27 +90,35 @@
 		                                    </header>
 		                                    <div class="comment-body">
 		                                        <div class="comment-content"> {$vo.content}</div>
-		                                    	<a href="javascript:void(0)" style="float:right;" dataid="{$vo.user_id}" dataname="{$vo.user_name}" class="reply" dataid="{$i}">回复</a>
+	                                        	{if condition="$Think.session.home_uid neq $vo.user_id"}
+													<a href="javascript:void(0)" style="float:right;" dataid="{$vo.user_id}" dataname="{$vo.user_name}" commentid="{$vo.comment_id}"  class="reply out-reply" dataid="{$i}">回复</a>
+		                                        {/if}
+		                                    	
 		                                    </div>
 		                                </div>
 		                            </li>
-	                            {else /}
-	                            	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="http://qzapp.qlogo.cn/qzapp/101388738/1CF8425D24660DB8C3EBB76C03D95F35/100"></i></a>
-		                                <div class="comment-main">
-		                                    <header class="comment-header">
-		                                        <div class="comment-meta">
-		                                        	{eq name="vo.user_id" value="0"}<span class="comment-author">{$vo.user_name} 回复：{$vo.to_user_name}</span>{else /}<a class="comment-author" href="#">{$vo.user_name} 回复：{$vo.to_user_name}</a>{/eq}
+		                            {volist name="vo.child" id="val"}
+		                            	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='val.img'}/images/user-4.png{else /}{$val.img}{/empty}"></i></a>
+			                                <div class="comment-main">
+			                                    <header class="comment-header">
+			                                        <div class="comment-meta">
+			                                        	{eq name="val.user_id" value="0"}<span class="comment-author">{$val.user_name} 回复：{$val.to_user_name}</span>{else /}<a class="comment-author" href="#">{$val.user_name} 回复：{$val.to_user_name}</a>{/eq}
 
-		                                            <time title="{$vo.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$vo.create_time}</time>
-		                                        </div>
-		                                    </header>
-		                                    <div class="comment-body">
-		                                        <div class="comment-content"> {$vo.content}</div>
-		                                    	<a href="javascript:void(0)" style="float:right;" dataid="{$vo.user_id}" dataname="{$vo.user_name}" class="reply">回复</a>
-		                                    </div>
-		                                </div>
-		                            </li>
-	                            {/eq}
+			                                            <time title="{$val.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$val.create_time}</time>
+			                                        </div>
+			                                    </header>
+			                                    <div class="comment-body">
+			                                        <div class="comment-content"> {$val.content}</div>
+		                                        	{if condition="$Think.session.home_uid neq $val.user_id"}
+			                                    		<a href="javascript:void(0)" style="float:right;" dataid="{$val.user_id}" dataname="{$val.user_name}" class="reply">回复</a>
+			                                    	{/if}
+			                                    </div>
+			                                </div>
+			                            </li>
+		                            {/volist}
+		                        </div>
+	                           
+
 	                            {/volist}
                     		{/empty}
                     		
@@ -118,7 +146,7 @@
 
 						
                         <div class="text-r mt-10">
-                            <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" > 发表评论</button>
+                            <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" dataid="comment"> 发表评论</button>
                         </div>
                     </div>
                     <!--用于回复-->
@@ -196,20 +224,23 @@
 
 		//Demo测试
 		$('.Smohan_Showface').click(function() {
-			content = $('.smohan_text').val();
-			to_user_id = $('#create_userid').val();
-			to_user_name = $('#create_username').val();
-			article_id = {:input('id')};
-			$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
-				if(data.code == 1){
-					layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
-					setTimeout(function(){
-						window.location.reload();
-					}, 1500)
-				}else{
-					layer.alert(data.msg,{icon:5});
-				}
-			})
+			if($(this).attr('dataid') == 'comment'){
+				content = $('.smohan_text').val();
+				to_user_id = $('#create_userid').val();
+				to_user_name = $('#create_username').val();
+				article_id = {:input('id')};
+				$.post("{:url('viewinfo')}",{content:content,to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
+					if(data.code == 1){
+						layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
+						setTimeout(function(){
+							window.location.reload();
+						}, 1500)
+					}else{
+						layer.alert(data.msg,{icon:5});
+					}
+				})
+			}
+			
 		});
 
 		reply = 0;
@@ -235,11 +266,12 @@
 
 				to_user_id = $(this).attr('dataid');
 				to_user_name = $(this).attr('dataname');
-
+				comment_id = $(this).parents('.out-div').find('.out-reply').attr('commentid');
+				//回复
 				$('.Smohan_Showface').click(function() {
 					content = $(this).parent('div').find('#Smohan_text1').val();
 					article_id = {:input('id')};
-					$.post("{:url('viewinfo')}",{content:content,user_id:{$userid},to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:1},function(data){
+					$.post("{:url('reply')}",{content:content,link_comment_id:comment_id,to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:1},function(data){
 						if(data.code == 1){
 							layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
 							setTimeout(function(){

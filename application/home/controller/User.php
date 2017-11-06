@@ -44,6 +44,7 @@
                     session::set('home_uid',$info['user_id']);
                     session::set('home_loginName',$info['loginName']);
                     session::set('home_username',$info['user_name']);
+                    session::set('home_img',$info['img']);
                     session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
                     
 
@@ -63,6 +64,7 @@
     		session('home_loginName',null);
     		session('home_username',null);
     		session('home_sign',null);
+			session('home_img',null);    		
 	        if (!session::has('home_uid')) {
 	            // return json(self::sucres());
 	            $this->success('退出登录成功!',url('index/index/index'));

@@ -54,10 +54,15 @@
                                 <li><a href="/app/loginOut">退出</a></li>
                             </ul>-->
                             <!-- onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" -->
+
                             {empty name="Think.session.home_username"}
-                            您好,<a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
+                            您好,<?php if(strpos($_SERVER['PHP_SELF'] , '/home/article/viewinfo')){;?>
+                              <a href="{:url('index/index/index')}" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
+                            <?php }else{?>
+                              <a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
+                            <?php }?>
                             {else /}
-                            您好,<a href="{:url('User/center')}">{$Think.session.home_username}</a><a href="{:url('home/user/logout')}"><img class="avatar size-S" src="/img/qq.jpg" title="退出登录">退出登录</a>
+                            <a href="{:url('User/center')}"><img class="avatar size-S" src="{empty name='Think.session.home_img'}/images/user-4.png{else /}{$Think.session.home_img}{/empty}" title="个人中心"></a>您好,<a href="{:url('User/center')}">{$Think.session.home_username},</a><a href="{:url('home/user/logout')}">退出登录</a>
                             {/empty}
                     </li>
                 </ul>
