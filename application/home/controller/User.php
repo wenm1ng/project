@@ -9,6 +9,7 @@
 	use phpmailer\Exception;
 	use base\Base_2;
 	use think\Request;
+	use verify\Verify;
 
 	Class User extends Base_2{
 
@@ -47,7 +48,22 @@
                     session::set('home_img',$info['img']);
                     session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
                     
+                    //登录访问记录
+                    $login_info = Db::name('login')->where("user_id = '{$info['user_id']}'")->find();
 
+                    if(empty($login_info)){
+                    	//第一次登录本博客
+                    	$data['user_id'] = $info['user_id'];
+                    	$data['user_name'] = $info['user_name'];
+                    	$data['create_time'] = date('Y-m-d H:i:s');
+                    	$data['update_time'] = date('Y-m-d H:i:s');
+                    	Db::name('login')->insert($data);
+                    }else{
+                    	//非第一次登录
+                    	$data['user_name'] = $info['user_name'];
+                    	$data['update_time'] = date('Y-m-d H:i:s');
+                    	Db::name('login')->where("user_id = '{$info['user_id']}'")->update($data);
+                    }
                     $this->success('登录成功','index/index/index');
                 }else{
                     $this->error('密码错误');
@@ -74,6 +90,8 @@
 	        }
 		}
 
+		
+
 		//前台注册用户
 		public function register(){
 			// $rule = [
@@ -88,6 +106,8 @@
 			//     'phone.regex'  		=> '电话格式错误',
 			//     'email'        		=> '邮箱格式错误',
 			// ];
+
+
 			$data = [
 			    'loginName' 	=> input('loginName'),
 			    'password'   	=> input('password'),
@@ -95,11 +115,11 @@
 			    'phone' 		=> input('phone'),
 			];
 
-			$validate = new Validate();
-			// $validate->scene('edit', ['loginName', 'password','email','phone']);
-			if(!$result = $validate->scene('add')->check($data)){
-				$this->error($validate->getError());
-			}
+			// $validate = new Validate();
+			// // $validate->scene('edit', ['loginName', 'password','email','phone']);
+			// if(!$result = $validate->scene('add')->check($data)){
+			// 	$this->error($validate->getError());
+			// }
 
 			$data['user_name']   = input('user_name');
 			$data['create_time'] = date('Y-m-d H:i:s');
@@ -235,6 +255,8 @@
 					}
 				}else{
 					//获取用户相关信息
+			  //       $captcha = new Captcha();
+					// $code = $captcha->entry();
 
 					$info = Db::name('user_home')->where("user_id = '{$this->uid}'")->find();
 					$meta_title = '个人信息';

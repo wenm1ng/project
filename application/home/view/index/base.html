@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="keywords" content="个人博客,文明个人博客,个人博客系统,小明博客,文明">
+<meta name="keywords" content="php,文明个人博客,个人博客系统,小明博客,php程序员">
 <meta name="description" content="小明个人博客 — 一个站在php开发之路上的草根程序员个人博客网站">
 <LINK rel="Bookmark" href="favicon.ico" >
 <LINK rel="Shortcut Icon" href="favicon.ico" />
@@ -40,10 +40,10 @@
             <nav class="nav navbar-nav nav-collapse w_menu" role="navigation">
                 <ul class="cl">
                     <li class="active"> <a href="{:url('index/index/index')}" data-hover="首页">首页</a> </li>
-                    <li> <a href="about.html" data-hover="关于我">关于我</a> </li>
+                    <li> <a href="{:url('chat/about')}" data-hover="关于我">关于我</a> </li>
                     <li> <a href="{:url('chat/index')}" data-hover="碎言碎语">碎言碎语</a> </li>
-                    <li><a href="article.html" data-hover="学无止尽">学无止尽</a></li>
-                    <li> <a href="board.html" data-hover="留言板">留言板</a> </li>
+                    <li><a href="{:url('chat/study')}" data-hover="学无止尽">学无止尽</a></li>
+                    <li> <a href="{:url('chat/board')}" data-hover="留言板">留言板</a> </li>
                 </ul>
             </nav>
             <nav class="navbar-nav navbar-userbar hidden-xs hidden-sm " style="top: 0;">
@@ -166,6 +166,7 @@
                     <input name="phone" class="form-control phone" type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/> 
                    </div> 
                   </div> 
+
                   <!-- <div class="form-group col-sm-12" style="margin-top:20px"> 
                    <label class="col-sm-5 control-label">身份证号：</label> 
                    <div class="col-sm-5"> 

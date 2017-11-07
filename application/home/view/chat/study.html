@@ -1,0 +1,263 @@
+{extend name="index/base"/}
+{block name="body"}
+<!-- <nav class="breadcrumb">
+  <div class="container"> <i class="Hui-iconfont">&#xe67f;</i> <a href="{:url('index/index/index')}" class="c-primary">首页</a> <span class="c-gray en">&gt;</span>  <span class="c-gray">文章</span> <span class="c-gray en">&gt;</span>  <span class="c-gray">{$meta_title}</span></div>
+</nav> -->
+<section class="container pt-20">
+    <!--<div class="Huialert Huialert-info"><i class="Hui-iconfont">&#xe6a6;</i>成功状态提示</div>-->
+  <!--left-->
+  <div class="col-sm-9 col-md-9">
+        
+        <div class="mt-20 bg-fff box-shadow radius mb-5">
+            <div class="tab-category">
+                <a href=""><strong class="current">最新发布</strong></a>
+            </div>
+        </div>
+        <div class="art_content">
+            <ul class="index_arc">
+                {volist name="article_list.data" id="vo"}
+                    
+                {empty name="vo.img"}
+                    <li class="index_arc_item no_pic">
+                        <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a></h4>
+                        <div class="date_hits">
+                            <span>{$vo.create_username}</span>
+                            <span>{$vo.create_time}</span>
+                            <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> {$vo.read_num}</p>
+                            <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span id="sourceId::105" class="cy_cmt_count">{$vo.comment_count}</span></p>
+                        </div>
+                        <div class="desc">{$vo.content}</div>
+                    </li>
+                    {else /}
+                    <li class="index_arc_item">
+                        <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}" class="pic">
+                            <img class="lazyload" data-original="temp/art.jpg" src="{$vo.img}" alt="无法加载该图片" />
+                        </a>
+                        <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'] )}">{$vo.title}</a></h4>
+                        <div class="date_hits">
+                            <span>{$vo.create_username}</span>
+                            <span>{$vo.create_time}</span>
+                            <!-- <span><a href="/article-lists/10.html">程序人生</a></span> -->
+                            <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> {$vo.read_num}</p>
+                            <p class="commonts"><i class="Hui-iconfont" title="点击量">&#xe622;</i> <span class="cy_cmt_count">{$vo.comment_count}</span></p>
+                        </div>
+                        <div class="desc">{$vo.content}</div>
+                    </li>
+                {/empty}
+                {/volist}
+                
+            </ul>
+            <div class="pagination" style="width:100%;">
+                {$_page->render()}
+            </div>
+        <!-- <div class="text-c mb-20" id="moreBlog">
+            <a class="btn  radius btn-block road" href="javascript:;">点击加载更多</a>
+            <a class="btn  radius btn-block hidden" href="javascript:;">加载中……</a>
+        </div> -->
+        </div>
+  </div>
+  
+  <!--right-->
+  <div class="col-sm-3 col-md-3">
+    
+    <!--站点声明-->
+        <div class="panel panel-default mb-20">
+            <div class="panel-body">
+                <i class="Hui-iconfont" style="float: left;">&#xe62f;&nbsp;</i>
+                <div class="slideTxtBox">
+                    <div class="bd">
+                        <ul>
+                            <li><a href="javascript:void(0);">欢迎访问小明博客！在这里，你将拥有全世界</a></li>
+                            <li><a href="javascript:void(0);">内容如有侵犯，请立即联系管理员删除</a></li>
+                            <li><a href="javascript:void(0);">本站内容仅供学习和参阅，不做任何商业用途</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <!--博主信息-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>博主信息</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <ul class="index_recd">
+                    <li class="index_recd_item"><i class="Hui-iconfont">&#xe653;</i>姓名：文明</li>
+                    <li class="index_recd_item"><i class="Hui-iconfont">&#xe70d;</i>职业： PHPWeb开发</li>
+                    <li class="index_recd_item"><i class="Hui-iconfont">&#xe63b;</i>邮箱：<a href="#">st-m1ng@163.com</a></li>
+                    <li class="index_recd_item"><i class="Hui-iconfont">&#xe671;</i>定位：广东 &middot; 深圳</li>
+                </ul>
+            </div>
+        </div>
+    
+    
+    <!--热门推荐-->
+    <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>热门推荐</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <ul class="index_recd">
+                    {volist name="article_hot" id="vo"}
+                    <li>
+                        <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe622;</i> {$vo.read_num} </p>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+        
+        <!--点击排行-->
+        <!-- <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>点击排行</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <ul class="index_recd clickTop">
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                    <li>
+                        <a href="#">AJAX的刷新和前进后退问题解决</a>
+                        <p class="hits"><i class="Hui-iconfont" title="点击量">&#xe6c1;</i> 276° </p>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+        
+        <!--标签-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>标签云</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <div class="tags"> <a href="http://www.h-ui.net/">H-ui前端框架</a> <a href="http://www.h-ui.net/websafecolors.shtml">Web安全色</a> <a href="http://www.h-ui.net/Hui-4.4-Unslider.shtml">jQuery轮播插件</a> <a href="http://idc.likejianzhan.com/vhost/korea_hosting.php">韩国云虚拟主机</a> <a href="http://www.h-ui.net/bug.shtml">IEbug</a> <a href="http://www.h-ui.net/site.shtml">IT网址导航</a> <a href="http://www.h-ui.net/icon/index.shtml">网站常用小图标</a> <a href="http://www.h-ui.net/tools/jsformat.shtml">web工具箱</a> <a href="http://www.h-ui.net/bg/index.shtml">网站常用背景素材</a> <a href="http://www.h-ui.net/yuedu/chm.shtml">H-ui阅读</a> <a href="http://www.h-ui.net/easydialog-v2.0/index.html">弹出层插件</a> <a href="http://www.h-ui.net/SuperSlide2.1/demo.html">SuperSlide插件</a> <a href="http://www.h-ui.net/TouchSlide1.1/demo.html">TouchSlide</a></div>
+            </div>
+        </div>
+        <!--图片-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>打赏博主</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <span>如果觉得博主的内容还不错，您可以打赏博主</span>
+                <img data-original="/images/weixin.jpg" class="img-responsive lazyload" alt="响应式图片">
+            </div>
+        </div>
+        
+        <!--友情链接-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>隔壁邻居</strong></a>
+            </div>
+            <div class="tab-category-item">
+                <span><i class="Hui-iconfont">&#xe6f1;</i><a href="http://www.baidu.com" class="btn-link">百度</a></span>
+                <span><i class="Hui-iconfont">&#xe6f1;</i><a href="http://www.taobao.com" class="btn-link">淘宝</a></span>
+                <span><i class="Hui-iconfont">&#xe6f1;</i><a href="http://www.qq.com" class="btn-link">腾讯</a></span>
+                <span><i class="Hui-iconfont">&#xe6f1;</i><a href="http://www.muke.com" class="btn-link">慕课网</a></span>
+                <span><i class="Hui-iconfont">&#xe6f1;</i><a href="http://www.aiyanxin.club" class="btn-link">小明博客</a></span>
+            </div>
+        </div>
+        <!--最近访客-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>最近访客</strong></a>
+            </div>
+            <div class="panel-body">
+                <ul class="recent">
+                    <div class="item"><img src="img/40.jpg" alt=""></div>
+                </ul>
+            </div>
+        </div>
+        
+        <!--分享-->
+        <div class="bg-fff box-shadow radius mb-20">
+            <div class="tab-category">
+                <a href=""><strong>站点分享</strong></a>
+            </div>
+            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+           <!--  <div class="panel-body">
+                <div class="bdsharebuttonbox Hui-share"><a href="#" class="bds_weixin Hui-iconfont" data-cmd="weixin" title="分享到微信">&#xe694;</a><a href="#" class="bds_qzone Hui-iconfont" data-cmd="qzone" title="分享到QQ空间">&#xe6c8;</a> <a href="#" class="bds_sqq Hui-iconfont" data-cmd="sqq" title="分享到QQ好友">&#xe67b;</a> <a href="#" class="bds_tsina Hui-iconfont" data-cmd="tsina" title="分享到新浪微博">&#xe6da;</a> <a href="#" class="bds_tqq Hui-iconfont" data-cmd="tqq" title="分享到腾讯微博">&#xe6d9;</a></div>
+            </div> -->
+        </div>
+    
+    
+    
+
+  </div>
+  
+</section>
+{/block}
+{block name="script"}
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script>
+
+    //获取滚动条当前的位置
+    function getScrollTop() {
+    var scrollTop = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+        scrollTop = document.documentElement.scrollTop;
+    }else if (document.body) {
+        scrollTop = document.body.scrollTop;
+    }
+    
+        return scrollTop;
+    }
+
+    //获取当前可是范围的高度
+    function getClientHeight() {
+        var clientHeight = 0;
+    if (document.body.clientHeight && document.documentElement.clientHeight) {
+        clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+    }else {
+        clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+        return clientHeight;
+    }
+
+    //获取文档完整的高度
+    function getScrollHeight() {
+        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    } 
+
+    //初始化页数
+    page = 0;
+
+    window.onscroll = function () {
+        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+
+            // var newnode = document.createElement("a");
+            // newnode.setAttribute("href", "#");
+            // newnode.innerHTML = "new item";
+            // document.body.appendChild(newnode);
+            // var newline = document.createElement("br");
+            // document.body.appendChild(newline); 
+            $.post("{:url('index/addcontent')}",{page:page},)
+        }
+    } 
+</script>
+{/block}

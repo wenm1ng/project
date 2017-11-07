@@ -146,16 +146,27 @@ $(function() {
 		//创建表情框结束
 		var $facepic = $("#SmohanFaceBox1 li img");
 		//BTN触发事件，显示或隐藏表情层
-		$btn.live(options.Event,function(e) {
+		// $btn.live(options.Event,function(e) {
+		// 	if($('#SmohanFaceBox1').is(":hidden")){
+		// 		$('#SmohanFaceBox1').show(360);
+		// 		$btn.addClass('in');
+		// 	}else{
+		// 		$('#SmohanFaceBox1').hide(360);
+		// 		$btn.removeClass('in');
+		// 		alert($('#SmohanFaceBox1').length);
+		// 	}
+		// });
+
+		$btn.click(function(){
 			if($('#SmohanFaceBox1').is(":hidden")){
 				$('#SmohanFaceBox1').show(360);
 				$btn.addClass('in');
 			}else{
 				$('#SmohanFaceBox1').hide(360);
 				$btn.removeClass('in');
-				alert($('#SmohanFaceBox1').length);
 			}
-		});
+		})
+
 		//插入表情
 		$facepic.die().click(function(){
 		     $('#SmohanFaceBox1').hide(360);

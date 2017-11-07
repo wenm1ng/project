@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta name="keywords" content="个人博客,文明个人博客,个人博客系统,小明博客,文明">
+<meta name="keywords" content="php,文明个人博客,个人博客系统,小明博客,php程序员">
 <meta name="description" content="小明个人博客 — 一个站在php开发之路上的草根程序员个人博客网站">
 <LINK rel="Bookmark" href="favicon.ico" >
 <LINK rel="Shortcut Icon" href="favicon.ico" />
@@ -44,8 +44,8 @@
                     <li class="active"> <a href="{:url('index/index')}" data-hover="首页">首页</a> </li>
                     <li> <a href="{:url('home/chat/about')}" data-hover="关于我">关于我</a> </li>
                     <li> <a href="{:url('home/chat/index')}" data-hover="碎言碎语">碎言碎语</a> </li>
-                    <li><a href="article.html" data-hover="学无止尽">学无止尽</a></li>
-                    <li> <a href="board.html" data-hover="留言板">留言板</a> </li>
+                    <li><a href="{:url('home/chat/study')}" data-hover="学无止尽">学无止尽</a></li>
+                    <li> <a href="{:url('home/chat/board')}" data-hover="留言板">留言板</a> </li>
                 </ul>
             </nav>
             <nav class="navbar-nav navbar-userbar hidden-xs hidden-sm " style="top: 0;">
@@ -59,7 +59,7 @@
                             {empty name="Think.session.home_username"}
                             您好,<a href="javascript:void(0)" id="login" ><img class="avatar size-S" src="/img/qq.jpg" title="登入">请登录</a>
                             {else /}
-                            <a href="{:url('User/center')}"><img class="avatar size-S" src="{empty name='Think.session.home_img'}/images/user-4.png{else /}{$Think.session.home_img}{/empty}" title="个人中心"></a>您好,<a href="{:url('User/center')}">{$Think.session.home_username},</a><a href="{:url('home/user/logout')}">退出登录</a>
+                            <a href="{:url('home/User/center')}"><img class="avatar size-S" src="{empty name='Think.session.home_img'}/images/user-4.png{else /}{$Think.session.home_img}{/empty}" title="个人中心"></a>您好,<a href="{:url('home/User/center')}">{$Think.session.home_username},</a><a href="{:url('home/user/logout')}">退出登录</a>
                             {/empty}
                     </li>
                 </ul>
@@ -163,6 +163,8 @@
                     <input name="phone" class="form-control phone" type="number"  onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/> 
                    </div> 
                   </div> 
+                  <img src="{:url('verify')}" alt="" onclick='this.src=this.src+"?c="+Math.random()'>
+                  <a href="javascript:void(0)" url="{:url('verify')}" class="reflash">点击刷新</a>
                   <!-- <div class="form-group col-sm-12" style="margin-top:20px"> 
                    <label class="col-sm-5 control-label">身份证号：</label> 
                    <div class="col-sm-5"> 
@@ -429,6 +431,17 @@ $('#register').click(function(){
                 layer.alert(data.msg,{icon:5});
             }
         },'json')
+    })
+
+    //点击刷新按钮
+    $('.reflash').click(function(){
+      img = $(this).prev();
+      src = $(this).prev().attr('src');
+      if(src.indexOf('?')>0){
+        img.attr("src", src+'&random='+Math.random());  
+      }else{  
+        img.attr("src", src.replace(/\?.*$/,'')+'?'+Math.random());  
+      }  
     })
 </script> 
 

@@ -1,67 +1,52 @@
 <?php
 // +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006-2015 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
 // | Author: yunwuxin <448901948@qq.com>
 // +----------------------------------------------------------------------
-
-if (!function_exists('class_basename')) {
-    /**
-     * 获取类名(不包含命名空间)
-     *
-     * @param  string|object $class
-     * @return string
-     */
-    function class_basename($class)
-    {
-        $class = is_object($class) ? get_class($class) : $class;
-
-        return basename(str_replace('\\', '/', $class));
-    }
+\think\Route::get('captcha/[:id]', "\\think\\captcha\\CaptchaController@index");
+\think\Validate::extend('captcha', function ($value, $id = '') {
+    return captcha_check($value, $id);
+});
+\think\Validate::setTypeMsg('captcha', ':attribute错误!');
+/**
+ * @param string $id
+ * @param array  $config
+ * @return \think\Response
+ */
+function captcha($id = '', $config = [])
+{
+    $captcha = new \think\captcha\Captcha($config);
+    return $captcha->entry($id);
 }
-
-if (!function_exists('class_uses_recursive')) {
-    /**
-     *获取一个类里所有用到的trait，包括父类的
-     *
-     * @param $class
-     * @return array
-     */
-    function class_uses_recursive($class)
-    {
-        if (is_object($class)) {
-            $class = get_class($class);
-        }
-
-        $results = [];
-
-        foreach (array_merge([$class => $class], class_parents($class)) as $class) {
-            $results += trait_uses_recursive($class);
-        }
-
-        return array_unique($results);
-    }
+/**
+ * @param $id
+ * @return string
+ */
+function captcha_src($id = '')
+{
+    return \think\Url::build('/captcha' . ($id ? "/{$id}" : ''));
 }
-
-if (!function_exists('trait_uses_recursive')) {
-    /**
-     * 获取一个trait里所有引用到的trait
-     *
-     * @param  string $trait
-     * @return array
-     */
-    function trait_uses_recursive($trait)
-    {
-        $traits = class_uses($trait);
-
-        foreach ($traits as $trait) {
-            $traits += trait_uses_recursive($trait);
-        }
-
-        return $traits;
-    }
+/**
+ * @param $id
+ * @return mixed
+ */
+function captcha_img($id = '')
+{
+    return '<img src="' . captcha_src($id) . '" alt="captcha" />';
+}
+/**
+ * @param        $value
+ * @param string $id
+ * @param array  $config
+ * @return bool
+ */
+function captcha_check($value, $id = '')
+{
+    $captcha = new \think\captcha\Captcha((array)\think\Config::get('captcha'));
+    return $captcha->check($value, $id);
 }

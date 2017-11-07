@@ -133,7 +133,7 @@
                         <div id="err" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
 
 						<div id="Smohan_FaceBox">
-						   <textarea name="content" id="Smohan_text" class="smohan_text" style="width:662px"></textarea>
+						   <textarea name="content" id="Smohan_text" class="smohan_text" style="width:100%;resize:none;"></textarea>
 						   <p>
 						   <a href="javascript:void(0)" class="face" title="表情"></a>
 						   <!-- <button class="button" id="Smohan_Showface" style="float:left;margin-left:60%;margin-top:40px">显示表情</button> -->
@@ -146,13 +146,13 @@
 
 						
                         <div class="text-r mt-10">
-                            <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" dataid="comment"> 发表评论</button>
+                            <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" dataid="comment" style="margin-right:120px"> 发表评论</button>
                         </div>
                     </div>
                     <!--用于回复-->
                     <div class="comment hidden">
                         <div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>
-                            <textarea class="textarea" style="height:100px;" > </textarea>
+                            <textarea class="textarea" style="height:100px;width:662px" > </textarea>
                             <button type="button" class="btn btn-primary radius mt-10">回复</button>
                             <a class="cancelReply f-r mt-10">取消回复</a>
                     </div>
@@ -247,9 +247,9 @@
 		
 		$('.reply').click(function(){
 			
-			div = '<div id="Smohan_FaceBox1" class="comment comment-reply" style="float:right;width:640px;margin-top:20px">'+
+			div = '<div id="Smohan_FaceBox1" class="comment comment-reply" style="float:right;width:100%;margin-top:20px">'+
 			            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
-			                '<textarea class="textarea smohan_text1" id="Smohan_text1"  style="height:100px;" > </textarea>'+
+			                '<textarea class="textarea smohan_text1" id="Smohan_text1"  style="height:100px;width:100%" > </textarea>'+
 			                '<p><a href="javascript:void(0)" class="face1" title="表情"></a></p>'+
 			                '<button type="button" class="btn btn-primary radius mt-10 Smohan_Showface">回复</button>'+
 			                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
@@ -284,14 +284,12 @@
 				});
 
 			}else{
-				$('#Smohan_FaceBox1').css('display','none');
 				$('.comment-reply').remove();
 				
 				reply = 0;
 			}
 
 			$('.no_reply').click(function(){
-				$('#Smohan_FaceBox1').css('display','none');
 				$(this).parents('.comment-reply').remove();
 				reply = 0;
 			})

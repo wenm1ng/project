@@ -7,6 +7,8 @@ use think\Log;
 use think\Request;
 use think\Db;
 use think\Session;
+use think\Verify;
+
 // namespace base;
 class Index extends Base_2
 {
@@ -19,7 +21,7 @@ class Index extends Base_2
         // $this->view->info = $userinfo;
         // $limit = input('limit');
         //获取文章信息
-        $page = Db::name('article')->where("status = 1")->order('create_time desc')->paginate(6,false,['type'=>'BootstrapDetailed']);
+        $page = Db::name('article')->where("status = 1")->order('create_time desc')->paginate(10,false,['type'=>'BootstrapDetailed']);
         $article_list = obj_to_array($page);
         foreach ($article_list['data'] as $key => $val) {
         	//过滤掉Img标签
@@ -37,5 +39,17 @@ class Index extends Base_2
 
     	return view('index',['name'=>$name,'article_list'=>$article_list,'article_hot'=>$article_hot,'_page'=>$page]);
     }
-    
+
+    //加载验证码
+    public function verify(){
+        //实例化验证码类
+        header('content-type:text/html;charset=utf-8');
+        $verify = new Verify();
+        // var_dump($verify);
+        $verify->fontSize=20;//字体大小
+        $verify->length=4;//验证码位数
+        $verify->useNoise=false;//验证码干扰素
+        //输出验证码
+        return $verify->entry();
+    }
 }
