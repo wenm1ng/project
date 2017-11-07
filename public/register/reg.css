@@ -1,0 +1,379 @@
+body,html{ padding:0; margin:0 auto; background-color:#fff;}
+img{ border:none;}
+h1,h2,h3,h4,h5,h6,hr,blockquote,form,ul,ol,li,p,pre,dl,dt,dd,fieldset,legend,button,input,textarea,th,td{ padding:0; margin:0;}
+ul,ol,li{ list-style:none;}
+sup{ vertical-align:text-top;}
+sub{ vertical-align:text-bottom;}
+legend { color:#000;}
+fieldset{ border:0;} 
+button,input,select,textarea { font-size:100%;}
+table{ border-collapse:collapse; border-spacing:0;}
+.clear{ clear:both; line-height:0px; font-size:0px;}
+.clearfix:after{ content:".";display:block; height:0; clear:both; visibility:hidden;}
+.clearfix{display:inline-block;overflow:hidden;}
+.left{ float:left; _display:inline;}
+.right{ float:right;}
+.hr_10{ clear:both; height:10px; overflow:hidden; font-size:1px; line-height:1px;}
+
+body,button,input,select,textarea{ font-family:"Microsoft Yahei"!important; color:#000; font-size:12px;}
+h1,h2,h3,h4,h5,h6{ font-size:100%;}
+address,cite,dfn,em,var{ font-style:normal }
+code,kbd,pre,samp{ font-family:courier new, courier, monospace;}
+.bold{ font-weight:bold;}
+a{ color:#000; text-decoration:none;}
+a:hover{ color:#CC0000; text-decoration:underline;}
+
+a,area{blr:expression(this.onFocus=this.blur());}/*For IE*/
+:focus{-moz-outline-style:none;}/*For Firefox*/ 
+
+.topMargin5{ margin-top:5px;}
+.topMargin10{ margin-top:10px;}
+.topMargin8{ margin-top:8px;}
+.topMargin20{ margin-top:20px;}
+.leftMargin5{ margin-left:5px;}
+.leftMargin10{ margin-left:10px;}
+
+.wrapper	{ width:1200px; height:100%; margin:0 auto;}
+.logo	{ padding:20px 0;}
+.regist	{ width:100%; margin:30px 0 0 0;}
+.regist h1	{     height: 35px;
+          	      width:415px; float:right;
+    line-height: 35px;
+    margin:0 100px 0 0;
+    border-bottom: 2px solid #b81e20;
+    /* padding-left: 10px; */
+    font-size: 20px;
+    color: #a2a2a2;
+    font-weight: bolder;}
+    
+.regist h1 span{
+    font-size:14px;
+    float:right
+}
+
+.regist h1 span a{
+    color:#b52024;
+    margin:0 0 0 3px
+}
+
+.content_left{
+    width: 415px;float: right;margin: 10px 95px 0 0;    
+}
+.tag	{  width: 100%;
+    	   display:none;
+    height: 45px;
+    line-height: 45px;
+    padding-bottom: 10px;}
+.tag h2	{ width:145px;float:left; background:url(https://ssl.vanclimg.com/login/num_1.gif) 10px no-repeat; color:#656565; text-indent:42px; font-size:14px; font-weight:normal;}
+.tag ul	{ width:400px; float:left;}
+.tag li	{ width:94px; height:45px; padding-left:40px; float:left; background :url(https://ssl.vanclimg.com/login/tag_bg.gif); background-repeat:no-repeat; cursor:pointer;}
+.tag li.tb-email	{ background-position: 0 0; margin-right:10px; }
+.tag li.tb-phone	{ background-position: -144px -45px; }
+.tag li.tb-email-select { background-position: 0 -45px; }
+.tag li.tb-phone-select { background-position: -144px 0; }
+
+.yi	{ padding-left:45px;}
+.yi:hover{color:#CC0000; text-decoration:underline; cursor:pointer}
+.er	{ padding-left:63px;}
+.er:hover{color:#CC0000; text-decoration:underline; cursor:pointer}
+.infor	{ width:415px; zoom:1;}
+.infor h2	{ width:140px; height:45px; float:left; background:url(https://ssl.vanclimg.com/login/num_2.gif) 10px 0 no-repeat; color:#656565; text-indent:42px; font-size:14px;font-weight:normal; line-height:26px; margin-top:13px;}
+.email	{ width:415px;}
+.gray	{ width:515px; height:44px; line-height:44px; padding:5px 0; padding-left:24px;}
+.gray label	{ float:left;}
+.gray input	{ width:197px; height:19px; line-height:19px; border:1px solid #A5AFC3; float:left; margin-top:12px; margin-right:5px;}
+.tips,.tips3,.tips1,.tips4,.tips5{ width:202px; line-height:17px; border:1px solid #36689B;color:#434343;padding-left:3px; float:left;}
+.tips3{margin-top:-4px;}
+.tips1{margin-top:13px;}
+.tips4{margin-top:3px}
+.tips5{margin:-20px 0px 0px 38px}
+.password	{ height: 44px;
+    line-height: 44px;
+    padding: 5px 0 5px 24px;
+    width: 515px;}
+.password label	{ display:inline-block;}
+.password img,.password a{ margin-top:11px; margin-right:10px;}
+.password input	{ width:197px; height:19px; line-height:19px; border:1px solid #A5AFC3; margin: 12px 5px 0 0; vertical-align:middle;}
+.tips2,.tips6,.tips7{ width:202px; height:20px; line-height:20px; border:1px solid #CC9998;color:#a10000; background-color:#FFF6F7; padding-left:3px; float:left; margin-top:11px; background:url(https://ssl.vanclimg.com/login/shurubg0316.jpg) 5px no-repeat; text-indent:25px;}
+.tips6{margin:-20px 0px 0px 38px}
+.bt	{ color:#656565; padding-left:120px; padding-top:10px; float:left; }
+.bt a	{color:#a20000;}
+.bt p	{ padding-bottom:10px;}
+.submitStyle{     /* padding:1px; */
+    clear: both;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    background: #b52024;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    clear: both;
+    font-size: 16px;
+    font-weight: bolder;}
+.submitStyle:hover	{text-decoration:underline;}
+.submitingStyle{ color:#656565;}
+
+.content_right	{   width: 465px;
+    height: 500px;
+    /* border-left:1px solid #C3C3C3; */
+    float: left;
+    /* background-color:#F9F9F9; */
+    margin: 0 0 0 130px;}
+.content_right p	{padding-top:130px; text-align:center;}
+.content_right p a	{display: inline-block; background:url(https://ssl.vanclimg.com/login/bt2_bg.jpg) center no-repeat; width:61px; height:19px; line-height:19px; text-align:center; margin-left:2px;}
+
+
+.log2	{ clear:both;display:block; width:127px; height:23px; padding-top:4px; color:#656565; text-align:center; background:url(https://ssl.vanclimg.com/login/bt2.jpg) center no-repeat; float:left; margin-right:5px; padding-bottom:0;}
+.log2 img	{ margin-right:3px;}
+
+
+.hideDiv{ display:none; visibility:hidden; }
+.DisplayDiv{ display:block; visibility:visible;}
+
+.email label, .email input
+{
+    float:left;
+}
+.email label
+{
+    width:100px;
+    text-align:right;
+}
+.success-tip
+{
+    background: url("https://ssl.vanclimg.com/login/yes.gif") no-repeat scroll center center transparent;
+    float: left;
+    height: 14px;
+    margin-top: 12px;
+    width: 15px;
+}
+#Img1,.change-img
+{
+    float:left; 
+    cursor:pointer;   
+    
+}
+.change-img:hover
+{
+    text-decoration:none;
+    }
+.nextcode,.change
+{
+    line-height:12px;
+    display:block;
+    width:37px;
+    color:Gray;
+}
+.change
+{
+    color:#A00002;
+    }
+.hiddenSubmit{  visibility:hidden; display:none;}
+.showSubmit{ visibility:visible; display:block}
+.validating{ background:url('https://ssl.vanclimg.com/login/loading.gif') no-repeat scroll center center transparent; width:30px;}
+.tips7{padding-left:29px;text-indent:0px; width:180px; height:50px; margin-top:-5px; line-height:16px;}
+.phonelogin{ line-height:15px;height:15px;text-decoration:none; color:#7030A0}
+.grayback{ border:1px solid #F2F2F2; border-bottom:2px solid #F2F2F2;  border-right:2px solid #F2F2F2; background-color:#FAFAFA;  }
+.regtips {
+    border: 1px solid #36689B;
+    color: #434343;
+    float: left;
+    height: 37px;
+    line-height: 17px;
+    margin-top: 2px;
+    padding-left: 3px;
+    padding-top: 3px;
+    width: 238px;
+}
+
+/* ---------------- 20120410 注册成功 css ---------------- */
+.sprite_a{background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat left top;}
+.asRegister_tipspic{ width:220px; height:25px; background-position:0 0; margin:0 auto;}
+.textindent{text-indent:-9999px;}
+.asRegister_tipsname{text-align:center; color:#8c8c8c;}
+.asRegister_tipsname .shopping{width:98px; height:29px; line-height:29px; background-position:0 -39px; font-size:12px; color:#fff; margin-left:10px; float:left; text-align:center; cursor:pointer; color:#fff;}
+.asRegister_tipsname .asRFt{ float:left; margin-left:80px; line-height:29px;}
+.asVerify_tips{ width:620px; margin:0 auto; background:#fefef1; border:1px #ffeec4 solid; padding:10px 0px; text-align:center; color:#666;}
+.asVerify_mail,.asVerify_Mobile{ width:285px; height:80px; margin-left:220px; float:left; background-position:-120px -102px; padding-left:65px; line-height:20px; color:#444; display:inline;}
+.asVerify_Mobile{background-position:0px -188px; padding-left:100px; margin-left:0;}
+.asBtn{width: 99px;height: 27px;line-height: 27px;background-position:0px -354px;text-align: center;display: block;overflow: hidden}
+
+.asBtn01 {
+    background-position: 0 -1200px;
+    display: block;
+    height: 27px;
+    line-height: 27px;
+    overflow: hidden;
+    text-align: center;
+    width:129px;
+}
+
+/* ---------------- 20120410 账户安全公共部分 css ---------------- */
+.box3,.box7,.box10,.box15,.box20,.box30,.box40,.box50,.box80{height:7px; line-height:0; font-size:0; clear:both; display:block;}
+.box10{height:10px;}
+.box15{height:15px;}
+.box20{height:20px;}
+.box30{height:30px;}
+.box40{height:40px;}
+.box50{height:50px;}
+.box80{height:80px;}
+.box3{height:0px; overflow:hidden;}
+.margb10{margin-bottom:10px; clear:both;}
+.as_clear{clear:both; height:0; font-size:0; line-height:0; clear:both; display:block;}
+.fontWrb{font:bold 15px/24px "微软雅黑";}
+.fontgry9{color:#999;}
+.fontreda{color:#a10000;}
+.fontB14b{color:#333; font-size:14px; font-weight:bold;}
+.fontR14b{color:#a10000; font-size:14px; font-weight:bold;}
+.fontgry3{color:#333;}
+.fontRa02{color:#a00002;}
+.spR40{ padding-right:40px;}
+.whitef:link,.whitef:visited{color:#fff;}
+.whitef:hover{ color:#fff;}
+a,a:visited{color:#333; text-decoration:none;}
+a:hover{color:#a10000; text-decoration:underline;}
+.reda10_ft14:link,.reda10_ft14:visited{color:#a10000; font-size:14px;}
+.reda10_ft14:hover{text-decoration:underline;}
+.reda10_ft12:link,.reda10_ft12:visited{color:#a10000; font-size:12px;}
+.reda10_ft12:hover{text-decoration:underline;}
+.asfontnone{ display:none;}
+.aslinx{ width:890px; height:2px; font-size:0; line-height:0; background-position:0 -943px; display:block;}
+
+/* ---------------- 20120423 账户安全 注册登录提示语 修改 css ---------------- */
+.Rclear{line-height:0; font-size:0; clear:both; display:block;}
+/*#v2regListInfo_bar label{float:left; line-height:22px;}*/
+#livalidatecode label{margin-top:15px;}
+.v2regListInfo_rtCont{ width:415px;height:auto;}
+.reginput_01,.reginput_02{border:1px solid #A5AFC3; float: left; height:20px; line-height:20px; margin-right:8px; width:198px;}
+.reginput_02{width:48px;margin-top:16px;}
+/*.v2regList_Btnimg{float:left; background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat 0 -354px; width:97px; height:22px;  padding-top:5px; margin-top:-3px; position:relative;}*/
+.v2regList_Btnimg{float:left; background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat 0 -354px;  width: 97px;
+    height: 45px;text-align: center;line-height: 45px;/* background-position:0 -354px; */background: #f5f5f5;color: #b52024!important;
+    border: solid 1px #cbcbcb;display: block;float: left;margin: 0 0 0 10px;font-weight: bolder;}
+.v2regList_Btnimg img{margin-right:3px; }
+.v2regBtn_02{float:left; margin-top:5px; display:none;}
+#livalidatecode .v2regBtn_02{margin-top:18px}
+.v2reg_Safetyinfo{float:left; line-height:22px; color:#666;}
+.v2regfl,.v2regimg_01{ float:left;}
+.v2regimg_01{ width:140px; float:left; height:12px; overflow:hidden; background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat 0 -1097px; margin-top:5px; margin-right:5px;}  /*安全程度 低*/
+.v2regimg_02{ width:140px; float:left; height:12px; overflow:hidden; background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat 0 -1117px; margin-top:5px; margin-right:5px;}  /*安全程度 中*/
+.v2regimg_03{ width:140px; float:left; height:12px; overflow:hidden; background:url(https://ssl.vanclimg.com/login/sprite_a.png) no-repeat 0 -1139px; margin-top:5px; margin-right:5px;}  /*安全程度 高*/
+.v2reg_tips01{
+    line-height: 16px;
+    color: #999;
+    height: 16px;
+    position: absolute;
+    left: 0px;
+    top: 47px;
+    z-index: 20;    
+}
+.v2reg_bg{  border:1px #fff solid;}
+.v2reg_bg1{  border:1px solid #fff}
+#v2regListInfo_bar li{ clear:both; /*padding:5px 0;*/ margin-top:15px; }
+/*.v2reg_tips02{display:none;  color:#a10000; border:1px #ffd5d5 solid; padding:3px 5px; display:inline-block;}*/
+.v2reg_tips02{    display: none;
+    color: #a10000;
+    border: 1px #ffd5d5 solid;
+    padding: 3px 5px;
+    position: absolute;
+    left: 0px;
+    z-index: 20;
+    background: #f9f9f9;
+    top: 46px;
+    display: inline-block;}
+.change-img_01{ margin-left:7px; float:left;}
+.v2reg_bt{ /*margin-left:100px;*/ margin:10px 0 0 0;}
+.v2reg_bt span{    color: #9d9d9d;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 12px;
+    margin: 0 0 10px 0;}
+.v2reg_bt span a{font-size:14px;color:#b52024!important;font-weight:bolder;}
+.v2reg_Class{float:left;}
+
+/*.box5{height:5px; line-height:0; font-size:0; clear:both; display:block;}*/
+.box5{height:0px; line-height:0; font-size:0; clear:both; overflow:hidden;}
+.asPhoneregBtn{ width: 97px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    /* background-position:0 -354px; */
+    background: #f5f5f5;
+    color: #b52024!important;
+    border: solid 1px #cbcbcb;
+    display: block;
+    float: left;
+    margin: 0 0 0 10px;
+    font-weight: bolder;
+    /* margin-top:-3px; */}   /*20120423 样式修改*/
+
+/*20120423 手机注册发送手机验证码的验证码*/
+.clear{clear:both; display:block; height:0; font-size:0; line-height:0;}
+.iFloatingwindow{z-index:99;display:none; position:absolute; background:#fff7f7; border:1px #ffb8b8 solid; padding:7px; left:220px; top:35px;}
+.iFloatingwindow dd{float:left; margin-left:5px;margin-top: 5px; color:#000; font-family:Verdana;}
+.iFloatingwindow .inviteTips_ft{ width:180px; text-align:center; line-height:20px; clear:left; margin-top:5px; color:#804117;}
+.iFloatingwindow .inviteTips_ft img{vertical-align:middle; margin-top:0; margin-right:5px;}
+.iFloatingwindow .inviteTips_img img{ margin-top:5px; vertical-align:middle;}
+.iFloatingwindow .inviteTips_img a,.iFloatingwindow .inviteTips_img a:visited{display:inline-block;}
+.iFloatingInput{width:60px;height: 20px; font-weight:bold; border:1px #aaa solid; margin-top:3px;}
+.ftgry6{color:#666;}
+a.grayft6:link,a.grayft6:visited{color:#666;}
+.iFloatingIco{position:absolute; left:33px; top:-6px;}
+
+
+.FSVerification{float:left; line-height:14px; color:#808080;margin-left: 7px;margin-top:25px}
+a.reda02,a.reda02:visited{color:#a00002;}
+
+#img_validatecode {
+    cursor: pointer;
+    float: left;
+}
+
+.orderChangeTsk80EE8D67985E{ position:fixed;_position: absolute;z-index: 1000006; background-color:#ffffff; width:300px; height:auto; padding-bottom:15px; *padding-bottom:5px; border:1px solid #a10000; overflow:hidden; zoom:1;}
+.orderChangeTsk80EE8D67985E h3{ width:300px; height:23px; line-height:23px; color:#fff; background:url(https://ssl.vanclimg.com/Others/2012/3/6/tsbg0117.jpg) repeat-x scroll left top;}
+.orderChangeTsk80EE8D67985E h3 span{ float:left; margin-left:3px;}
+.orderChangeTsk80EE8D67985E h3 a:link,.orderChangeTsk80EE8D67985E h3 a:visited{ float:right; margin-right:6px; color:#fff;}
+.orderChangeTsk80EE8D67985E h3 a img{ float:left; display:inline; margin-top:6px;}
+.orderChangeTsk80EE8D67985E .Word80EE8D67985E{ font-size:12px; color:#333333; text-align:center; margin:15px auto 10px; padding:0px 10px; text-align:left; line-height:18px;}
+.orderChangeTsk80EE8D67985E div{ margin:0px 0px 0px 120px; float:left; display:inline;}
+.orderChangeTsk80EE8D67985E div .queding80EE8D67985E{ width:56px; height:19px; float:left; border:none; background:url(https://ssl.vanclimg.com/Others/2012/3/6/queding0117.jpg) no-repeat scroll; cursor:pointer;}
+.orderChangeTsk80EE8D67985E div span{ float:left; margin-left:10px; margin-top:2px; }
+.orderChangeTsk80EE8D67985E div span a:link,.orderChangeTsk80EE8D67985E span div a:visited{ text-decoration:underline;}
+#maskdiv80EE8D67985E{display:none;position: fixed;_position: absolute;top: 0;left: 0;z-index: 100000;width: 100%;height: 100%;background: black;border: 0;filter: alpha(opacity=0);opacity: 0;}
+
+
+.newtxt{    height: 45px;
+    width: 360px;
+    border: solid 1px #cbcbcb;
+    position: relative;
+    overflow: hidden;}
+.newtxt1{    height: 45px;
+    width: 360px;
+    border: solid 1px #cbcbcb;
+    position: relative;
+    overflow: hidden;}
+.newtxt label{ height:45px; line-height:45px; color:#acacac; position:absolute; left:0px; top:0px; width:100%;
+              display:block; text-align:left; z-index:10; font-size:14px; text-indent:10px; background:#fff;}
+.newtxt input{ height:45px; line-height:45px; color:#656565;position:absolute; left:0px; top:0px; width:100%;
+              display:block; text-align:left; text-indent:10px; z-index:9; border:0 none; font-size:14px;}
+              
+.newtxt input.hoverinput
+{
+    filter: alpha(opacity=50);
+    -moz-opacity: .5;
+    opacity: 0.5;
+    background: #fff;    
+}
+
+.newtxt1 input{ height:45px; line-height:45px; color:#656565;position:absolute; left:0px; top:0px; width:100%;
+              display:block; text-align:left; text-indent:11px; z-index:9; border:0 none; font-size:14px;}
+              
+.newtxt1 input.hoverinput
+{
+    filter: alpha(opacity=50);
+    -moz-opacity: .5;
+    opacity: 0.5;
+    background: #fff;    
+}

@@ -1,0 +1,63 @@
+#bottom{ width:980px; display:inline-table;font: 100 12px "Microsoft Yahei";color: #999999; padding-top:15px;}
+#bottom{
+	font: 100 12px "ËÎÌו";
+	color: #999999;
+	position:relative;
+	width: 980px;
+	margin: 0px auto;
+}
+#bottom a:link
+{
+	text-decoration: none;
+	color: #333333;
+}
+#bottom a:visited
+{
+	text-decoration: none;
+	color: #333333;
+}
+
+#bottom a:hover
+{
+	text-decoration: none;
+	color: #a10000;
+}
+#bottom{ width:980px; display:inline-table; }
+#bottom #helpIntro{ width:980px; border-top:1px solid #9F0306; border-bottom:1px solid #9F0306; padding:20px 0 30px 0;*padding:20px 0; margin:20px 0; height:77px; clear:left;}
+#bottom #helpIntro dl{ float:left; border-right:1px solid #CCCCCC; height:87px;*height:77px;_height:87px; padding:0 27px 0 27px;  margin:0; overflow:hidden; }
+#bottom #helpIntro .Nosty{border-right:none;}
+#bottom #helpIntro dl dt{ margin:0px 0px 14px 0px;}
+#bottom #helpIntro dl dd{ list-style:none;  margin:0 12px 8px 0; padding:0}
+
+#bottom #helpIntro .helpLeft{float:left; border-right:1px solid #CCCCCC; height:87px;height:77px;_height:87px; padding:0 27px 0 0px; }
+ 
+#bottoms p{margin:10px 0; padding:5px 0;}
+#bottoms .bZp{height:55px;_height:53px; width:980px}
+#bottoms p{}
+#bottoms .about{ margin:0 0 10px;margin:0 0 8px; padding:0; width:980px}
+#bottoms .bZp2{margin:0 0 20px 0; padding:0; width:980px}
+#bottoms .bZp2 img{ margin-right:20px;}
+#bottoms .bZp3{margin:0 0 20px 0; padding:0; _margin:0 0 17px 0; width:980px}
+
+.wdSty{ color:#a10000; font:bold 14px "ËÎÌו";}
+.wdSty2{color:#000000;}
+#bottom #helpIntro .Nosty{padding:5px 0 5px 25px;width:160px; }
+#bottom #helpIntro .Nosty dd{ padding:0; margin:0  0 0 10px}
+
+
+#Head, #Bottom{width:1200px; font-size:12px; color:#333333; }
+#Head{ border-bottom:1px solid #7a7f89; height:40px!important; height:39px;}
+#Head img{float:left;}
+#Head p{margin-top:20px;}
+#Head img{margin-right:458px;}
+
+#Bottom{clear:both;}
+#Bottom p{ margin:0;  clear:left; width:100%;}
+#Bottom p .sty01{ margin-right:20px;}
+#Bottom .sty02{color:#999999; margin:14px 0 19px 0;}
+
+
+.shoppingstepcontrol{color:#a10000; font-weight:bolder;}
+#bottom{ width:980px; display:inline-table;font: 100 12px "ËÎÌו";color: #999999; }
+#step_{font-size:12px; width:800px; padding-top:17px;color:#999999;}
+

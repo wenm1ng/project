@@ -40,16 +40,5 @@ class Index extends Base_2
     	return view('index',['name'=>$name,'article_list'=>$article_list,'article_hot'=>$article_hot,'_page'=>$page]);
     }
 
-    //加载验证码
-    public function verify(){
-        //实例化验证码类
-        header('content-type:text/html;charset=utf-8');
-        $verify = new Verify();
-        // var_dump($verify);
-        $verify->fontSize=20;//字体大小
-        $verify->length=4;//验证码位数
-        $verify->useNoise=false;//验证码干扰素
-        //输出验证码
-        return $verify->entry();
-    }
+    
 }

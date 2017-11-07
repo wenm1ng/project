@@ -1,0 +1,163 @@
+body,html{ padding:0; margin:0 auto; background-color:#FFF;}
+img{ border:none;}
+h1,h2,h3,h4,h5,h6,hr,blockquote,form,ul,ol,li,p,pre,dl,dt,dd,fieldset,legend,button,input,textarea,th,td{ padding:0; margin:0;}
+ul,ol,li{ list-style:none;}
+sup{ vertical-align:text-top;}
+sub{ vertical-align:text-bottom;}
+legend { color:#000;}
+fieldset{ border:0;} 
+button,input,select,textarea { font-size:100%;}
+table{ border-collapse:collapse; border-spacing:0;}
+.clear{ clear:both; line-height:0px; font-size:0px;}
+.clearfix:after{ content:".";display:block; height:0; clear:both; visibility:hidden;}
+.clearfix{display:inline-block;overflow:hidden;}
+.left{ float:left; _display:inline;}
+.right{ float:right;}
+.hr_10{ clear:both; height:10px; overflow:hidden; font-size:1px; line-height:1px;}
+
+body,button,input,select,textarea{ font-family:"Microsoft Yahei"; color:#000; font-size:12px;}
+h1,h2,h3,h4,h5,h6{ font-size:100%;}
+address,cite,dfn,em,var{ font-style:normal }
+code,kbd,pre,samp{ font-family:courier new, courier, monospace;}
+.bold{ font-weight:bold;}
+a{ color:#000; text-decoration:none;}
+a:hover{ color:#CC0000; text-decoration:underline;}
+
+a,area{blr:expression(this.onFocus=this.blur());}/*For IE*/
+:focus{-moz-outline-style:none;}/*For Firefox*/ 
+
+.topMargin5{ margin-top:5px;}
+.topMargin10{ margin-top:10px;}
+.topMargin15{ margin-top:15px;}
+.topMargin20{ margin-top:20px;}
+.leftMargin5{ margin-left:5px;}
+.leftMargin10{ margin-left:10px;}
+
+.newtxt{    height: 45px;
+    width: 360px;
+    border: solid 1px #cbcbcb;
+    position: relative;
+    overflow: hidden;}
+.newtxt label{ height:45px; line-height:45px; color:#acacac; position:absolute; left:0px; top:0px; width:100%;
+              display:block; text-align:left; z-index:10; font-size:14px; text-indent:10px; background:#fff;}
+.newtxt input{ height:45px; line-height:45px; color:#656565;position:absolute; left:0px; top:0px; width:100%;
+              display:block; text-align:left; text-indent:10px; z-index:9; border:0 none; font-size:14px;}
+              
+.newtxt input.hoverinput
+{
+    filter: alpha(opacity=50);
+    -moz-opacity: .5;
+    opacity: 0.5;
+    background: #fff;    
+}
+
+.wrapper	{ width:1200px; border-bottom:1px solid #999; margin:50px auto 10px;}
+.login {width:400px;border:1px solid #D1D1D1;background-color:#fff;float:right;margin-top: 18px; margin-bottom:20px;
+        margin-right:100px;}
+.tag	{ width:400px; height:35px; line-height:35px; border-bottom:1px solid #cbcbcb;}
+.tag li	{ width: 200px;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    text-align: center;
+    background: #f5f5f5;
+    color: #656565;
+    cursor: pointer;
+    font-size: 14px;}
+.tag li.on	{ width: 200px;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    text-align: center;
+    background: #b42025;
+    color: #fff;
+    font-weight: bolder;}
+.user_infor	{ width:415px; padding:10px 30px 10px;}
+.tips{clear:both;width:220px;min-height:16px;line-height:16px;color:#A10000;text-indent:30px;background:url(https://ssl.vanclimg.com/login/login_spritesbg.png) -351px -662px no-repeat;background-color:#FFF6F7;border:1px solid #CC9998;margin-left:48px;display:block;visibility:hidden;}
+.user_infor{width:415px;padding:10px 20px 10px;}
+.user_infor p 	{ padding:2px 0;}
+.user_infor p label	{ color:#656565;}
+.user_infor p input{width:220px;height:28px;line-height:28px;border:1px solid #A5AFC3;text-indent:5px;color:#999999;vertical-align:middle;}
+
+.lines{border-bottom:dotted 1px #909090; width:100%; height:1px; overflow:hidden; margin:30px 0 0 0;}
+
+.bt{ width: 360px;
+    /*margin: 10px auto 0px auto;*/}
+    .bt span{float:left;font-size:14px;line-height:30px;color:#919191
+}
+.bt span label{font-weight:bolder;}
+.bt a.log	{     display: block;
+      width: 100%;
+    display: block;
+    height: 45px;
+    line-height:45px;
+    background: #b42025;
+    color: #fff;
+    text-align: center;
+    font-size:20px;}
+.bt a.loading	{ display:block; width:97px; height:27px; line-height:27px; padding-top:0px; color:#656565; text-align:center; background:url(https://ssl.vanclimg.com/login/bt2.jpg) center no-repeat; float:left; margin-right:5px;}
+.bt a.loading img{ vertical-align:middle; }
+.bt a.log:hover	{ text-decoration:none; font-weight:700;}
+/*.bt a.loading:hover	{ text-decoration:none; color:#a20000;}*/
+.bt a.forget{   line-height: 30px;
+    display: inline;
+    color: #b42025;
+    font-size: 14px;
+    font-weight: bolder;
+    float: right;}
+.tishi{line-height:24px;color:#656565; padding-left:10px;}
+.tishi span	{ color:#A10000;}
+.tishi a:link,.tishi a:visited{ display:inline-block; width:61px; height:19px; line-height:19px; color:#fff; text-align:center; background:url(https://ssl.vanclimg.com/login/login_spritesbg.png) -284px -662px no-repeat; margin-left:5px;}
+.tishi a:hover	{ color:#fff; text-decoration: underline;}
+.advert {float: left; width: auto; height: auto; /*ie7 hack*/ +margin-bottom:-3px; margin:18px 0 0 150px;+margin:18px 0 -3px 150px;}
+.user_infor p input.inputtextcolor {color:#000;}
+#Head{ margin-top:15px; padding:0 0 15px 0;}
+#Head .logo:link, .logo:visited, .logo:hover { background: url("http://i1.vanclimg.com/cms/20160119/logo_new.jpg") no-repeat left top; display: inline-block; height: 50px; width: 187px;}
+#Head p {float:right; margin: 0 5px;}
+.subFooter { margin-bottom: 25px; text-align: center;}
+#footerArea .redLogo:link, #footerArea .redLogo:visited, #footerArea .redLogo:hover { background: url("https://ssl.vanclimg.com/login/login_spritesbg.png") no-repeat scroll 0 -400px transparent; display: inline-block; height: 42px; width: 113px;}
+#footerArea .subFooter a, #footerArea .subFooter span { margin: 0 10px;}
+#footerArea .costumeOrg { background: url("https://ssl.vanclimg.com/login/login_spritesbg.png") no-repeat scroll 0 -448px transparent; display: inline-block; height: 45px; width: 156px;}
+#footerArea .wsjyBzzx:link, #footerArea .wsjyBzzx:visited, #footerArea .wsjyBzzx:hover { background: url("https://ssl.vanclimg.com/login/login_spritesbg.png") no-repeat scroll 0 -494px transparent; display: inline-block; height: 42px; width: 96px;}
+#footerArea .vanclMsg:link, #footerArea .vanclMsg:visited, #footerArea .vanclMsg:hover { background: url("https://ssl.vanclimg.com/login/login_spritesbg.png") no-repeat scroll -97px -494px transparent; display: inline-block; height: 42px; width: 101px;}
+
+/*联合登录样式*/
+.blank10{clear:both;display:block;font-size:1px;overflow:hidden;height:10px;}
+.glup{  width: 360px;
+    height: auto;
+    margin: 10px auto; }
+.hezuo{ color: #a4a4a4;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: bolder;}
+.adImg a{ display:block; width:63px; height:20px; float:left; background:url("https://ssl.vanclimg.com/apilogin/glbg.png") no-repeat scroll 0px 0px; margin-right:4px;}
+.adImg .adImg01{ width:53px; background:url("https://ssl.vanclimg.com/apilogin/glbg.png") no-repeat scroll -67px 0px;}
+.adImg .adImg02{ width:73px; background:url(https://ssl.vanclimg.com/apilogin/glbg.png) no-repeat scroll -123px 0px;}
+.adImg .adImg03{ background:url("https://ssl.vanclimg.com/apilogin/glbg.png") no-repeat scroll -199px 0px;}
+
+
+
+
+.qkimg a{width:33px;height:33px; display:block;float:left; margin:0 10px 0 0;background:url(http://i1.vanclimg.com/cms/20160118/logos.jpg) no-repeat left center;}
+
+.qkimg a.weixin{background-position:0px 0px;}
+.qkimg a.zhifubao{background-position:-48px 0px;}
+.qkimg a.weibo{background-position:-93px 0px;width:36px;}
+.qkimg a.xiaomi{background-position:-147px 0px;}
+.qkimg a.qq{background-position:-189px 0px;}
+.qkimg a.qihu360{background-position:-228px 0px;}
+
+
+.asPhoneregBtn {
+    width: 97px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    background: #f5f5f5;
+    color: #b52024!important;
+    border: solid 1px #cbcbcb;
+    display: block;
+    float: left;
+    margin: 0 0 0 10px;
+    font-weight: bolder;
+}
