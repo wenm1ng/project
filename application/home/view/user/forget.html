@@ -4,7 +4,7 @@
  <head id="Head1">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>小明博客 - 会员免费注册</title> 
+  <title>小明博客 - 找回密码</title> 
   <link rel="shortcut icon" href="/images/icon.jpg" type="image/x-icon" />
   <script type="text/javascript" language="javascript" src="/register/jquery-1.8.3.min.js"></script> 
   <link href="/register/reg.css" type="text/css" rel="stylesheet" /> 
@@ -15,12 +15,12 @@
    <img src="/images/icon.jpg" alt="" style="height:48px" onclick="javascript:window.location.href='{:url('index/index/index')}'">
   </div> 
   <!--logo--> 
-  <form method="post" action="{:url('register')}" method="post" id="myform"> 
+  <form method="post" action="{:url('reset')}" method="post" id="myform"> 
    <div class="aspNetHidden"> 
    </div> 
    <span class="box15"></span> 
-   <div class="regist"> 
-    <h1> 注册新用户 <span>我已经注册，现在就<a href="{:url('login')}">登录</a></span> </h1> 
+   <div class="regist" style="width:50%;margin:0 auto"> 
+    <h1> 找回密码 <span>我记得密码，现在就<a href="{:url('login')}">登录</a></span> </h1> 
     <div style="width: 100%; height: 10px; overflow: hidden; clear: both;"> 
     </div> 
     <div class="content_left"> 
@@ -36,9 +36,6 @@
       <div class="email"> 
        <ul id="v2regListInfo_bar">
 
-        <li id="liphonecode" class="v2reg_bg1" style="height:55px"> 
-          <input type="text" name="loginName" id="username" placeholder="请输入用户名" style="width:410px;height:45px;margin-top:0px">
-        </li>
 
         <li id="liphonecode" class="v2reg_bg1" style="display: list-item;height:55px"> 
           <input type="email" name="email" id="email" placeholder="请输入邮箱" style="width:410px;height:45px">
@@ -49,19 +46,9 @@
           <img src="{:url('verify')}" id="fimg" onclick="this.src=this.src+'?a=1'"  style="width:150px;float:right" >
         </li>
 
-
-        <li class="v2reg_bg1" style="height:55px">          
-           <input  type="password" name="password" id="pwd" placeholder="请输入密码" style="width:410px;height:45px" value="" /> 
-        </li> 
-
-        <li class="v2reg_bg1">         
-          <input  type="password" name="repwd" id="repwd" style="width:410px;height:45px" placeholder="请再次输入密码" value=""  /> 
-        </li>
-
-        
         <li class="v2reg_bg1"> 
          <div class="v2reg_bt"> 
-           <input type="submit" value="立即注册" id="submitRegister_false" class="submitStyle" style="background: #B42025; color: #FFFFFF;"/>        
+           <input type="submit" value="提交" id="submitRegister_false" class="submitStyle" style="background: #B42025; color: #FFFFFF;"/>        
          </div> </li> 
        </ul> 
         <a href="{:url('index/index/index')}" class="forget" style="float:left;color:#B42025;font-weight:bold;margin-top:10px;font-size:14px">返回主页</a>
@@ -72,10 +59,10 @@
      <!--infor--> 
     </div> 
     <!--content_left--> 
-    <div class="content_right"> 
+    <!-- <div class="content_right"> 
      <img src="" id="ContentPlaceHolder1__advertImage" style="width: 465px;" /> 
      <img src="/images/xiaoming1.jpg" style="width: 465px" /> 
-    </div> 
+    </div>  -->
     <!--content_right--> 
     <div class="clear"> 
     </div> 
@@ -106,88 +93,6 @@
 
     // 直接提交时赋值false；
     flag=false;
-    //用户名验证
-    $("#username").focus(function(){
-        //清除span
-        $(this).next('span').remove();
-        if($(this).val()==null){
-          //1.获取焦点的提示信息
-          $("<span>请输入正确的信息</span>").css('color','red').insertAfter($(this));
-          flag=false;
-        }else{
-          flag=false;
-        }        
-    }).blur(function(){
-        //2.失去焦点 获取用户值 正则的判断
-        //获取用户值
-        s=$(this);
-        //清除
-        s.next('span').remove();
-        ss=s.val();
-        // alert(ss);
-        //匹配正则
-        if(ss.match(/^\w{4,16}$/)==null){
-            // alert('此用户不符合正则');
-            $("<span>请输入4-16位字符</span>").css('color','red').insertAfter(s);
-            flag=false;
-        }else{
-            //3.Ajax的验证
-            $.get("{:url('ajax')}",{loginName:ss,type:1},function(data){
-                // alert(data);
-                //判断
-                if(data){
-                    $(this).next('span').remove();
-                    $("<span>此用户可用</span>").css('color','green').insertAfter(s);
-                      flag=true;
-                }else{
-                    $(this).next('span').remove();
-                    $("<span>此用户已经存在</span>").css('color','red').insertAfter(s);
-                        flag=false;
-                }
-            });
-        }
-    });
-
-    //邮箱验证
-    $("#email").focus(function(){
-        //清除span
-        $(this).next('span').remove();
-        if($(this).val()==null){
-          //1.获取焦点的提示信息
-          $("<span>请输入邮箱</span>").css('color','red').insertAfter($(this));
-            flag=false;
-        }else{
-            flag=false;
-        }              
-      }).blur(function(){
-         e=$(this);
-          //清除
-          e.next('span').remove();
-          ee=e.val();
-          // 邮箱规则
-          var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-          if(!myreg.test(ee))
-          {
-            $(this).next('span').remove();
-            $("<span>邮箱名不符合规则</span>").css('color','red').insertAfter(e);
-            flag=true;
-         }else{
-              //Ajax的验证
-              $.get("{:url('ajax')}",{email:ee,type:2},function(data){
-                  // alert(data);
-                  //判断
-                  if(data){
-                      $(this).next('span').remove();
-                      $("<span>该邮箱可用</span>").css('color','green').insertAfter(e);
-                        flag=true;
-                  }else{
-                      $(this).next('span').remove();
-                      $("<span>此邮箱已存在</span>").css('color','red').insertAfter(e);
-                        flag=false;
-                  }
-              });          
-          }              
-      });
 
     // 验证码的验证
     $("#fcode").live('focus',function(){
@@ -235,58 +140,12 @@
     })
       
   
-   // 密码验证
-    $("#pwd").focus(function(){
-        //清除span
-        $(this).next('span').remove();
-        //1.获取焦点的提示信息
-        $("<span>请设定密码</span>").css('color','red').insertAfter($(this));
-    }).blur(function(){
-        //2.失去焦点 获取用户值 正则的判断
-        //获取用户值
-        s=$("#pwd");
-        //清除
-        s.next('span').remove();
-        ss=s.val();
-        // alert(ss);
-        //匹配正则
-        if(ss.match(/^\w{6,16}$/)==null){
-            // alert('此用户不符合正则');
-            $("<span>请输入6-16位字符</span>").css('color','red').insertAfter(s);
-        }else{
-            // 确认密码
-            $("#repwd").click(function(){
-                $(this).next('span').remove();                
-            }).blur(function(){
-                repwd=$(this).val();
-                if(repwd!=ss){
-                  $(this).next('span').remove();
-                  $("<span>两次密码不一致</span>").css('color','red').insertAfter($(this));
-                    flag=false;
-                }else{
-                    flag = true;
-                }
-            });            
-        }
-    });
+   
 
-    // 确认密码的判断
-    $("#repwd").click(function(){
-        $(this).next('span').remove();                
-    }).blur(function(){
-        repwd=$(this).val();
-        ss=$("#pwd").val();
-        if(repwd!=ss){
-          $(this).next('span').remove();
-          $("<span>两次密码不一致</span>").css('color','red').insertAfter($(this));
-            flag=false;
-        }else{
-            flag = true;
-        }
-    });
+    
 
     // 判断空值
-    if($("#username").val() == undefined || ($("#pwd").val()) == null || $("#repwd").val()==null || $("#email").val()==null || $("#fcode").val()==null){
+    if($("#email").val()==null || $("#fcode").val()==null){
       flag==false;
     }
 

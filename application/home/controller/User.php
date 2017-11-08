@@ -43,91 +43,96 @@
 	    				$loginName = input('loginName');
 	    				$info = Db::name("user_home")->where("loginName = '{$loginName}'")->find();
 	    				if(empty($info)){
-	    					echo 1;
+	    					return 1;
 	    				}else{
-	    					echo 0;
+	    					return 0;
 	    				}
 	    				break;
 	    			case '2'://验证邮箱
 	    				$email = input('email');
 	    				$info = Db::name("user_home")->where("email = '{$email}'")->find();
 	    				if(empty($info)){
-	    					echo 1;
+	    					return 1;
 	    				}else{
-	    					echo 0;
+	    					return 0;
 	    				}
 	    				break;
 	    			case '3'://验证验证码
 	    				$fcode = input('fcode');
 	    				$verify = new Verify();
-	    				if($verify->check($fcode,'')){
-	    					echo 0;
+	    				$verify->reset = false;
+	    				if($verify->check($fcode)){
+	    					return 1;
 	    				}else{
-	    					echo 1;
+	    					return 0;
 	    				}
 	    				break;
 	    			
 	    			default:
-	    				echo 0;
+	    				return 0;
 	    				break;
 	    		}
 	    	}else{
-	    		echo 0;
+	    		return 0;
 	    	}
 	    }
 
 		//前台登录
 		public function login(){
-			if(Request::instance()->isPost()){
-				if(empty(input('loginName'))){
-		            $this->error('请填写登录账号！');exit;
-		        }
-		        if(empty(input('password'))){
-		            $this->error('请填写登录密码！');exit;
-		        }
-		        // print_r(111);exit;
-		        $table_name = 'user_home';
-		        $where = array(
-		            'loginName' => input('loginName'),
-		            );
-		        $info = Db::name($table_name)->where($where)->find();
-		        if(!empty($info)){
-		        	if($info['status'] == 0){
-		        		$this->error('该账号还未激活！');exit;
-		        	}
-
-	                if($info['password'] == input('password')){
-	                    session::set('home_uid',$info['user_id']);
-	                    session::set('home_loginName',$info['loginName']);
-	                    session::set('home_username',$info['user_name']);
-	                    session::set('home_img',$info['img']);
-	                    session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
-	                    
-	                    //登录访问记录
-	                    $login_info = Db::name('login')->where("user_id = '{$info['user_id']}'")->find();
-
-	                    if(empty($login_info)){
-	                    	//第一次登录本博客
-	                    	$data['user_id'] = $info['user_id'];
-	                    	$data['user_name'] = $info['user_name'];
-	                    	$data['create_time'] = date('Y-m-d H:i:s');
-	                    	$data['update_time'] = date('Y-m-d H:i:s');
-	                    	Db::name('login')->insert($data);
-	                    }else{
-	                    	//非第一次登录
-	                    	$data['user_name'] = $info['user_name'];
-	                    	$data['update_time'] = date('Y-m-d H:i:s');
-	                    	Db::name('login')->where("user_id = '{$info['user_id']}'")->update($data);
-	                    }
-	                    $this->success('登录成功','index/index/index');
-	                }else{
-	                    $this->error('密码错误');
-	                }
-		        }else{
-		            $this->error('该用户不存在！');
-		        }
+			if(session::has('home_uid')){
+				$this->error('您已登录，请勿重复登录','index/index/index');
 			}else{
-				return view();
+				if(Request::instance()->isPost()){
+					if(empty(input('loginName'))){
+			            $this->error('请填写登录账号！');exit;
+			        }
+			        if(empty(input('password'))){
+			            $this->error('请填写登录密码！');exit;
+			        }
+			        // print_r(111);exit;
+			        $table_name = 'user_home';
+			        $where = array(
+			            'loginName' => input('loginName'),
+			            );
+			        $info = Db::name($table_name)->where($where)->find();
+			        if(!empty($info)){
+			        	if($info['status'] == 0){
+			        		$this->error('该账号还未激活！');exit;
+			        	}
+
+		                if($info['password'] == input('password')){
+		                    session::set('home_uid',$info['user_id']);
+		                    session::set('home_loginName',$info['loginName']);
+		                    session::set('home_username',$info['user_name']);
+		                    session::set('home_img',$info['img']);
+		                    session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
+		                    
+		                    //登录访问记录
+		                    $login_info = Db::name('login')->where("user_id = '{$info['user_id']}'")->find();
+
+		                    if(empty($login_info)){
+		                    	//第一次登录本博客
+		                    	$data['user_id'] = $info['user_id'];
+		                    	$data['user_name'] = $info['user_name'];
+		                    	$data['create_time'] = date('Y-m-d H:i:s');
+		                    	$data['update_time'] = date('Y-m-d H:i:s');
+		                    	Db::name('login')->insert($data);
+		                    }else{
+		                    	//非第一次登录
+		                    	$data['user_name'] = $info['user_name'];
+		                    	$data['update_time'] = date('Y-m-d H:i:s');
+		                    	Db::name('login')->where("user_id = '{$info['user_id']}'")->update($data);
+		                    }
+		                    $this->success('登录成功','index/index/index');
+		                }else{
+		                    $this->error('密码错误');
+		                }
+			        }else{
+			            $this->error('该用户不存在！');
+			        }
+				}else{
+					return view();
+				}
 			}
 			
 		}
@@ -142,7 +147,7 @@
 			session('home_img',null);    		
 	        if (!session::has('home_uid')) {
 	            // return json(self::sucres());
-	            $this->success('退出登录成功!',url('index/index/index'));
+	            $this->success('退出登录成功!',url('login'));
 	        } else {
 	            // return json(self::erres("退出登录失败"));
 	            $this->error('退出登录失败!');
@@ -150,16 +155,90 @@
 		}
 
 		
+		public function email_login(){
+			if(empty(input('email'))){
+				$this->error('邮箱不能为空');
+			}
+			$email = input('email');
+			//获取用户id
+			$info = Db::name("user_home")->where("email = '{$email}'")->find();
+			if(!empty($info)){
+				switch(input('type')){
+					case 'send'://发送邮箱验证码
+						$this->send_mail($email,'send',$info['user_id'],$info['user_name']);
+						$this->success('验证码发送成功，请登录邮箱查看');
+						break;
+					case 'login'://邮箱登录
+						if(!empty(input('code'))){
+							$code_info = Db::name('code')->where("user_id = '{$info['user_id']}'")->find();
+							if(input('code') == $code_info['code']){
+								if($code_info['end_time'] > date('Y-m-d H:i:s')){
+									//登录并且登记session
+									session::set('home_uid',$info['user_id']);
+				                    session::set('home_loginName',$info['loginName']);
+				                    session::set('home_username',$info['user_name']);
+				                    session::set('home_img',$info['img']);
+				                    session::set('home_sign',sha1(md5($info['loginName']).'wenminghenshuai'));
+				                    
+				                    //登录访问记录
+				                    $login_info = Db::name('login')->where("user_id = '{$info['user_id']}'")->find();
+
+				                    if(empty($login_info)){
+				                    	//第一次登录本博客
+				                    	$data['user_id'] = $info['user_id'];
+				                    	$data['user_name'] = $info['user_name'];
+				                    	$data['create_time'] = date('Y-m-d H:i:s');
+				                    	$data['update_time'] = date('Y-m-d H:i:s');
+				                    	Db::name('login')->insert($data);
+				                    }else{
+				                    	//非第一次登录
+				                    	$data['user_name'] = $info['user_name'];
+				                    	$data['update_time'] = date('Y-m-d H:i:s');
+				                    	Db::name('login')->where("user_id = '{$info['user_id']}'")->update($data);
+				                    }
+				                    $this->success('登录成功','index/index/index');
+								}else{
+									$this->error('该验证码已过期，请重新发送验证码');
+								}
+							}else{
+								$this->error('邮箱验证码输入错误');
+							}
+						}else{
+							$this->error('邮箱验证码不能为空');
+						}
+						
+						break;
+					default:
+						$this->error('参数错误');
+						break;
+				}
+			}else{
+				$this->error('该邮箱不存在');
+			}
+		}
+
 
 		//前台注册用户
 		public function register(){
 
 			if(Request::instance()->isPost()){
+				if(empty(input('loginName'))){
+					$this->error('请输入用户名');
+				}
+				if(empty(input('password'))){
+					$this->error('请输入密码');
+				}
+				if(empty(input('email'))){
+					$this->error('请输入邮箱');
+				}
+				if(empty(input('repwd'))){
+					$this->error('请输入确认密码');
+				}
+
 				$data = [
 				    'loginName' 	=> input('loginName'),
 				    'password'   	=> input('password'),
 				    'email' 		=> input('email'),
-				    'phone' 		=> input('phone'),
 				];
 
 				// $validate = new Validate();
@@ -168,7 +247,6 @@
 				// 	$this->error($validate->getError());
 				// }
 
-				$data['user_name']   = input('user_name');
 				$data['create_time'] = date('Y-m-d H:i:s');
 
 				if($insertId = Db::name('user_home')->insertGetId($data)){
@@ -190,7 +268,6 @@
 					//第三种 成功
 
 
-				$momo = $data['phpmailer'];
 
 		        $toemail = $data['email'];//定义收件人的邮箱
 
@@ -207,7 +284,7 @@
 		        $mail->IsHTML(false);
 
 	            $mail->setFrom("st_yanxin@163.com","小明博客");// 设置发件人信息，如邮件格式说明中的发件人,
-	            $mail->addAddress($toemail, $data['user_name']);// 设置收件人信息，如邮件格式说明中的收件人
+	            $mail->addAddress($toemail, $data['loginName']);// 设置收件人信息，如邮件格式说明中的收件人
 	            $mail->addReplyTo("st_yanxin@163.com","Reply（回复）");// 设置回复人信息，指的是收件人收到邮件后，如果要回复，回复邮件将发送到的邮箱地址
 	            //$mail->addCC("xxx@163.com");// 设置邮件抄送人，可以只写地址，上述的设置也可以只写地址(这个人也能收到邮件)
 	            //$mail->addBCC("xxx@163.com");// 设置秘密抄送人(这个人也能收到邮件)
@@ -219,15 +296,15 @@
 	            $content = url('User/active?token='.$token.'&userid='.$userid);
 
 	            $mail->Subject = "小明博客激活邮件";// 邮件标题
-	            $mail->Body = "你好：".$toemail."! 
-	            你需要点击以下链接来激活你的小明博客账户: ".$_SERVER['HTTP_HOST'].$content;// 邮件正文
+	            $mail->Body = "您好：".$toemail."! 
+	            您需要点击以下链接来激活你的小明博客账户: ".$_SERVER['HTTP_HOST'].$content;// 邮件正文
 	            //$mail->AltBody = "This is the plain text纯文本";// 这个是设置纯文本方式显示的正文内容，如果不支持Html方式，就会用到这个，基本无用
 
 	            if(!$mail->send()){// 发送邮件
 	            	log_error('send_fail'.date('Y-m-d'),$mail->ErrorInfo);// 记录错误信息
 	            }
 
-				$this->success('注册成功，请前往邮箱激活账号');	
+				$this->success('注册成功，请前往邮箱激活该账号','login');	
 					
 				}else{
 					log_error('fail_sql',Db::getlastsql());
@@ -270,7 +347,7 @@
 					$userid = base64_decode($replace);
 					// echo $userid;
 					if($result = Db::name('user_home')->where("user_id = '{$userid}'")->update(array('status'=>1))){
-						$this->success('激活成功！','index/index/index');
+						$this->success('激活成功！','login');
 					}else{
 						$this->error('无效操作！');
 					}
@@ -370,6 +447,68 @@
 				}
 			}else{
 				$this->error('您还未登录，无法查看该页面','index/index/index');
+			}
+		}
+
+		//找回密码
+		public function forget(){
+			if(Request::instance()->isPost()){
+				if(empty(input('email'))){
+					$this->error('邮箱不能为空');
+				}
+
+				$toemail = input('email');
+
+				$info = Db::name('user_home')->where("email = '{$toemail}'")->find();
+
+				if(!empty($info)){
+					$this->send_mail($toemail,'forget',$info['user_id'],$info['user_name']);
+					$this->success('邮件发送成功，请前往邮箱找回密码');
+				}else{
+					$this->error('该邮箱不存在');
+				}
+			}else{
+				return view();
+			}
+		}
+
+		//重置密码
+		public function reset(){
+			if(Request::instance()->isPost()){
+				$user_id = input('user_id');
+				if(empty(input('password'))){
+					$this->error('密码不能为空');
+				}
+				if(empty(input('password'))){
+					$this->error('确认密码不能为空');
+				}
+				if(input('password') != input('repwd')){
+					$this->error('两次输入的密码不一致');
+				}
+
+				if($result = Db::name('user_home')->where("user_id = '{$user_id}'")->update(array('password'=>input('password')))){
+					$this->success('密码重置成功','login');
+				}else{
+					$this->error('密码重置失败');
+				}
+
+			}else{
+				if(input('token') && input('userid')){
+					if(md5('home'.'User'.'forget'.date('Y-m-d').$this->key) == input('token')){
+						$replace = str_replace('gm5Bi','',input('userid'));
+						$userid = base64_decode($replace);
+						// echo $userid;
+						if($result = Db::name('user_home')->where("user_id = '{$userid}'")->find()){
+							return view('reset',['userid'=>$userid]);
+						}else{
+							$this->error('无效操作！');
+						}
+					}else{
+						$this->error('无效操作！');
+					}
+				}else{
+					$this->error('无效操作！');
+				}
 			}
 		}
 	}

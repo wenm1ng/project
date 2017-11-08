@@ -20,6 +20,7 @@ class Index extends Base_2
         // echo Db::getlastsql();exit;
         // $this->view->info = $userinfo;
         // $limit = input('limit');
+        // echo session::get('home_uid');exit;
         //获取文章信息
         $page = Db::name('article')->where("status = 1")->order('create_time desc')->paginate(10,false,['type'=>'BootstrapDetailed']);
         $article_list = obj_to_array($page);

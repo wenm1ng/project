@@ -1,0 +1,2 @@
+SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting---------2017-11-08 16:01:14
+SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting---------2017-11-08 16:01:35

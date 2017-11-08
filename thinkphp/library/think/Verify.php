@@ -90,7 +90,7 @@ class Verify {
             return false;
         }
         // session 过期
-        if(NOW_TIME - $secode['verify_time'] > $this->expire) {
+        if(time() - $secode['verify_time'] > $this->expire) {
             session($key, null);
             return false;
         }
