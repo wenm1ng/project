@@ -377,6 +377,7 @@
 
 					if(Db::name('user_home')->where("user_id = '{$this->uid}'")->update($data)){
 						session::set('home_username',input('username'));
+						session::set('home_img',input('img'));
 						$this->success('修改成功');
 					}else{
 						$this->error('修改失败');

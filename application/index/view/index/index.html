@@ -9,8 +9,8 @@
             <div class="slider">
                 <div class="bd">
                     <ul>
-                        <li><a href="#" target="_blank"><img src="/img/temp/city.jpg"></a></li>
-                        <li><a href="#" target="_blank"><img src="/img/temp/banner8.png"></a></li>
+                        <li><a href="#" target="_blank"><img src="/public/img/temp/city.jpg"></a></li>
+                        <li><a href="#" target="_blank"><img src="/public/img/temp/banner8.png"></a></li>
                     </ul>
                 </div>
                 <ol class="hd cl dots">
@@ -45,7 +45,7 @@
                     {else /}
                     <li class="index_arc_item">
                         <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}" class="pic">
-                            <img class="lazyload" data-original="temp/art.jpg" src="{$vo.img}" alt="无法加载该图片" />
+                            <img class="lazyload" data-original="/public/temp/art.jpg" src="{$vo.img}" alt="无法加载该图片" />
                         </a>
                         <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'] )}">{$vo.title}</a></h4>
                         <div class="date_hits">
@@ -178,7 +178,7 @@
             </div>
             <div class="tab-category-item">
                 <span>如果觉得博主的内容还不错，您可以打赏博主</span>
-                <img data-original="/images/weixin.jpg" class="img-responsive lazyload" alt="响应式图片">
+                <img data-original="/public/images/weixin.jpg" class="img-responsive lazyload" alt="响应式图片">
             </div>
         </div>
         

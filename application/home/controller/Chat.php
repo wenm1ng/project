@@ -12,6 +12,7 @@
 	class Chat extends Base_2
 	{
 		public function index(){
+			header('content-type:text/html;charset:utf-8');
 			$page = Db::name('chat')->order('create_time DESC')->paginate(10);
 			$list = $this->obj_to_array($page);
 			$meta_title = '碎言碎语';

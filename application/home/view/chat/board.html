@@ -1,6 +1,6 @@
 {extend name="index/base" /}
 {block name="style"}
-	<link href="/css/smohan.face.css" type="text/css" rel="stylesheet">
+	<link href="/public/css/smohan.face.css" type="text/css" rel="stylesheet">
 {/block}
 {block name="body"}
 <div class="panel-body">
@@ -32,7 +32,7 @@
 					{volist name="board_list.data" id="vo"}
 
 		    		<div style="border:1px solid #ccc;padding:20px;margin:20px 0px" class="out-div">
-		                <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='vo.img'}/images/user-4.png{else /}{$vo.img}{/empty}"></i></a>
+		                <li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='vo.img'}/public/images/user-4.png{else /}{$vo.img}{/empty}"></i></a>
 		                    <div class="comment-main">
 		                        <header class="comment-header">
 		                            <div class="comment-meta">
@@ -50,7 +50,7 @@
 		                    </div>
 		                </li>
 		                {volist name="vo.child" id="val"}
-		                	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='val.img'}/images/user-4.png{else /}{$val.img}{/empty}"></i></a>
+		                	<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="{empty name='val.img'}/public/images/user-4.png{else /}{$val.img}{/empty}"></i></a>
 		                        <div class="comment-main">
 		                            <header class="comment-header">
 		                                <div class="comment-meta">
@@ -114,8 +114,8 @@
 </div>
 {/block}
 {block name="script"}
-	<script src="/js/jquery-1.8.2.min.js" type="text/javascript"></script> 
-	<script type="text/javascript" src="/js/smohan.face.js" charset="utf-8"></script>
+	<script src="/public/js/jquery-1.8.2.min.js" type="text/javascript"></script> 
+	<script type="text/javascript" src="/public/js/smohan.face.js" charset="utf-8"></script>
 	<script type="text/javascript">
    	$(function (){
 		$("a.face").smohanfacebox({

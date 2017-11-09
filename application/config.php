@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => false,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -306,5 +306,13 @@ return [
         'lenght' => 4,
         //验证成功后是否重置
         'reset' => true,
+    ],
+    //抛出异常
+    'http_exception_template'    =>  [  
+        // 定义404错误的重定向页面地址  
+        404 =>  APP_PATH.'404.html',  
+        // 还可以定义其它的HTTP status  
+        408 =>  APP_PATH.'408.html',  
+        500 =>  APP_PATH.'500.html',
     ],
 ];

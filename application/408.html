@@ -20,10 +20,9 @@
 <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
 <link rel="stylesheet" type="text/css" href="/public/plugin/pifu/pifu.css" />
 <!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" /> -->
+<link rel="stylesheet" href="/public/css/error.css">
 <link rel="stylesheet" href="/public/css/page.css">
 <!-- <script src="/js/bootstrap.min.js"></script> -->
-
-
 {block name="style"}{/block}
 <!--[if lt IE 9]>
 <link href="/staticRes/lib/h-ui/css/H-ui.ie.css" rel="stylesheet" type="text/css" />
@@ -34,43 +33,39 @@
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container cl">
-            <a class="navbar-logo hidden-xs" href="{:url('index/index')}">
+            <a class="navbar-logo hidden-xs" href="index.html">
                 <img class="logo" src="/public/images/20130703160400_y3JzN.jpeg" alt="小明博客" />
             </a>
-            <a class="logo navbar-logo-m visible-xs" href="{:url('index/index')}">小明博客</a>
+            <a class="logo navbar-logo-m visible-xs" href="{:url('index/index/index')}">小明博客</a>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:void(0);" onclick="showSide();">&#xe667;</a>
             <nav class="nav navbar-nav nav-collapse w_menu" role="navigation">
                 <ul class="cl">
-                    <li class="active"> <a href="{:url('index/index')}" data-hover="首页">首页</a> </li>
-                    <li> <a href="{:url('home/chat/about')}" data-hover="关于我">关于我</a> </li>
-                    <li> <a href="{:url('home/chat/index')}" data-hover="碎言碎语">碎言碎语</a> </li>
-                    <li><a href="{:url('home/chat/study')}" data-hover="学无止尽">学无止尽</a></li>
-                    <li> <a href="{:url('home/chat/board')}" data-hover="留言板">留言板</a> </li>
+                    <li class="active"> <a href="{:url('index/index/index')}" data-hover="首页">首页</a> </li>
+                    <li> <a href="{:url('chat/about')}" data-hover="关于我">关于我</a> </li>
+                    <li> <a href="{:url('chat/index')}" data-hover="碎言碎语">碎言碎语</a> </li>
+                    <li><a href="{:url('chat/study')}" data-hover="学无止尽">学无止尽</a></li>
+                    <li> <a href="{:url('chat/board')}" data-hover="留言板">留言板</a> </li>
                 </ul>
             </nav>
-            <nav class="navbar-nav navbar-userbar hidden-xs hidden-sm " style="top: 0;">
-                <ul class="cl">
-                    <li class="userInfo dropDown dropDown_hover">
-                            <!--<a href="javascript:;" ><img class="avatar radius" src="img/40.jpg" alt="丶似浅 "></a>
-                            <ul class="dropDown-menu menu radius box-shadow">
-                                <li><a href="/app/loginOut">退出</a></li>
-                            </ul>-->
-                            <!-- onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" -->
-                            {empty name="Think.session.home_uid"}
-                            您好,<a href="{:url('home/User/login')}" ><img class="avatar size-S" src="/public/img/qq.jpg" title="登入">请登录</a>
-                            {else /}
-                            <a href="{:url('home/User/center')}"><img class="avatar size-S" src="{empty name='Think.session.home_img'}/public/images/user-4.png{else /}{$Think.session.home_img}{/empty}" title="个人中心"></a>您好,<a href="{:url('home/User/center')}">{empty name="Think.session.home_username"}{$Think.session.home_loginName}{else /}{$Think.session.home_username}{/empty},</a><a href="{:url('home/user/logout')}">退出登录</a>
-                            {/empty}
-                    </li>
-                </ul>
-            </nav>
+           
         </div>
     </div>
 </header>
 
 <!--body-->
-{block name="body"}{/block}
+
+<div style="width:100%;margin-bottom:45%">
+	<div class="error" style="margin:0 auto;">
+
+	<h2>请求超时~！请重试T_T</h2>
+	<p>看到这个提示，就自认倒霉吧!</p>
+	<div class="reindex"><a href="{:url('index/index/index')}" target="_parent">返回首页</a></div>
+
+	</div>
+</div>
 <!--body-->
+
+
 
 <footer class="footer mt-20">
     <div class="container-fluid" id="foot">
@@ -85,7 +80,7 @@
 <script type="text/javascript" src="/public/plugin/pifu/pifu.js"></script>
 <script type="text/javascript" src="/public/js/common.js"></script>
 <script> $(function(){ $(window).on("scroll",backToTopFun); backToTopFun(); }); </script>
-<script type="text/javascript" src="/public/plugin/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js"></script>
 {block name="script"}{/block}
 <script>
 $(function(){
@@ -104,6 +99,7 @@ jQuery(".slideTxtBox").slide({titCell: ".hd ul", mainCell: ".bd ul", autoPage: t
     $("img.lazyload").lazyload({failurelimit : 3});
 });
 
+
     $(".ajax-post").click(function(){
         url = $(this).parents('form').attr('action');
         target_form = $(this).attr('target-form');
@@ -113,13 +109,14 @@ jQuery(".slideTxtBox").slide({titCell: ".hd ul", mainCell: ".bd ul", autoPage: t
         $.post(url,query,function(data){
             if(data.code == 1){
                 layer.alert(data.msg,{icon:6});
-                window.location.href = data.url;
+                setTimeout(function(){
+                  window.location.href = data.url;
+                }, 1500)
             }else{
                 layer.alert(data.msg,{icon:5});
             }
         },'json')
     })
-
 </script> 
 
 </body>
