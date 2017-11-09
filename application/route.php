@@ -9,9 +9,8 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 use think\Route;
-Route::get('admin/Order/getDetails','order/getDetails','');
-Route::get('admin/Order/getOneOrder','order/getOneOrder','');
-Route::get('admin/Order/getFoodsname','order/getFoodsname','');
+// Route::get('app/qq','home/user/login','');
+
 // return [
 //     '__pattern__' => [
 //         'name' => '\w+',
