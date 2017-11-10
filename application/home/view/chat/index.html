@@ -1,5 +1,6 @@
 {extend name="index/base" /}
 {block name="style"}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="/public/css/timeline.css" />
 {/block}
 {block name="body"}
@@ -14,7 +15,7 @@
 				    <div class="cd-timeline-content">
 				        <h4>{$vo.title}</h4>
 				        <p>{$vo.content}</p>
-				        <a href="{:url('index/index/index')}" class="f-r"><input class="btn btn-success size-S" type="button" value="¸ü ¶à"></a>
+				        <a href="{:url('index/index/index')}" class="f-r"><input class="btn btn-success size-S" type="button" value="more"></a>
 				        <span class="cd-date">{$vo.create_time}</span>
 				    </div>
 				</div>

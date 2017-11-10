@@ -147,7 +147,7 @@
 			session('home_img',null);    		
 	        if (!session::has('home_uid')) {
 	            // return json(self::sucres());
-	            $this->success('退出登录成功!',url('login'));
+	            $this->success('退出登录成功!');
 	        } else {
 	            // return json(self::erres("退出登录失败"));
 	            $this->error('退出登录失败!');
