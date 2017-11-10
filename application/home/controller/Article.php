@@ -47,6 +47,7 @@
 					$readData['update_time'] = date('Y-m-d H:i:s');
 
 					Db::name('article_read')->insert($readData);
+					Db::name('article')->where("article_id = '{$id}'")->update(array('read_num'=>1,'update_time'=>date('Y-m-d H:i:s')));
 				}else{
 					//本ip再次阅读该文章，判断间断时间是否超过1分钟限制
 					if($readInfo['update_time'] < date('Y-m-d H:i:s',time()-60)){
@@ -58,8 +59,6 @@
 						//小于1分钟，不能增加阅读数
 					}
 				}
-				
-
 				$keyArr = explode(',',$info['key']);
 				$info['key'] = $keyArr;
 
