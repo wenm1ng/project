@@ -30,7 +30,6 @@
         <div class="art_content">
             <ul class="index_arc">
                 {volist name="article_list.data" id="vo"}
-                    
                 {empty name="vo.img"}
                     <li class="index_arc_item no_pic">
                         <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}">{$vo.title}</a></h4>
