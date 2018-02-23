@@ -45,7 +45,7 @@
 
 	        $name = session::get('home_username');
 			$meta_title = '学无止境';
-			print_r($article_list);
+			// print_r($article_list);
 	    	return view('study',['name'=>$name,'article_list'=>$article_list,'article_hot'=>$article_hot,'_page'=>$page,'meta_title'=>$meta_title]);
 		}
 
