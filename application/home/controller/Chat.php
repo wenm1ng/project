@@ -33,7 +33,7 @@
 	        foreach ($article_list['data'] as $key => $val) {
 	        	//过滤掉Img标签
 	        	$content = preg_replace('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', '', $val['content']);
-	        	$article_list['data'][$key]['content'] = mb_strimwidth($content, 0 , 100 ,'...');
+	        	$article_list['data'][$key]['content'] = mb_strimwidth(strip_tags($content), 0 , 100 ,'...');
 
 	            //获取评论个数
 	            $count = Db::name('article_comment')->where("article_id = '{$val['article_id']}'")->count();
@@ -45,7 +45,7 @@
 
 	        $name = session::get('home_username');
 			$meta_title = '学无止境';
-
+			print_r($article_list);
 	    	return view('study',['name'=>$name,'article_list'=>$article_list,'article_hot'=>$article_hot,'_page'=>$page,'meta_title'=>$meta_title]);
 		}
 
