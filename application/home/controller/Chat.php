@@ -89,7 +89,6 @@
 				}
 				return view('board',['board_list'=>$board_list,'_page'=>$page]);
 			}
-			
 		}
 
 		//回复留言

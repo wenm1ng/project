@@ -44,7 +44,7 @@
                     {else /}
                     <li class="index_arc_item">
                         <a href="{:url('home/article/viewinfo?id='.$vo['article_id'])}" class="pic">
-                            <img class="lazyload" data-original="/public/temp/art.jpg" src="{$vo.img}" alt="无法加载该图片" />
+                            <img class="lazyload" src="{$vo.img}" alt="无法加载该图片" />
                         </a>
                         <h4 class="title"><a href="{:url('home/article/viewinfo?id='.$vo['article_id'] )}">{$vo.title}</a></h4>
                         <div class="date_hits">
