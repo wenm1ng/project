@@ -16,6 +16,9 @@
 			if(Request::instance()->isPost()){
 				$data = input();
 				
+				//文章信息
+				$article_info = Db::name('article')->where("article_id = '{$data['article_id']}'")->find();
+
 				if(empty($this->uid)){
 					$data['user_id']	= 0;
 					$data['user_name'] 	= '游客'.mt_rand(99999,999999);
@@ -27,6 +30,12 @@
 				$data['create_time'] 	= date('Y-m-d H:i:s');
 				//别人评论了
 				if(Db::name('article_comment')->insert($data)){
+
+					//进行评论个数追加
+					$save_data['comment_num'] = $article_info['comment_num'] + 1;
+					$save_data['update_time'] = date('Y-m-d H:i:s');
+					Db::name('article')->where("article_id = '{$data['article_id']}'")->update($save_data);
+
 					$this->success('评论成功');
 				}else{
 					$this->success('评论失败');
@@ -47,12 +56,13 @@
 					$readData['update_time'] = date('Y-m-d H:i:s');
 
 					Db::name('article_read')->insert($readData);
-					Db::name('article')->where("article_id = '{$id}'")->update(array('read_num'=>1,'update_time'=>date('Y-m-d H:i:s')));
+					Db::name('article')->where("article_id = '{$id}'")->update(array('read_num'=>$info['read_num'] + 1,'update_time'=>date('Y-m-d H:i:s')));
 				}else{
 					//本ip再次阅读该文章，判断间断时间是否超过1分钟限制
 					if($readInfo['update_time'] < date('Y-m-d H:i:s',time()-60)){
 						//大于1分钟，可以增加阅读数
 						$data['read_num'] = $info['read_num'] + 1;
+						$data['update_time'] = date('Y-m-d H:i:s');
 						Db::name('article')->where("article_id = '{$id}'")->update($data);
 						Db::name('article_read')->where("article_id = '{$id}' and ip_address = '{$this->ip}'")->update(array('update_time'=>date('Y-m-d H:i:s')));
 					}else{
@@ -103,12 +113,23 @@
 		public function reply(){
 			if(!empty(session::get('home_username'))){
 				$data = input();
+
+				//文章信息
+				$article_info = Db::name('article')->where("article_id = '{$data['article_id']}'")->find();
+					
+
 				$data['user_id'] = $this->uid;
 				$data['user_name'] = $this->username;
 				$data['create_time'] = date('Y-m-d H:i:s');
 				// print_r($data);exit;
 				//别人评论了
 				if(Db::name('article_comment')->insert($data)){
+
+					//进行评论个数追加
+					$save_data['comment_num'] = $article_info['comment_num'] + 1;
+					$save_data['update_time'] = date('Y-m-d H:i:s');
+					Db::name('article')->where("article_id = '{$data['article_id']}'")->update($save_data);
+
 					$this->success('回复成功');
 				}else{
 					$this->success('回复失败');

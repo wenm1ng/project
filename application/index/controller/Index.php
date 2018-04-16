@@ -34,7 +34,7 @@ class Index extends Base_2
         }
 
         //热门推荐
-        $article_hot = Db::name('article')->field('title,read_num,article_id')->order('read_num DESC')->limit(5)->select();
+        $article_hot = Db::name('article')->field('title,comment_num,article_id')->order('comment_num DESC')->limit(5)->select();
 
         $name = session::get('home_username');
 
