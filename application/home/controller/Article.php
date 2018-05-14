@@ -103,7 +103,7 @@
 				// print_r($article_list);exit;
 				$view = new View();
 				//热门推荐
-				$article_hot = Db::name('article')->field('title,read_num,article_id')->order('read_num DESC')->limit(5)->select();
+				$article_hot = Db::name('article')->field('title,comment_num,article_id')->order('comment_num DESC')->limit(5)->select();
 				// var_dump($username);exit;
 				
 				return $view->fetch('viewinfo',['info'=>$info,'last_info'=>$last_info,'next_info'=>$next_info,'article_page'=>$article_page,'article_list'=>$article_list,'article_hot'=>$article_hot]);
