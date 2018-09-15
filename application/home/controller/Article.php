@@ -36,13 +36,13 @@
 					$save_data['update_time'] = date('Y-m-d H:i:s');
 					Db::name('article')->where("article_id = '{$data['article_id']}'")->update($save_data);
 
-					$this->success('评论成功');
+					$this->success('评论成功','',['user_name'=>$data['user_name']]);
 				}else{
 					$this->success('评论失败');
 				}
 			}else{
 				//页面
-				// echo session::get('home_uid');exit;
+				// echo session::get('home_img');exit;
 				$id = input('id');
 				$info = Db::name('article')->where("article_id = '{$id}'")->find();
 
@@ -78,7 +78,7 @@
 				$next_info = Db::name('article')->where("article_id > '{$info['article_id']}'")->order('article_id')->find();
 
 				//获取评论
-				$article_page = Db::name('article_comment')->where("article_id = '{$id}' and is_reply = 0")->order('create_time DESC')->paginate(10);
+				$article_page = Db::name('article_comment')->where("article_id = '{$id}' and is_reply = 0")->order('create_time ASC')->paginate(10);
 				
 				$article_list = $this->obj_to_array($article_page);
 
@@ -92,9 +92,12 @@
 					
 
 					$child = Db::name('article_comment')->where("link_comment_id = '{$val['comment_id']}' and is_reply = 1")->order('create_time')->select();
-					foreach ($child as $k => $v) {
-						$user_info_child = Db::name('user_home')->where("user_id = '{$v['user_id']}'")->find();
-						$child[$k]['img'] = $user_info_child['img'];
+
+					if($child){
+						foreach ($child as $k => $v) {
+							$user_info_child = Db::name('user_home')->where("user_id = '{$v['user_id']}'")->find();
+							$child[$k]['img'] = $user_info_child['img'];
+						}
 					}
 					
 					// echo Db::getlastsql();
@@ -104,9 +107,8 @@
 				$view = new View();
 				//热门推荐
 				$article_hot = Db::name('article')->field('title,comment_num,article_id')->order('comment_num DESC')->limit(5)->select();
-				// var_dump($username);exit;
-				
-				return $view->fetch('viewinfo',['info'=>$info,'last_info'=>$last_info,'next_info'=>$next_info,'article_page'=>$article_page,'article_list'=>$article_list,'article_hot'=>$article_hot]);
+
+ 				return $view->fetch('viewinfo',['info'=>$info,'last_info'=>$last_info,'next_info'=>$next_info,'article_page'=>$article_page,'article_list'=>$article_list,'article_hot'=>$article_hot,'user_img'=>$this->userimg]);
 			}
 		}
 
@@ -130,7 +132,7 @@
 					$save_data['update_time'] = date('Y-m-d H:i:s');
 					Db::name('article')->where("article_id = '{$data['article_id']}'")->update($save_data);
 
-					$this->success('回复成功');
+					$this->success('回复成功','',['user_name'=>$this->username,'user_img'=>$this->userimg,'user_id'=>$this->uid]);
 				}else{
 					$this->success('回复失败');
 				}

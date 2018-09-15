@@ -10,8 +10,8 @@
     <div class="ibox-title"> 
      <h5>{$meta_title}</h5> 
     </div> 
-    <div class="ibox-content" style="height:800px"> 
-     <form class="form-horizontal" id="signupForm" action="{:url('addinfo')}" method="post" > 
+    <div class="ibox-content" style="height:auto"> 
+     <form class="form-horizontal" id="signupForm" action="{:url('editinfo')}" method="post" > 
       <!-- <div class="form-group"> 
        <label class="col-sm-3 control-label">文章标题：</label> 
        <div class="col-sm-8"> 
@@ -30,7 +30,7 @@
       <div class="form-group">
           <label class="col-sm-2 control-label">文章标题：</label>
           <div class="col-sm-6">
-              <input id="username" name="title" value="" class="form-control" type="text" value="" aria-required="true" aria-invalid="true" />
+              <input id="username" name="title" class="form-control" type="text" value="{$info['title']}" aria-required="true" aria-invalid="true" />
               <span class="help-block m-b-none" id="usernames"></span> 
           </div>
       </div>
@@ -39,7 +39,7 @@
       <div class="form-group">
           <label class="col-sm-2 control-label">文章关键词：</label>
           <div class="col-sm-6">
-             <input name="key" value="" class="form-control user_name" type="text" value="" aria-required="true" aria-invalid="true"/>
+             <input name="key" class="form-control user_name" type="text" value="{$info['key']}" aria-required="true" aria-invalid="true"/>
           </div>
       </div>
       <!-- <div class="form-group"> 
@@ -54,7 +54,7 @@
       <div class="form-group">
           <label class="col-sm-2 control-label">文章内容：</label>
           <div class="col-sm-6">
-              <textarea id="content" name="content" required></textarea>
+              <textarea id="content" name="content" required>{$info.content}</textarea>
           </div>
       </div>
        
@@ -69,13 +69,16 @@
       <div class="form-group">
           <label class="col-sm-2 control-label"> </label>
           <div class="col-sm-6">
-              <div class="input-group col-sm-12 upload_img"></div>
+              <div class="input-group col-sm-12 upload_img">
+                <div class="img_li col-sm-3"><input type="hidden" name="img[]" value="{$info.img}"><a class="del_span" href="javascript:;" onclick="delimg(this)">删除</a><img class="viewer-item" width="200px" style="padding:5px;box-shadow: 0 0 3px #999;margin: 2px;" src="{$info.img}"/></div>
+              </div>
           </div>
       </div>
      
       <div class="form-group"> 
        <div class="col-sm-8 col-sm-offset-4"> 
-        <a  class="btn btn-primary ajax-post" target-form="form-horizontal"/>添加</a>
+        <input type="hidden" name="article_id" value="{$info.article_id}">
+        <a  class="btn btn-primary ajax-post" target-form="form-horizontal"/>修改</a>
         <input class="btn btn-primary" type="reset" value="重置" /> 
        </div> 
       </div> 

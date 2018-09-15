@@ -23,6 +23,7 @@ class Base_2 extends Controller
 		parent::__construct();
 		$this->uid = !empty(session::get('home_uid'))?session::get('home_uid'):"";
 		$this->username = !empty(session::get('home_username'))?session::get('home_username'):"";
+		$this->userimg = !empty(session::get('home_img'))?session::get('home_img'):"/public/images/user-4.png";
 		$this->ip = $_SERVER['REMOTE_ADDR'];
 		$this->key = 'jfYnb51fubczY5Vkbnc';
 		//进行访客登记

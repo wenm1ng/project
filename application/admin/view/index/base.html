@@ -260,7 +260,7 @@
     })
 
     $(".ajax-post").click(function(){
-        url = $('form').attr('action');
+        url = $(this).parents('form').attr('action');
         target_form = $(this).attr('target-form');
         form = $('.'+target_form);
         query = form.serialize();

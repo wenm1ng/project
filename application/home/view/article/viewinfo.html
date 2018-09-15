@@ -25,7 +25,7 @@
 							</ul>
 															
 							<div class="keybq">
-						    	<p><span>关键字</span>：{volist name="info.key" id="vo"}<a class="label label-default" href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd={$vo}&rsv_pq=9f746fc5000162cf&rsv_t=8c36PyGPA479WqdKR0Dw8pcD0zLs1P%2FkMnhM5hZMbCh4JfCIuPZcZeocoBA&rqlang=cn&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug7=100&rsv_sug2=0&inputT=2469&rsv_sug4=2909">{$vo}</a>{/volist}</p>    
+						    	<p><span>关键字</span>：{volist name="info.key" id="vo"}<a class="label label-default" href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd={$vo}&rsv_pq=9f746fc5000162cf&rsv_t=8c36PyGPA479WqdKR0Dw8pcD0zLs1P%2FkMnhM5hZMbCh4JfCIuPZcZeocoBA&rqlang=cn&rsv_enter=1&rsv_sug3=2&rsv_sug1=1&rsv_sug7=100&rsv_sug2=0&inputT=2469&rsv_sug4=2909" target="__blank">{$vo}</a>{/volist}</p>    
 						    </div>
 							
 							
@@ -102,8 +102,9 @@
 			                                <div class="comment-main">
 			                                    <header class="comment-header">
 			                                        <div class="comment-meta">
-			                                        	{eq name="val.user_id" value="0"}<span class="comment-author">{$val.user_name} 回复：{$val.to_user_name}</span>{else /}<a class="comment-author" href="#">{$val.user_name} 回复：{$val.to_user_name}</a>{/eq}
-
+			                                        	{eq name="val.user_id" value="0"}<span class="comment-author">{$val.user_name}</span> {else /}<a class="comment-author">{$val.user_name}</a>{/eq}
+			                                        	 回复： 
+														{eq name="val.to_user_id" value="0"}<span class="comment-author">{$val.to_user_name}</span>{else /}<a class="comment-author">{$val.to_user_name}</a>{/eq}
 			                                            <time title="{$val.create_time}" datetime="2014-08-31T03:54:20" class="f-r">{$val.create_time}</time>
 			                                        </div>
 			                                    </header>
@@ -146,6 +147,7 @@
 
 						
                         <div class="text-r mt-10">
+                        	<input type="hidden" id="user_img" value="{$user_img}">
                             <button id="Smohan_Showface" class="btn btn-primary radius Smohan_Showface" dataid="comment" style="margin-right:120px"> 发表评论</button>
                         </div>
                     </div>
@@ -222,6 +224,51 @@
 			$(this).replaceface($(this).html());
 		})
 
+		function getNowFormatDate() {
+		    var date = new Date();
+		    var seperator1 = "-";
+		    var seperator2 = ":";
+		    var month = date.getMonth() + 1;
+		    var strDate = date.getDate();
+		    var hours = date.getHours();
+		    var minute = date.getMinutes();
+		    var second = date.getSeconds();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strDate >= 0 && strDate <= 9) {
+		        strDate = "0" + strDate;
+		    }
+		    if(hours >= 1 && hours <= 9){
+		    	hours = "0" + hours;
+		    }
+		    if(minute >= 1 && minute <= 9){
+		    	minute = "0" + minute;
+		    }
+		    if(second >= 1 && second <= 9){
+		    	second = "0" + second;
+		    }
+		    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		            + " " + hours + seperator2 + minute
+		            + seperator2 + second;
+		    return currentdate;
+		}
+
+		//生成从minNum到maxNum的随机数
+		function randomNum(minNum,maxNum){ 
+		    switch(arguments.length){ 
+		        case 1: 
+		            return parseInt(Math.random()*minNum+1,10); 
+		        break; 
+		        case 2: 
+		            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+		        break; 
+		            default: 
+		                return 0; 
+		            break; 
+		    } 
+		}
+		// console.log(randomNum(99999,999999));
 		//Demo测试
 		$('.Smohan_Showface').click(function() {
 			if($(this).attr('dataid') == 'comment'){
@@ -229,12 +276,34 @@
 				to_user_id = $('#create_userid').val();
 				to_user_name = $('#create_username').val();
 				article_id = {:input('id')};
-				$.post("{:url('viewinfo')}",{content:content,to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
+				commentList = $('.commentList');
+				img = $("#user_img").val();
+				text_area = $("#Smohan_text");
+				$.post("{:url('home/article/viewinfo')}",{content:content,to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:0},function(data){
+					name = data.data.user_name;
 					if(data.code == 1){
-						layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
-						setTimeout(function(){
-							window.location.reload();
-						}, 1500)
+						// layer.alert(data.msg,{icon:6});
+						if(name == '/public/images/user-4.png'){
+							user_name = '<span class="comment-author">'+name+'</span>';
+						}else{
+							user_name = '<a class="comment-author" href="#">'+name+'</a>';
+						}
+						apply_content = '<div style="border:1px solid #ccc;padding:20px;margin:20px 0px" class="out-div">'+
+											'<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="'+ img +'"></i></a>'+
+				                                '<div class="comment-main">'+
+				                                    '<header class="comment-header">'+
+				                                        '<div class="comment-meta">'+user_name+
+				                                            '<time title="'+ getNowFormatDate() +'" datetime="'+ getNowFormatDate() +'" class="f-r">'+ getNowFormatDate() +'</time>'+
+				                                        '</div>'+
+				                                    '</header>'+
+				                                    '<div class="comment-body">'+
+				                                        '<div class="comment-content">'+ content +'</div>'+
+				                                    '</div>'+
+				                                '</div>'+
+				                            '</li>'+
+				                        '</div>';
+						commentList.append(apply_content);
+						text_area.val('');
 					}else{
 						layer.alert(data.msg,{icon:5});
 					}
@@ -243,10 +312,11 @@
 			
 		});
 
+		
+
 		reply = 0;
 		
 		$('.reply').click(function(){
-			
 			div = '<div id="Smohan_FaceBox1" class="comment comment-reply out-div" style="float:right;width:100%;margin-top:20px">'+
 			            '<div id="err2" class="Huialert Huialert-danger hidden radius">成功状态提示</div>'+
 			                '<textarea class="textarea smohan_text1" id="Smohan_text1"  style="height:100px;width:100%" > </textarea>'+
@@ -255,7 +325,8 @@
 			                '<a class="cancelReply f-r mt-10 no_reply">取消回复</a>'+
 			        '</div>';
 			if(reply == 0){
-				$(this).parents('li').append(div);
+				parent_li = $(this).parents('li');
+				parent_li.append(div);
 				reply = 1;
 
 				$("a.face1").smohanfacebox1({
@@ -271,12 +342,42 @@
 				$('.Smohan_Showface').click(function() {
 					content = $(this).parent('div').find('#Smohan_text1').val();
 					article_id = {:input('id')};
+
+					brother = $(this).parents('.comment').find('.comment-main');
 					$.post("{:url('reply')}",{content:content,link_comment_id:comment_id,to_user_id:to_user_id,to_user_name:to_user_name,article_id:article_id,is_reply:1},function(data){
 						if(data.code == 1){
-							layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
-							setTimeout(function(){
-								window.location.reload();
-							}, 1500)
+							// layer.alert(data.msg + '页面即将自动跳转~',{icon:6});
+							user_name = data.data.user_name;
+							user_img = data.data.user_img;
+							is_login = data.data.user_id;
+
+							if(is_login == 1){
+								html_name = '<a class="comment-author" href="#">'+user_name+'</a>';
+							}else{
+								html_name = '<span class="comment-author">'+user_name+'</span>'
+							}
+
+							if(to_user_id == 1){
+								to_html_name = '<a class="comment-author" href="#">'+to_user_name+'</a>';
+							}else{
+								to_html_name = '<span class="comment-author" href="#">'+to_user_name+'</span>';
+							}
+							reply_content = '<li class="item cl comment"> <a href="#"><i class="avatar size-L radius"><img alt="" src="'+user_img+'"></i></a>'+
+			                                '<div class="comment-main">'+
+			                                    '<header class="comment-header">'+
+			                                        '<div class="comment-meta">'+
+			                                        	html_name+ ' 回复： '+ to_html_name+
+			                                            '<time title="'+ getNowFormatDate() +'" datetime="'+ getNowFormatDate() +'" class="f-r">'+ getNowFormatDate() +'</time>'+
+			                                        '</div>'+
+			                                    '</header>'+
+			                                    '<div class="comment-body">'+
+			                                        '<div class="comment-content">'+ content +'</div>'+
+			                                    '</div>'+
+			                                '</div>'+
+			                            '</li>';
+			                brother.after(reply_content);
+			                parent_li.find('#Smohan_FaceBox1').remove();
+			                reply = 0;
 						}else{
 							layer.alert(data.msg,{icon:5});
 						}
@@ -285,7 +386,6 @@
 
 			}else{
 				$('.comment-reply').remove();
-				
 				reply = 0;
 			}
 

@@ -70,6 +70,26 @@
 				$this->error('删除失败');
 			}
 		}
+
+		public function editinfo(){
+			if(Request::instance()->isPost()){
+				$data = input();
+				$data['img'] = input('img/a')[0];
+				$data['update_time'] = date('Y-m-d H:i:s');
+				$id = $data['article_id'];
+				unset($data['article_id']);
+
+				if(Db::name('article')->where("article_id = '{$id}'")->update($data)){
+					$this->success('修改成功','index');
+				}else{
+					$this->error('修改失败');
+				}
+			}else{
+				$id = htmlspecialchars(trim(input('id')));
+				$info = Db::query("select * from blog_article where article_id = ?",[$id]);
+				return view('editinfo',['meta_title'=>'修改文章','info'=>$info[0]?:array()]);
+			}
+		}
 	}
 
  ?>

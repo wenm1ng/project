@@ -13,7 +13,7 @@
 		    // 获取表单上传文件 例如上传了001.jpg
 		    $file = request()->file('download');
 		    // 移动到框架应用根目录/public/uploads/ 目录下
-		    $info = $file->validate(['size'=>150000,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+		    $info = $file->validate(['size'=>1500000,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
 		    if($info){
 		        // 成功上传后 获取上传信息
 		        // 输出 jpg
